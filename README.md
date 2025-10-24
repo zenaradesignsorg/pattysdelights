@@ -1,73 +1,96 @@
-# Welcome to your Lovable project
+# Patty's Delights - Event Catering Website
 
-## Project info
+A modern, responsive website for Patty's Delights, a GTA-based event catering business specializing in fruit platters, dessert tables, and beverage stations.
 
-**URL**: https://lovable.dev/projects/fc1c7322-eac0-4bd7-b13a-2d29445a6bbc
+## Project Overview
 
-## How can I edit this code?
+Patty's Delights offers premium event catering services across the Greater Toronto Area, featuring:
+- Fresh fruit platters and artistic fruit carvings
+- Beautiful dessert tables with homemade treats
+- Interactive beverage stations (bubble tea, ice cream, tea, juice)
+- Custom event styling and on-site setup
 
-There are several ways of editing your application.
+## Getting Started
 
-**Use Lovable**
+### Prerequisites
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/fc1c7322-eac0-4bd7-b13a-2d29445a6bbc) and start prompting.
+- Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
 
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
+### Installation
 
 ```sh
-# Step 1: Clone the repository using the project's Git URL.
+# Step 1: Clone the repository
 git clone <YOUR_GIT_URL>
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+# Step 2: Navigate to the project directory
+cd pattysdelights
 
-# Step 3: Install the necessary dependencies.
+# Step 3: Install the necessary dependencies
 npm i
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
+# Step 4: Start the development server
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+## Development
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+### Available Scripts
 
-**Use GitHub Codespaces**
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run preview` - Preview production build
+- `npm run lint` - Run ESLint
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+### Project Structure
 
-## What technologies are used for this project?
+```
+src/
+├── components/          # Reusable UI components
+│   ├── ui/             # shadcn/ui components
+│   ├── Header.tsx      # Navigation header
+│   ├── Footer.tsx      # Site footer
+│   ├── ServiceCard.tsx # Service display component
+│   └── MobileNav.tsx   # Mobile navigation
+├── pages/              # Page components
+│   ├── Home.tsx        # Landing page
+│   ├── About.tsx       # About page
+│   ├── Services.tsx    # Services page
+│   ├── Gallery.tsx     # Gallery page
+│   ├── Contact.tsx     # Contact form
+│   └── NotFound.tsx    # 404 page
+├── assets/             # Images and static assets
+├── hooks/              # Custom React hooks
+└── lib/                # Utility functions
+```
 
-This project is built with:
+## Technologies Used
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+- **Vite** - Build tool and dev server
+- **TypeScript** - Type safety
+- **React** - UI framework
+- **React Router** - Client-side routing
+- **shadcn/ui** - UI component library
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icons
+- **Sonner** - Toast notifications
 
-## How can I deploy this project?
+## Deployment
 
-Simply open [Lovable](https://lovable.dev/projects/fc1c7322-eac0-4bd7-b13a-2d29445a6bbc) and click on Share -> Publish.
+The project can be deployed to any static hosting service:
 
-## Can I connect a custom domain to my Lovable project?
+1. Run `npm run build` to create a production build
+2. Deploy the `dist` folder to your hosting service
+3. Configure your domain and SSL certificate
 
-Yes, you can!
+## Features
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
+- **Responsive Design** - Works on all device sizes
+- **Modern UI** - Clean, professional design with smooth animations
+- **Contact Form** - Quote request form with validation
+- **Image Gallery** - Filterable gallery with hover effects
+- **SEO Optimized** - Meta tags and semantic HTML
+- **Accessibility** - ARIA labels and keyboard navigation
 
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## License
+
+All rights reserved. © 2024 Patty's Delights
