@@ -71,7 +71,7 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
                 ? "bg-white text-primary hover:bg-white/90" 
                 : ""
             }`}>
-              <Link to="/contact">Request a Quote</Link>
+              <Link to="/contact">Buy Now</Link>
             </Button>
             <MobileNav />
           </div>

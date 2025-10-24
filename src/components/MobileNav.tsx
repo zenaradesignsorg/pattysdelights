@@ -67,7 +67,7 @@ const MobileNav = () => {
               ))}
               <Button asChild size="lg" className="mt-4">
                 <Link to="/contact" onClick={closeMenu}>
-                  Request a Quote
+                  Buy Now
                 </Link>
               </Button>
             </nav>

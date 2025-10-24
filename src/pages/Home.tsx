@@ -81,13 +81,6 @@ const Home = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <div className="mb-6">
-              <div className="inline-flex items-center px-4 py-2 bg-white/10 rounded-full border border-white/20 mb-6 backdrop-blur-sm">
-                <Sparkles className="w-4 h-4 text-white mr-2" />
-                <span className="text-white font-medium">Premium Event Catering</span>
-              </div>
-            </div>
-            
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight">
               <span className="block">Premium Fruit Artistry</span>
               <span className="block text-primary">& Dessert Tables</span>
@@ -98,17 +91,19 @@ const Home = () => {
               Handcrafted with love, served with excellence.
             </p>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground px-6 py-3 font-medium">
-                <Link to="/contact">
-                  Request a Quote
-                  <ArrowRight className="ml-2 h-4 w-4" />
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Button asChild size="lg" className="group relative overflow-hidden bg-gradient-to-r from-coral to-primary hover:from-coral/90 hover:to-primary/90 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-2xl hover:shadow-coral/25 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                <Link to="/contact" className="flex items-center">
+                  <span className="relative z-10">Request a Quote</span>
+                  <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
               </Button>
-              <Button asChild variant="outline" size="lg" className="border-2 border-white/30 text-white hover:bg-white/10 px-6 py-3 font-medium">
-                <a href="tel:+14165551234">
-                  <Phone className="mr-2 h-4 w-4" />
-                  Call Now
+              <Button asChild variant="outline" size="lg" className="group relative overflow-hidden border-2 border-white/40 text-white hover:text-coral bg-white/5 hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-full shadow-xl hover:shadow-white/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
+                <a href="tel:+14165551234" className="flex items-center">
+                  <Phone className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
+                  <span className="relative z-10">Call Now</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-coral/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
               </Button>
             </div>
