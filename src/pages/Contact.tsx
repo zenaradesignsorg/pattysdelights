@@ -18,13 +18,11 @@ const Contact = () => {
     name: "",
     email: "",
     phone: "",
-    eventDate: "",
-    eventTime: "",
-    venue: "",
+    date: "",
     guestCount: "",
     services: "",
     budget: "",
-    notes: "",
+    message: "",
   });
 
   const handleSubmit = (e: React.FormEvent) => {

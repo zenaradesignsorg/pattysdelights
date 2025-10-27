@@ -136,14 +136,14 @@ const Services = () => {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-secondary mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-secondary mb-6">
               Our Services
             </h1>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
-            <p className="text-xl text-foreground leading-relaxed">
+            <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-6" />
+            <p className="text-lg md:text-xl text-foreground leading-relaxed">
               Pick a station—or mix and match. We'll tailor everything to your theme, guest count, and budget.
             </p>
           </div>
@@ -151,30 +151,26 @@ const Services = () => {
       </section>
 
       {/* Services Grid */}
-      <section className="py-20 bg-background">
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {services.map((service, index) => (
-              <div 
-                key={index}
-                className="animate-slide-up"
-                style={{ animationDelay: `${index * 50}ms` }}
-              >
-                <ServiceCard {...service} />
-              </div>
-            ))}
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <ServiceCard key={index} {...service} />
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ Section */}
-      <section className="py-20 bg-muted">
+      <section className="py-20 bg-background">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-secondary mb-4">
               Frequently Asked Questions
             </h2>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full" />
+            <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full" />
           </div>
           
           <div className="max-w-3xl mx-auto">
@@ -183,12 +179,12 @@ const Services = () => {
                 <AccordionItem 
                   key={index} 
                   value={`item-${index}`}
-                  className="bg-card rounded-xl shadow-soft px-6 border-0"
+                  className="bg-white rounded-lg px-6 py-4 border border-border shadow-sm hover:shadow-md transition-shadow"
                 >
-                  <AccordionTrigger className="text-left font-semibold text-secondary hover:text-primary">
+                  <AccordionTrigger className="text-left font-semibold text-secondary hover:text-coral transition-colors">
                     {faq.question}
                   </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground leading-relaxed">
+                  <AccordionContent className="text-muted-foreground leading-relaxed pt-2">
                     {faq.answer}
                   </AccordionContent>
                 </AccordionItem>
@@ -199,15 +195,15 @@ const Services = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-gradient-to-br from-coral to-primary">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
             Ready to Plan Your Perfect Event?
           </h2>
-          <p className="text-xl mb-8 max-w-2xl mx-auto opacity-90">
+          <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto text-white/90">
             Let's create a custom package that fits your vision and budget
           </p>
-          <Button asChild variant="outline" size="lg" className="bg-background text-primary hover:bg-background/90">
+          <Button asChild size="lg" className="bg-white text-coral hover:bg-white/90 px-8 py-4 text-lg font-semibold shadow-xl">
             <Link to="/contact">Get Your Free Quote</Link>
           </Button>
         </div>
