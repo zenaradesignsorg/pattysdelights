@@ -33,7 +33,7 @@ const AppContent = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header transparent={location.pathname === '/' && !isScrolled} />
-      <main className="flex-1">
+      <main className={`flex-1 ${location.pathname === '/' ? '' : 'pt-24'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />

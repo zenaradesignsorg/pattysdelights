@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Facebook, Instagram } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Clock, Star } from "lucide-react";
 
 const Footer = () => {
   const serviceAreas = [
@@ -15,14 +15,14 @@ const Footer = () => {
   return (
     <footer className="bg-cream border-t border-border">
       <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
           {/* About */}
           <div>
             <h3 className="text-xl font-serif font-bold text-secondary mb-4">
               Patty's Delights
             </h3>
             <p className="text-muted-foreground mb-4">
-              Serving the Greater Toronto Area — Toronto, Mississauga, Brampton, Markham, Vaughan, Scarborough, Oakville.
+              Serving the Greater Toronto Area with fresh, handcrafted treats and beautiful event styling.
             </p>
             <div className="flex gap-4">
               <a href="#" className="text-muted-foreground hover:text-primary transition-colors">
@@ -34,9 +34,9 @@ const Footer = () => {
             </div>
           </div>
           
-          {/* Quick Links */}
+          {/* Navigation */}
           <div>
-            <h4 className="font-semibold text-secondary mb-4">Quick Links</h4>
+            <h4 className="font-semibold text-secondary mb-4">Navigation</h4>
             <ul className="space-y-2">
               <li>
                 <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
@@ -87,6 +87,39 @@ const Footer = () => {
                 <span>Greater Toronto Area</span>
               </li>
             </ul>
+          </div>
+          
+          {/* Business Info */}
+          <div>
+            <h4 className="font-semibold text-secondary mb-4">Business Hours</h4>
+            <ul className="space-y-2 text-muted-foreground">
+              <li className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>Mon-Fri: 9am - 7pm</span>
+              </li>
+              <li className="flex items-center gap-2">
+                <Clock className="h-4 w-4" />
+                <span>Sat-Sun: 10am - 5pm</span>
+              </li>
+            </ul>
+            
+            <div className="mt-6">
+              <h5 className="font-semibold text-secondary mb-3">Why Choose Us?</h5>
+              <ul className="space-y-2 text-sm text-muted-foreground">
+                <li className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-coral" />
+                  <span>10+ years experience</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-coral" />
+                  <span>500+ happy events</span>
+                </li>
+                <li className="flex items-center gap-2">
+                  <Star className="h-4 w-4 text-coral" />
+                  <span>Fresh local ingredients</span>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
         
