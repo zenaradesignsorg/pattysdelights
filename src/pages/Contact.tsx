@@ -39,14 +39,14 @@ const Contact = () => {
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-secondary mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-secondary mb-6">
               Get in Touch
             </h1>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
-            <p className="text-xl text-foreground leading-relaxed">
+            <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-6" />
+            <p className="text-lg md:text-xl text-foreground leading-relaxed">
               Tell us about your event—we'll bring the treats
             </p>
           </div>
@@ -54,44 +54,44 @@ const Contact = () => {
       </section>
 
       {/* Contact Form & Info */}
-      <section className="py-20 bg-background">
+      <section className="py-16 bg-muted/30">
         <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
             {/* Contact Info */}
-            <div className="lg:col-span-1 space-y-8">
-              <div className="bg-card rounded-2xl p-8 shadow-card">
+            <div className="lg:col-span-2 space-y-8">
+              <div className="bg-white rounded-lg p-8 border border-border shadow-sm">
                 <h2 className="text-2xl font-serif font-bold text-secondary mb-6">
                   Contact Information
                 </h2>
                 
                 <div className="space-y-6">
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Phone className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-coral/10 flex items-center justify-center flex-shrink-0">
+                      <Phone className="h-6 w-6 text-coral" />
                     </div>
                     <div>
                       <p className="font-semibold text-secondary mb-1">Phone</p>
-                      <a href="tel:+14165551234" className="text-muted-foreground hover:text-primary transition-colors">
+                      <a href="tel:+14165551234" className="text-muted-foreground hover:text-coral transition-colors">
                         (416) 555-1234
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Mail className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-coral/10 flex items-center justify-center flex-shrink-0">
+                      <Mail className="h-6 w-6 text-coral" />
                     </div>
                     <div>
                       <p className="font-semibold text-secondary mb-1">Email</p>
-                      <a href="mailto:hello@pattysdelights.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      <a href="mailto:hello@pattysdelights.com" className="text-muted-foreground hover:text-coral transition-colors">
                         hello@pattysdelights.com
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <Clock className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-coral/10 flex items-center justify-center flex-shrink-0">
+                      <Clock className="h-6 w-6 text-coral" />
                     </div>
                     <div>
                       <p className="font-semibold text-secondary mb-1">Hours</p>
@@ -101,8 +101,8 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-4">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
-                      <MapPin className="h-6 w-6 text-primary" />
+                    <div className="w-12 h-12 rounded-lg bg-coral/10 flex items-center justify-center flex-shrink-0">
+                      <MapPin className="h-6 w-6 text-coral" />
                     </div>
                     <div>
                       <p className="font-semibold text-secondary mb-1">Coverage</p>
@@ -114,19 +114,19 @@ const Contact = () => {
                 </div>
               </div>
 
-              <div className="bg-primary text-primary-foreground rounded-2xl p-8 shadow-card">
+              <div className="bg-gradient-to-br from-coral to-primary text-white rounded-lg p-8 shadow-lg">
                 <h3 className="text-xl font-serif font-bold mb-3">
                   Quick Response Guaranteed
                 </h3>
-                <p className="opacity-90">
+                <p className="text-white/90 text-sm leading-relaxed">
                   We typically respond to all inquiries within 24 hours. For urgent requests, please call us directly!
                 </p>
               </div>
             </div>
 
             {/* Form */}
-            <div className="lg:col-span-2">
-              <div className="bg-card rounded-2xl p-8 md:p-10 shadow-card">
+            <div className="lg:col-span-3">
+              <div className="bg-white rounded-lg p-8 md:p-10 border border-border shadow-sm">
                 <h2 className="text-3xl font-serif font-bold text-secondary mb-2">
                   Request a Quote
                 </h2>
@@ -144,25 +144,12 @@ const Contact = () => {
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
                         required
+                        className="border-border focus:border-coral"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="email">Email *</Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="your@email.com"
-                        value={formData.email}
-                        onChange={(e) => handleChange("email", e.target.value)}
-                        required
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <Label htmlFor="phone">Phone *</Label>
+                      <Label htmlFor="phone">Phone Number *</Label>
                       <Input
                         id="phone"
                         type="tel"
@@ -170,79 +157,73 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         required
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="eventDate">Event Date *</Label>
-                      <Input
-                        id="eventDate"
-                        type="date"
-                        value={formData.eventDate}
-                        onChange={(e) => handleChange("eventDate", e.target.value)}
-                        required
+                        className="border-border focus:border-coral"
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-2">
-                      <Label htmlFor="eventTime">Event Start Time</Label>
+                      <Label htmlFor="email">Email</Label>
                       <Input
-                        id="eventTime"
-                        type="time"
-                        value={formData.eventTime}
-                        onChange={(e) => handleChange("eventTime", e.target.value)}
+                        id="email"
+                        type="email"
+                        placeholder="your@email.com"
+                        value={formData.email}
+                        onChange={(e) => handleChange("email", e.target.value)}
+                        className="border-border focus:border-coral"
                       />
                     </div>
 
                     <div className="space-y-2">
-                      <Label htmlFor="guestCount">Guest Count *</Label>
+                      <Label htmlFor="date">Date of Event</Label>
+                      <Input
+                        id="date"
+                        type="date"
+                        value={formData.date}
+                        onChange={(e) => handleChange("date", e.target.value)}
+                        className="border-border focus:border-coral"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <Label htmlFor="guestCount">Guest Count</Label>
                       <Input
                         id="guestCount"
                         type="number"
                         placeholder="50"
                         value={formData.guestCount}
                         onChange={(e) => handleChange("guestCount", e.target.value)}
-                        required
+                        className="border-border focus:border-coral"
                       />
                     </div>
-                  </div>
 
-                  <div className="space-y-2">
-                    <Label htmlFor="venue">Venue / City *</Label>
-                    <Input
-                      id="venue"
-                      placeholder="e.g., Toronto, Mississauga Banquet Hall"
-                      value={formData.venue}
-                      onChange={(e) => handleChange("venue", e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="services">Services Interested In</Label>
-                    <Select onValueChange={(value) => handleChange("services", value)}>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Select services" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="fruit-platters">Fruit Platters</SelectItem>
-                        <SelectItem value="fruit-carving">Fruit Carving</SelectItem>
-                        <SelectItem value="bubble-tea">Bubble Tea Station</SelectItem>
-                        <SelectItem value="ice-cream">Ice Cream & Kulfi</SelectItem>
-                        <SelectItem value="tea-station">Tea Station</SelectItem>
-                        <SelectItem value="juice-station">Juice Station</SelectItem>
-                        <SelectItem value="dessert-table">Dessert Table</SelectItem>
-                        <SelectItem value="custom">Custom / Multiple</SelectItem>
-                      </SelectContent>
-                    </Select>
+                    <div className="space-y-2">
+                      <Label htmlFor="services">Services Interested In</Label>
+                      <Select onValueChange={(value) => handleChange("services", value)}>
+                        <SelectTrigger className="border-border focus:border-coral">
+                          <SelectValue placeholder="Select services" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="fruit-platters">Fruit Platters</SelectItem>
+                          <SelectItem value="fruit-carving">Fruit Carving</SelectItem>
+                          <SelectItem value="bubble-tea">Bubble Tea Station</SelectItem>
+                          <SelectItem value="ice-cream">Ice Cream & Kulfi</SelectItem>
+                          <SelectItem value="tea-station">Tea Station</SelectItem>
+                          <SelectItem value="juice-station">Juice Station</SelectItem>
+                          <SelectItem value="dessert-table">Dessert Table</SelectItem>
+                          <SelectItem value="custom">Custom / Multiple</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
                   <div className="space-y-2">
                     <Label htmlFor="budget">Budget Range</Label>
                     <Select onValueChange={(value) => handleChange("budget", value)}>
-                      <SelectTrigger>
+                      <SelectTrigger className="border-border focus:border-coral">
                         <SelectValue placeholder="Select budget range" />
                       </SelectTrigger>
                       <SelectContent>
@@ -256,18 +237,20 @@ const Contact = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="notes">Additional Notes / Theme</Label>
+                    <Label htmlFor="message">Message *</Label>
                     <Textarea
-                      id="notes"
-                      placeholder="Tell us about your event theme, special requests, dietary restrictions, etc."
+                      id="message"
+                      placeholder="Tell us about your event..."
                       rows={5}
-                      value={formData.notes}
-                      onChange={(e) => handleChange("notes", e.target.value)}
+                      value={formData.message}
+                      onChange={(e) => handleChange("message", e.target.value)}
+                      required
+                      className="border-border focus:border-coral resize-none"
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full">
-                    Submit Quote Request
+                  <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral/90 text-white">
+                    Submit Request
                   </Button>
 
                   <p className="text-sm text-muted-foreground text-center">
