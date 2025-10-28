@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { Badge } from "@/components/ui/badge";
+import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruit-carving.jpg";
 import dessertImage from "@/assets/dessert-table.jpg";
@@ -9,6 +11,8 @@ type FilterType = "all" | "fruits" | "carving" | "desserts" | "beverages" | "eve
 
 const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
+  const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
   const filters: { label: string; value: FilterType }[] = [
     { label: "All", value: "all" },
@@ -42,17 +46,89 @@ const Gallery = () => {
     ? galleryItems 
     : galleryItems.filter(item => item.category === activeFilter);
 
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setLightboxIndex(null);
+    document.body.style.overflow = '';
+  };
+
+  const goToPrevious = () => {
+    if (lightboxIndex !== null) {
+      setLightboxIndex(lightboxIndex === 0 ? filteredItems.length - 1 : lightboxIndex - 1);
+    }
+  };
+
+  const goToNext = () => {
+    if (lightboxIndex !== null) {
+      setLightboxIndex(lightboxIndex === filteredItems.length - 1 ? 0 : lightboxIndex + 1);
+    }
+  };
+
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (lightboxIndex === null) return;
+      
+      if (e.key === 'Escape') {
+        closeLightbox();
+      } else if (e.key === 'ArrowLeft') {
+        goToPrevious();
+      } else if (e.key === 'ArrowRight') {
+        goToNext();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [lightboxIndex]);
+
+  // Touch/swipe handlers for mobile
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+
+    // Swipe threshold
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) {
+        // Swiped left - go to next
+        goToNext();
+      } else {
+        // Swiped right - go to previous
+        goToPrevious();
+      }
+    }
+    
+    setTouchStart(null);
+  };
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+
   return (
     <div className="animate-fade-in">
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary/5 via-background to-accent/5">
+      <section className="py-16 bg-background">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-5xl md:text-6xl font-serif font-bold text-secondary mb-6">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-secondary mb-6">
               Our Gallery
             </h1>
-            <div className="w-24 h-1 bg-primary mx-auto rounded-full mb-6" />
-            <p className="text-xl text-foreground leading-relaxed">
+            <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-6" />
+            <p className="text-lg md:text-xl text-foreground leading-relaxed">
               Browse our collection of beautifully styled events and delicious creations
             </p>
           </div>
@@ -88,8 +164,9 @@ const Gallery = () => {
             {filteredItems.map((item, index) => (
               <div
                 key={index}
-                className="group relative aspect-square rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 animate-scale-in"
+                className="group relative aspect-square rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 animate-scale-in cursor-pointer"
                 style={{ animationDelay: `${index * 30}ms` }}
+                onClick={() => openLightbox(index)}
               >
                 <img
                   src={item.image}
@@ -142,6 +219,74 @@ const Gallery = () => {
           </div>
         </div>
       </section>
+
+      {/* Lightbox */}
+      {lightboxIndex !== null && filteredItems[lightboxIndex] && createPortal(
+        <div 
+          className="fixed inset-0 bg-black/95 z-[9999] flex items-center justify-center p-4"
+          onClick={closeLightbox}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
+        >
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
+            className="absolute top-4 right-4 z-10 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors text-white"
+            aria-label="Close lightbox"
+          >
+            <X className="h-6 w-6" />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToPrevious();
+            }}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors text-white hidden md:flex items-center justify-center"
+            aria-label="Previous image"
+          >
+            <ChevronLeft className="h-8 w-8" />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              goToNext();
+            }}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors text-white hidden md:flex items-center justify-center"
+            aria-label="Next image"
+          >
+            <ChevronRight className="h-8 w-8" />
+          </button>
+
+          <div 
+            className="max-w-7xl max-h-full flex flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={filteredItems[lightboxIndex].image}
+              alt={filteredItems[lightboxIndex].caption}
+              className="max-w-full max-h-[80vh] object-contain"
+            />
+            <p className="text-white text-center mt-4 px-4 max-w-2xl">
+              {filteredItems[lightboxIndex].caption}
+            </p>
+            <div className="text-white/60 text-sm mt-2">
+              {lightboxIndex + 1} / {filteredItems.length}
+            </div>
+          </div>
+
+          {/* Mobile swipe indicators */}
+          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2 md:hidden">
+            <div className="text-white/40 text-xs">
+              Swipe to navigate
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   );
 };
