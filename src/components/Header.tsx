@@ -73,7 +73,7 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
             }`}>
               <Link to="/contact">Buy Now</Link>
             </Button>
-            <MobileNav />
+            <MobileNav isWhite={transparent} />
           </div>
         </div>
       </div>
