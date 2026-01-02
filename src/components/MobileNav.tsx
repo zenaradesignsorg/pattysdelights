@@ -18,6 +18,12 @@ const MobileNav = ({ isWhite = false }: { isWhite?: boolean }) => {
   
   const isActive = (path: string) => location.pathname === path;
   
+  const handleLinkClick = () => {
+    setIsOpen(false);
+    // Ensure instant scroll to top on navigation (no animation for instant feel)
+    window.scrollTo(0, 0);
+  };
+  
   const closeMenu = () => setIsOpen(false);
   
   // Prevent body scroll when menu is open
@@ -53,7 +59,7 @@ const MobileNav = ({ isWhite = false }: { isWhite?: boolean }) => {
               <Link 
                 to="/" 
                 className="text-2xl font-serif font-bold text-secondary"
-                onClick={closeMenu}
+                onClick={handleLinkClick}
               >
                 Patty's Delights
               </Link>
@@ -71,7 +77,7 @@ const MobileNav = ({ isWhite = false }: { isWhite?: boolean }) => {
                 <Link
                   key={link.path}
                   to={link.path}
-                  onClick={closeMenu}
+                  onClick={handleLinkClick}
                   className={`text-lg font-medium py-3 px-4 rounded-lg transition-colors ${
                     isActive(link.path) 
                       ? "bg-coral text-white" 
@@ -82,7 +88,7 @@ const MobileNav = ({ isWhite = false }: { isWhite?: boolean }) => {
                 </Link>
               ))}
               <Button asChild size="lg" className="mt-4 bg-coral hover:bg-coral/90">
-                <Link to="/contact" onClick={closeMenu}>
+                <Link to="/contact" onClick={handleLinkClick}>
                   Buy Now
                 </Link>
               </Button>

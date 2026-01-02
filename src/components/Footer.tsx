@@ -2,6 +2,10 @@ import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Facebook, Instagram, Clock, Star } from "lucide-react";
 
 const Footer = () => {
+  const handleLinkClick = () => {
+    // Ensure instant scroll to top on navigation (no animation for instant feel)
+    window.scrollTo(0, 0);
+  };
   const serviceAreas = [
     "Toronto",
     "Mississauga",
@@ -39,27 +43,27 @@ const Footer = () => {
             <h4 className="font-semibold text-secondary mb-4">Navigation</h4>
             <ul className="space-y-2">
               <li>
-                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/about" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   About
                 </Link>
               </li>
               <li>
-                <Link to="/services" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/services" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Services
                 </Link>
               </li>
               <li>
-                <Link to="/gallery" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/gallery" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Gallery
                 </Link>
               </li>
               <li>
-                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors">
+                <Link to="/contact" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
                   Contact
                 </Link>
               </li>

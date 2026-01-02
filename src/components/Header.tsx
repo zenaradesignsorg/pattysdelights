@@ -16,6 +16,11 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
   
   const isActive = (path: string) => location.pathname === path;
   
+  const handleLinkClick = () => {
+    // Ensure instant scroll to top on navigation (no animation for instant feel)
+    window.scrollTo(0, 0);
+  };
+  
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 ${
       transparent 
@@ -41,9 +46,13 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
       {/* Main header */}
       <div className={`container mx-auto px-4 ${transparent ? 'py-6' : 'py-4'}`}>
         <div className="flex items-center justify-between">
-          <Link to="/" className={`text-2xl md:text-3xl font-serif font-bold hover:text-primary transition-colors ${
-            transparent ? 'text-white' : 'text-secondary'
-          }`}>
+          <Link 
+            to="/" 
+            onClick={handleLinkClick}
+            className={`text-2xl md:text-3xl font-serif font-bold hover:text-primary transition-colors ${
+              transparent ? 'text-white' : 'text-secondary'
+            }`}
+          >
             Patty's Delights
           </Link>
           
@@ -52,6 +61,7 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
               <Link
                 key={link.path}
                 to={link.path}
+                onClick={handleLinkClick}
                 className={`font-medium transition-colors hover:text-primary ${
                   isActive(link.path) 
                     ? "text-primary" 
@@ -71,7 +81,7 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
                 ? "bg-white text-primary hover:bg-white/90" 
                 : ""
             }`}>
-              <Link to="/contact">Buy Now</Link>
+              <Link to="/contact" onClick={handleLinkClick}>Buy Now</Link>
             </Button>
             <MobileNav isWhite={transparent} />
           </div>
