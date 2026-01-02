@@ -56,9 +56,19 @@ All colors MUST be HSL.
     @apply border-border;
   }
 
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     @apply bg-background text-foreground font-sans;
     line-height: 1.7;
+    /* Optimize rendering */
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
   
   h1, h2, h3, h4, h5, h6 {
@@ -76,5 +86,15 @@ All colors MUST be HSL.
   
   h3 {
     @apply text-2xl md:text-3xl font-semibold;
+  }
+
+  /* Performance optimizations */
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+
+  /* Optimize scrolling performance */
+  * {
+    -webkit-tap-highlight-color: transparent;
   }
 }

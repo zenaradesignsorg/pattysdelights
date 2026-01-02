@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone } from "lucide-react";
+import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-11.jpg";
 import dessertImage from "@/assets/dessert-table-04.jpg";
@@ -10,6 +10,7 @@ import juiceStationImage from "@/assets/juice-station-01.jpg";
 import eventImage from "@/assets/events-10.jpg";
 import dessertTableImage2 from "@/assets/dessert-table-03.jpg";
 import bubbleTeaStationImage from "@/assets/bubble-tea-station-02.png";
+import pattyAtEventImage from "@/assets/events-09.jpg";
 
 const Home = () => {
   const highlights = [
@@ -81,7 +82,7 @@ const Home = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" style={{ height: '100vh' }}>
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: `url(${heroImage})` }}
+          style={{ backgroundImage: `url(${heroImage})`, willChange: 'auto', transform: 'translateZ(0)' }}
         />
         
         <div className="container mx-auto px-4 relative z-10">
@@ -118,9 +119,9 @@ const Home = () => {
 
       {/* Highlights Section */}
       <section className="py-20 bg-gradient-to-br from-background via-muted/30 to-background relative overflow-hidden">
-        {/* Background decoration */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--coral)/0.05),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.05),transparent_50%)]"></div>
+        {/* Background decoration - fixed to prevent repaints */}
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,hsl(var(--coral)/0.05),transparent_50%)] pointer-events-none" style={{ willChange: 'auto', transform: 'translateZ(0)' }}></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,hsl(var(--primary)/0.05),transparent_50%)] pointer-events-none" style={{ willChange: 'auto', transform: 'translateZ(0)' }}></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
@@ -139,16 +140,18 @@ const Home = () => {
               return (
                 <div 
                   key={index}
-                  className="bg-card/80 backdrop-blur-sm rounded-2xl shadow-card hover:shadow-hover transition-all duration-500 overflow-hidden group border border-border/50 hover:border-coral/20"
-                  style={{ animationDelay: `${index * 100}ms` }}
+                  className="bg-card/80 backdrop-blur-sm rounded-2xl shadow-card hover:shadow-hover transition-shadow duration-300 overflow-hidden group border border-border/50 hover:border-coral/20"
+                  style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}
                 >
                   <div className="aspect-square overflow-hidden relative">
                     <img 
                       src={highlight.image} 
                       alt={highlight.title}
+                      loading="lazy"
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      style={{ willChange: 'transform' }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                   </div>
                   <div className="p-6 relative">
                     <div className="w-12 h-12 rounded-xl bg-coral/10 flex items-center justify-center mb-4 group-hover:bg-coral/20 transition-colors duration-300">
@@ -165,13 +168,22 @@ const Home = () => {
               );
             })}
           </div>
+          
+          <div className="text-center mt-12">
+            <Button asChild size="lg" className="group bg-gradient-to-r from-coral to-primary hover:from-coral/90 hover:to-primary/90 text-white px-8 py-4 text-lg font-semibold rounded-full shadow-lg hover:shadow-coral/25 transition-all duration-300 transform hover:scale-105">
+              <Link to="/services" className="flex items-center">
+                <span>More Details</span>
+                <ArrowRight className="ml-3 h-5 w-5 group-hover:translate-x-1 transition-transform duration-300" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Why Choose Patty's */}
       <section className="py-20 bg-gradient-to-br from-muted/50 via-background to-muted/30 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,hsl(var(--coral)/0.08),transparent_60%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--primary)/0.08),transparent_60%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_50%,hsl(var(--coral)/0.08),transparent_60%)] pointer-events-none" style={{ willChange: 'auto', transform: 'translateZ(0)' }}></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_20%,hsl(var(--primary)/0.08),transparent_60%)] pointer-events-none" style={{ willChange: 'auto', transform: 'translateZ(0)' }}></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
@@ -186,8 +198,8 @@ const Home = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
             <div className="text-center group">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white text-3xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-all duration-300 group-hover:scale-105">
-                🍓
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-shadow duration-300 group-hover:scale-105" style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}>
+                <Sprout className="h-10 w-10" />
               </div>
               <h3 className="text-xl font-serif font-bold text-secondary mb-3">
                 Fresh & Local
@@ -198,8 +210,8 @@ const Home = () => {
             </div>
             
             <div className="text-center group">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white text-3xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-all duration-300 group-hover:scale-105">
-                ✨
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-shadow duration-300 group-hover:scale-105" style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}>
+                <Sparkles className="h-10 w-10" />
               </div>
               <h3 className="text-xl font-serif font-bold text-secondary mb-3">
                 Handcrafted Art
@@ -210,8 +222,8 @@ const Home = () => {
             </div>
             
             <div className="text-center group">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white text-3xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-all duration-300 group-hover:scale-105">
-                🏠
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-shadow duration-300 group-hover:scale-105" style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}>
+                <Heart className="h-10 w-10" />
               </div>
               <h3 className="text-xl font-serif font-bold text-secondary mb-3">
                 Personal Touch
@@ -222,8 +234,8 @@ const Home = () => {
             </div>
             
             <div className="text-center group">
-              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white text-3xl font-bold flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-all duration-300 group-hover:scale-105">
-                🎯
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-shadow duration-300 group-hover:scale-105" style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}>
+                <CheckCircle className="h-10 w-10" />
               </div>
               <h3 className="text-xl font-serif font-bold text-secondary mb-3">
                 Perfect Setup
@@ -233,13 +245,43 @@ const Home = () => {
               </p>
             </div>
           </div>
+
+          {/* Patty at Event Section */}
+          <div className="mt-20 max-w-5xl mx-auto">
+            <div className="relative rounded-3xl overflow-hidden shadow-2xl group" style={{ willChange: 'auto', transform: 'translateZ(0)' }}>
+              <img 
+                src={pattyAtEventImage} 
+                alt="Patty at an event with her beautiful fruit displays"
+                loading="lazy"
+                className="w-full h-[500px] md:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+                style={{ willChange: 'transform' }}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
+              <div className="absolute bottom-0 left-0 right-0 p-8 md:p-12">
+                <div className="max-w-2xl">
+                  <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white drop-shadow-lg">
+                    The Artist Behind the Magic
+                  </h3>
+                  <p className="text-lg md:text-xl text-white mb-6 leading-relaxed drop-shadow-md">
+                    At every event, personally crafting perfection
+                  </p>
+                  <Button asChild size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white hover:text-secondary backdrop-blur-sm shadow-lg">
+                    <Link to="/about" className="flex items-center">
+                      Meet Patty
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
       {/* Testimonials */}
       <section className="py-24 bg-gradient-to-br from-coral/5 via-background to-primary/5 relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_30%,hsl(var(--coral)/0.1),transparent_50%)]"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_70%,hsl(var(--primary)/0.1),transparent_50%)]"></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_30%,hsl(var(--coral)/0.1),transparent_50%)] pointer-events-none" style={{ willChange: 'auto', transform: 'translateZ(0)' }}></div>
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_70%,hsl(var(--primary)/0.1),transparent_50%)] pointer-events-none" style={{ willChange: 'auto', transform: 'translateZ(0)' }}></div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
@@ -256,8 +298,8 @@ const Home = () => {
             {testimonials.map((testimonial, index) => (
               <div 
                 key={index}
-                className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/20 hover:border-coral/20"
-                style={{ animationDelay: `${index * 150}ms` }}
+                className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-white/20 hover:border-coral/20"
+                style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}
               >
                 <div className="absolute top-6 right-6 text-6xl text-coral/20 font-serif">"</div>
                 <div className="flex items-center mb-6">
@@ -314,11 +356,13 @@ const Home = () => {
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
             {[fruitCarvingImage, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, dessertTableImage2, fruitCarvingImage].map((img, index) => (
-              <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 group">
+              <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 group" style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}>
                 <img 
                   src={img} 
                   alt={`Gallery ${index + 1}`}
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  style={{ willChange: 'transform' }}
                 />
               </div>
             ))}
