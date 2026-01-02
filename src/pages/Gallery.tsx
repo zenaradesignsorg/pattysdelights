@@ -3,9 +3,24 @@ import { createPortal } from "react-dom";
 import { Badge } from "@/components/ui/badge";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
-import fruitCarvingImage from "@/assets/fruit-carving.jpg";
-import dessertImage from "@/assets/dessert-table.jpg";
-import bubbleTeaImage from "@/assets/bubble-tea.jpg";
+import fruits01 from "@/assets/fruits-01.jpg";
+import fruits10 from "@/assets/fruits-10.jpg";
+import fruits11 from "@/assets/fruits-11.jpg";
+import fruitTable07 from "@/assets/fruit-table-07.jpg";
+import dessertTable01 from "@/assets/dessert-table-01.jpg";
+import dessertTable03 from "@/assets/dessert-table-03.jpg";
+import dessertTable04 from "@/assets/dessert-table-04.jpg";
+import bubbleTeaStation02 from "@/assets/bubble-tea-station-02.png";
+import bubbleTeaTable01 from "@/assets/bubble-tea-table-01.png";
+import juiceStation01 from "@/assets/juice-station-01.jpg";
+import juiceStation02 from "@/assets/juice-station-02.jpg";
+import juiceStation04 from "@/assets/juice-station-04.jpg";
+import juiceStation05 from "@/assets/juice-station-05.jpg";
+import juiceStation06 from "@/assets/juice-station-06.jpg";
+import events07 from "@/assets/events-07.jpg";
+import events08 from "@/assets/events-08.jpg";
+import events09 from "@/assets/events-09.jpg";
+import events10 from "@/assets/events-10.jpg";
 
 type FilterType = "all" | "fruits" | "carving" | "desserts" | "beverages" | "events";
 
@@ -24,22 +39,33 @@ const Gallery = () => {
   ];
 
   const galleryItems = [
-    { image: heroImage, category: "fruits", caption: "Fruit Platters • House Party" },
-    { image: fruitCarvingImage, category: "carving", caption: "Fruit Carving • Wedding" },
-    { image: dessertImage, category: "desserts", caption: "Dessert Table • Baby Shower" },
-    { image: bubbleTeaImage, category: "beverages", caption: "Bubble Tea Station • Corporate Event" },
-    { image: heroImage, category: "events", caption: "Full Event Setup • Birthday Party" },
-    { image: fruitCarvingImage, category: "carving", caption: "Custom Carving • Anniversary" },
-    { image: dessertImage, category: "desserts", caption: "Sweet Treats • Engagement Party" },
-    { image: bubbleTeaImage, category: "beverages", caption: "Beverage Bar • Graduation" },
-    { image: heroImage, category: "fruits", caption: "Seasonal Fruits • Community Event" },
-    { image: fruitCarvingImage, category: "carving", caption: "Intricate Design • Wedding Reception" },
-    { image: dessertImage, category: "desserts", caption: "Cupcake Display • Bridal Shower" },
-    { image: bubbleTeaImage, category: "beverages", caption: "Kulfi Station • Cultural Event" },
-    { image: heroImage, category: "fruits", caption: "Fresh Platters • Office Party" },
-    { image: fruitCarvingImage, category: "events", caption: "Complete Setup • Banquet Hall" },
-    { image: dessertImage, category: "desserts", caption: "Dessert Bar • Holiday Party" },
-    { image: bubbleTeaImage, category: "beverages", caption: "Tea Station • Family Gathering" },
+    // Fruits (only working images)
+    { image: fruits01, category: "fruits", caption: "Fruit Platters • House Party" },
+    { image: fruits10, category: "fruits", caption: "Premium Fruit Selection • Corporate Event" },
+    { image: fruits11, category: "fruits", caption: "Fresh Fruit Platter • Family Gathering" },
+    // Fruit Tables (only working images)
+    { image: fruitTable07, category: "fruits", caption: "Colorful Fruit Table • Party" },
+    // Fruit Carving (using working fruits images)
+    { image: fruits01, category: "carving", caption: "Fruit Carving • Wedding" },
+    { image: fruits10, category: "carving", caption: "Custom Carving • Anniversary" },
+    { image: fruits11, category: "carving", caption: "Intricate Design • Wedding Reception" },
+    // Desserts (only working images)
+    { image: dessertTable01, category: "desserts", caption: "Dessert Table • Baby Shower" },
+    { image: dessertTable03, category: "desserts", caption: "Sweet Treats • Engagement Party" },
+    { image: dessertTable04, category: "desserts", caption: "Cupcake Display • Bridal Shower" },
+    // Beverages (all working)
+    { image: bubbleTeaStation02, category: "beverages", caption: "Bubble Tea Station • Corporate Event" },
+    { image: bubbleTeaTable01, category: "beverages", caption: "Bubble Tea Table • Celebration" },
+    { image: juiceStation01, category: "beverages", caption: "Juice Station • Event" },
+    { image: juiceStation02, category: "beverages", caption: "Fresh Juice Bar • Party" },
+    { image: juiceStation04, category: "beverages", caption: "Juice Station Setup • Gathering" },
+    { image: juiceStation05, category: "beverages", caption: "Beverage Station • Celebration" },
+    { image: juiceStation06, category: "beverages", caption: "Juice Bar • Special Event" },
+    // Events (only working images)
+    { image: events07, category: "events", caption: "Complete Event Display • Party" },
+    { image: events08, category: "events", caption: "Stunning Event Setup • Gathering" },
+    { image: events09, category: "events", caption: "Beautiful Event Display • Celebration" },
+    { image: events10, category: "events", caption: "Premium Event Setup • Grand Occasion" },
   ];
 
   const filteredItems = activeFilter === "all" 
