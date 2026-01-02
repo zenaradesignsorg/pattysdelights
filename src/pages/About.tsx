@@ -1,8 +1,8 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChefHat, Palette, MapPin, Heart, Users, Star, Coffee, ShoppingBag, Sparkles } from "lucide-react";
-import pattyImage from "@/assets/patty-portrait.jpg";
-import fruitCarvingImage from "@/assets/fruit-carving.jpg";
+import pattyImage from "@/assets/patty-profile.jpg";
+import fruitCarvingImage from "@/assets/fruits-01.jpg";
 
 const About = () => {
   return (

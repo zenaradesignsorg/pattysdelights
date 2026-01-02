@@ -8,11 +8,11 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-fruits.jpg";
-import fruitCarvingImage from "@/assets/fruit-carving.jpg";
-import dessertImage from "@/assets/dessert-table.jpg";
-import bubbleTeaImage from "@/assets/bubble-tea.jpg";
-import iceCreamImage from "@/assets/ice-cream.jpg";
-import teaStationImage from "@/assets/tea-station.jpg";
+import fruitCarvingImage from "@/assets/fruits-01.jpg";
+import dessertImage from "@/assets/dessert-table-01.jpg";
+import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
+import iceCreamImage from "@/assets/ice-cream-02.jpg";
+import juiceStationImage from "@/assets/juice-station-01.jpg";
 
 const Services = () => {
   const services = [
@@ -74,7 +74,7 @@ const Services = () => {
     {
       title: "Juice Stations",
       description: "Fresh, healthy beverages made to order",
-      image: bubbleTeaImage,
+      image: juiceStationImage,
       features: [
         "Fresh fruit blends",
         "Mocktails & specialty drinks",
