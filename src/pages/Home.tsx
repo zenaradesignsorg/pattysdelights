@@ -2,9 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
-import fruitCarvingImage from "@/assets/fruit-carving.jpg";
-import dessertImage from "@/assets/dessert-table.jpg";
-import bubbleTeaImage from "@/assets/bubble-tea.jpg";
+import fruitCarvingImage from "@/assets/fruits-11.jpg";
+import dessertImage from "@/assets/dessert-table-04.jpg";
+import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
+import fruitTableImage from "@/assets/fruit-table-07.jpg";
+import juiceStationImage from "@/assets/juice-station-01.jpg";
+import eventImage from "@/assets/events-10.jpg";
+import dessertTableImage2 from "@/assets/dessert-table-03.jpg";
+import bubbleTeaStationImage from "@/assets/bubble-tea-station-02.png";
 
 const Home = () => {
   const highlights = [
@@ -55,17 +60,17 @@ const Home = () => {
   const testimonials = [
     {
       text: "Patty's fruit carving was the highlight of our wedding! Absolutely stunning and delicious.",
-      author: "Sarah M.",
+      author: "Sarah Mitchell",
       event: "Wedding Reception",
     },
     {
       text: "The bubble tea station was a hit at our corporate event. Professional setup and amazing service!",
-      author: "James L.",
+      author: "James Chen",
       event: "Corporate Event",
     },
     {
       text: "Beautiful dessert table that looked too good to eat! Patty's attention to detail is incredible.",
-      author: "Priya K.",
+      author: "Priya Sharma",
       event: "Baby Shower",
     },
   ];
@@ -270,7 +275,7 @@ const Home = () => {
                     {testimonial.author.charAt(0)}
                   </div>
                   <div>
-                    <p className="font-semibold text-secondary text-lg">{testimonial.author}</p>
+                    <p className="font-semibold text-lg" style={{ color: '#8B4513' }}>{testimonial.author}</p>
                     <p className="text-sm text-coral font-medium">{testimonial.event}</p>
                   </div>
                 </div>
@@ -282,7 +287,7 @@ const Home = () => {
           <div className="text-center mt-16">
             <div className="inline-flex items-center gap-6 px-8 py-6 bg-gradient-to-r from-coral/10 to-primary/10 rounded-2xl border border-coral/20 shadow-lg">
               <div className="flex items-center gap-2">
-                <span className="text-2xl">🍓</span>
+                <span className="text-2xl">🥭</span>
                 <span className="text-lg font-semibold text-secondary">100+ clients</span>
               </div>
               <div className="text-center">
@@ -308,7 +313,7 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[heroImage, fruitCarvingImage, dessertImage, bubbleTeaImage, heroImage, fruitCarvingImage, dessertImage, bubbleTeaImage].map((img, index) => (
+            {[fruitCarvingImage, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, dessertTableImage2, fruitCarvingImage].map((img, index) => (
               <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 group">
                 <img 
                   src={img} 
