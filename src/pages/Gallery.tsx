@@ -18,10 +18,11 @@ import dessertTable01 from "@/assets/dessert-table-01.jpg";
 import dessertTable02 from "@/assets/dessert-table-02.jpg";
 import dessertTable03 from "@/assets/dessert-table-03.jpg";
 import dessertTable04 from "@/assets/dessert-table-04.jpg";
-import iceCream01 from "@/assets/ice-cream-01.jpeg";
+import iceCream01 from "@/assets/ice-cream-01.jpg";
 // Beverages
 import bubbleTeaStation02 from "@/assets/bubble-tea-station-02.png";
 import bubbleTeaTable01 from "@/assets/bubble-tea-table-01.png";
+import teaStation01 from "@/assets/tea-station-01.png";
 import juiceStation01 from "@/assets/juice-station-01.jpg";
 import juiceStation02 from "@/assets/juice-station-02.jpg";
 import juiceStation03 from "@/assets/juice-station-03.jpg";
@@ -75,10 +76,11 @@ const Gallery = () => {
       { image: dessertTable03, category: "desserts" as const },
       { image: dessertTable04, category: "desserts" as const },
       { image: iceCream01, category: "desserts" as const },
-      // Beverage Station - juice-station and bubble-tea items
-      { image: bubbleTeaStation02, category: "beverageStation" as const },
-      { image: bubbleTeaTable01, category: "beverageStation" as const },
-      { image: juiceStation01, category: "beverageStation" as const },
+    // Beverage Station - juice-station, bubble-tea, and tea-station items
+    { image: bubbleTeaStation02, category: "beverageStation" as const },
+    { image: bubbleTeaTable01, category: "beverageStation" as const },
+    { image: teaStation01, category: "beverageStation" as const },
+    { image: juiceStation01, category: "beverageStation" as const },
       { image: juiceStation02, category: "beverageStation" as const },
       { image: juiceStation03, category: "beverageStation" as const },
       { image: juiceStation04, category: "beverageStation" as const },

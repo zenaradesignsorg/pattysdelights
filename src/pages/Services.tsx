@@ -8,18 +8,21 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import heroImage from "@/assets/hero-fruits.jpg";
-import fruitCarvingImage from "@/assets/fruits-01.jpg";
-import dessertImage from "@/assets/dessert-table-01.jpg";
+import fruitPlattersImage from "@/assets/fruits-06.jpg";
+import fruitCarvingImage from "@/assets/events-01.jpg";
+import fruitTableImage from "@/assets/fruit-table-02.jpg";
+import dessertImage from "@/assets/dessert-table-02.jpg";
 import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
-import iceCreamImage from "@/assets/ice-cream-01.jpeg";
+import iceCreamImage from "@/assets/ice-cream-01.jpg";
 import juiceStationImage from "@/assets/juice-station-01.jpg";
+import teaStationImage from "@/assets/tea-station-01.png";
 
 const Services = () => {
   const services = [
     {
       title: "Fruit Platters & Trays",
       description: "Fresh, seasonal fruit beautifully arranged for any occasion",
-      image: heroImage,
+      image: fruitPlattersImage,
       features: [
         "Seasonal fruit selections",
         "Vibrant, eye-catching styling",
@@ -36,6 +39,17 @@ const Services = () => {
         "Names, monograms & special messages",
         "Intricate watermelon & melon carvings",
         "Centerpiece-worthy presentations",
+      ],
+    },
+    {
+      title: "Fruit Tables/Stations",
+      description: "Beautifully styled fruit displays for your event",
+      image: fruitTableImage,
+      features: [
+        "Elegant table arrangements",
+        "Mixed fruit selections",
+        "Professional presentation",
+        "Perfect for large gatherings",
       ],
     },
     {
@@ -96,7 +110,7 @@ const Services = () => {
     {
       title: "Custom Requests",
       description: "Have something special in mind? We can make it happen!",
-      image: fruitCarvingImage,
+      image: heroImage,
       features: [
         "Snack & appetizer bars",
         "Cultural specialty stations",
