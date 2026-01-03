@@ -11,7 +11,7 @@ import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-01.jpg";
 import dessertImage from "@/assets/dessert-table-01.jpg";
 import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
-import iceCreamImage from "@/assets/ice-cream-02.jpg";
+import iceCreamImage from "@/assets/ice-cream-01.jpeg";
 import juiceStationImage from "@/assets/juice-station-01.jpg";
 
 const Services = () => {

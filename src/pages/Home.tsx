@@ -2,15 +2,15 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
-import fruitCarvingImage from "@/assets/fruits-11.jpg";
+import fruitCarvingImage from "@/assets/fruits-01.jpg";
 import dessertImage from "@/assets/dessert-table-04.jpg";
 import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
-import fruitTableImage from "@/assets/fruit-table-07.jpg";
+import fruitTableImage from "@/assets/fruit-table-01.jpg";
 import juiceStationImage from "@/assets/juice-station-01.jpg";
-import eventImage from "@/assets/events-10.jpg";
+import eventImage from "@/assets/events-01.jpg";
 import dessertTableImage2 from "@/assets/dessert-table-03.jpg";
 import bubbleTeaStationImage from "@/assets/bubble-tea-station-02.png";
-import pattyAtEventImage from "@/assets/events-09.jpg";
+import pattyAtEventImage from "@/assets/events-03.jpg";
 
 const Home = () => {
   const highlights = [

@@ -1,98 +1,164 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Badge } from "@/components/ui/badge";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
-import heroImage from "@/assets/hero-fruits.jpg";
+// Fruits
 import fruits01 from "@/assets/fruits-01.jpg";
-import fruits10 from "@/assets/fruits-10.jpg";
-import fruits11 from "@/assets/fruits-11.jpg";
-import fruitTable07 from "@/assets/fruit-table-07.jpg";
+import fruits02 from "@/assets/fruits-02.jpg";
+import fruits03 from "@/assets/fruits-03.jpg";
+import fruits04 from "@/assets/fruits-04.jpg";
+import fruits05 from "@/assets/fruits-05.jpg";
+import fruits06 from "@/assets/fruits-06.jpg";
+import fruits07 from "@/assets/fruits-07.jpg";
+// Fruit Tables
+import fruitTable01 from "@/assets/fruit-table-01.jpg";
+import fruitTable02 from "@/assets/fruit-table-02.jpg";
+// Desserts
 import dessertTable01 from "@/assets/dessert-table-01.jpg";
+import dessertTable02 from "@/assets/dessert-table-02.jpg";
 import dessertTable03 from "@/assets/dessert-table-03.jpg";
 import dessertTable04 from "@/assets/dessert-table-04.jpg";
+import iceCream01 from "@/assets/ice-cream-01.jpeg";
+// Beverages
 import bubbleTeaStation02 from "@/assets/bubble-tea-station-02.png";
 import bubbleTeaTable01 from "@/assets/bubble-tea-table-01.png";
 import juiceStation01 from "@/assets/juice-station-01.jpg";
 import juiceStation02 from "@/assets/juice-station-02.jpg";
+import juiceStation03 from "@/assets/juice-station-03.jpg";
 import juiceStation04 from "@/assets/juice-station-04.jpg";
 import juiceStation05 from "@/assets/juice-station-05.jpg";
 import juiceStation06 from "@/assets/juice-station-06.jpg";
+import juiceStation07 from "@/assets/juice-station-07.jpg";
+import juiceStation08 from "@/assets/juice-station-08.jpg";
+import juiceStation09 from "@/assets/juice-station-09.jpg";
+// Events
+import events01 from "@/assets/events-01.jpg";
+import events02 from "@/assets/events-02.jpg";
+import events03 from "@/assets/events-03.jpg";
+import events04 from "@/assets/events-04.jpg";
+import events05 from "@/assets/events-05.jpg";
+import events06 from "@/assets/events-06.jpg";
 import events07 from "@/assets/events-07.jpg";
-import events08 from "@/assets/events-08.jpg";
-import events09 from "@/assets/events-09.jpg";
-import events10 from "@/assets/events-10.jpg";
 
-type FilterType = "all" | "fruits" | "carving" | "desserts" | "beverages" | "events";
+type FilterType = "all" | "fruits" | "desserts" | "beverageStation" | "events";
 
 const Gallery = () => {
   const [activeFilter, setActiveFilter] = useState<FilterType>("all");
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
 
   const filters: { label: string; value: FilterType }[] = [
     { label: "All", value: "all" },
-    { label: "Fruit Platters", value: "fruits" },
-    { label: "Fruit Carving", value: "carving" },
+    { label: "Fruits", value: "fruits" },
     { label: "Desserts", value: "desserts" },
-    { label: "Beverage Stations", value: "beverages" },
+    { label: "Beverage Station", value: "beverageStation" },
     { label: "Events", value: "events" },
   ];
 
-  const galleryItems = [
-    // Fruits (only working images)
-    { image: fruits01, category: "fruits", caption: "Fruit Platters • House Party" },
-    { image: fruits10, category: "fruits", caption: "Premium Fruit Selection • Corporate Event" },
-    { image: fruits11, category: "fruits", caption: "Fresh Fruit Platter • Family Gathering" },
-    // Fruit Tables (only working images)
-    { image: fruitTable07, category: "fruits", caption: "Colorful Fruit Table • Party" },
-    // Fruit Carving (using working fruits images)
-    { image: fruits01, category: "carving", caption: "Fruit Carving • Wedding" },
-    { image: fruits10, category: "carving", caption: "Custom Carving • Anniversary" },
-    { image: fruits11, category: "carving", caption: "Intricate Design • Wedding Reception" },
-    // Desserts (only working images)
-    { image: dessertTable01, category: "desserts", caption: "Dessert Table • Baby Shower" },
-    { image: dessertTable03, category: "desserts", caption: "Sweet Treats • Engagement Party" },
-    { image: dessertTable04, category: "desserts", caption: "Cupcake Display • Bridal Shower" },
-    // Beverages (all working)
-    { image: bubbleTeaStation02, category: "beverages", caption: "Bubble Tea Station • Corporate Event" },
-    { image: bubbleTeaTable01, category: "beverages", caption: "Bubble Tea Table • Celebration" },
-    { image: juiceStation01, category: "beverages", caption: "Juice Station • Event" },
-    { image: juiceStation02, category: "beverages", caption: "Fresh Juice Bar • Party" },
-    { image: juiceStation04, category: "beverages", caption: "Juice Station Setup • Gathering" },
-    { image: juiceStation05, category: "beverages", caption: "Beverage Station • Celebration" },
-    { image: juiceStation06, category: "beverages", caption: "Juice Bar • Special Event" },
-    // Events (only working images)
-    { image: events07, category: "events", caption: "Complete Event Display • Party" },
-    { image: events08, category: "events", caption: "Stunning Event Setup • Gathering" },
-    { image: events09, category: "events", caption: "Beautiful Event Display • Celebration" },
-    { image: events10, category: "events", caption: "Premium Event Setup • Grand Occasion" },
-  ];
+  // Memoize gallery items to prevent recreation on every render
+  const galleryItems = useMemo(() => {
+    const items = [
+      // Fruits - all fruits and fruit-table items
+      { image: fruits01, category: "fruits" as const },
+      { image: fruits02, category: "fruits" as const },
+      { image: fruits03, category: "fruits" as const },
+      { image: fruits04, category: "fruits" as const },
+      { image: fruits05, category: "fruits" as const },
+      { image: fruits06, category: "fruits" as const },
+      { image: fruits07, category: "fruits" as const },
+      { image: fruitTable01, category: "fruits" as const },
+      { image: fruitTable02, category: "fruits" as const },
+      // Desserts - dessert-table and ice-cream items
+      { image: dessertTable01, category: "desserts" as const },
+      { image: dessertTable02, category: "desserts" as const },
+      { image: dessertTable03, category: "desserts" as const },
+      { image: dessertTable04, category: "desserts" as const },
+      { image: iceCream01, category: "desserts" as const },
+      // Beverage Station - juice-station and bubble-tea items
+      { image: bubbleTeaStation02, category: "beverageStation" as const },
+      { image: bubbleTeaTable01, category: "beverageStation" as const },
+      { image: juiceStation01, category: "beverageStation" as const },
+      { image: juiceStation02, category: "beverageStation" as const },
+      { image: juiceStation03, category: "beverageStation" as const },
+      { image: juiceStation04, category: "beverageStation" as const },
+      { image: juiceStation05, category: "beverageStation" as const },
+      { image: juiceStation06, category: "beverageStation" as const },
+      { image: juiceStation07, category: "beverageStation" as const },
+      { image: juiceStation08, category: "beverageStation" as const },
+      { image: juiceStation09, category: "beverageStation" as const },
+      // Events - all events items
+      { image: events01, category: "events" as const },
+      { image: events02, category: "events" as const },
+      { image: events03, category: "events" as const },
+      { image: events04, category: "events" as const },
+      { image: events05, category: "events" as const },
+      { image: events06, category: "events" as const },
+      { image: events07, category: "events" as const },
+    ];
+    
+    // Remove duplicates by image source
+    const seen = new Set();
+    return items.filter(item => {
+      if (seen.has(item.image)) {
+        return false;
+      }
+      seen.add(item.image);
+      return true;
+    });
+  }, []);
 
-  const filteredItems = activeFilter === "all" 
-    ? galleryItems 
-    : galleryItems.filter(item => item.category === activeFilter);
+  // Memoize filtered items to prevent recalculation on every render
+  const filteredItems = useMemo(() => {
+    if (activeFilter === "all") {
+      return galleryItems.filter(item => !failedImages.has(item.image));
+    }
+    return galleryItems.filter(item => item.category === activeFilter && !failedImages.has(item.image));
+  }, [activeFilter, galleryItems, failedImages]);
 
-  const openLightbox = (index: number) => {
+  const handleImageError = useCallback((imageSrc: string, event?: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    const img = event?.currentTarget;
+    const errorInfo = {
+      src: imageSrc,
+      naturalWidth: img?.naturalWidth,
+      naturalHeight: img?.naturalHeight,
+      complete: img?.complete,
+    };
+    
+    console.error('Image failed to load:', errorInfo);
+    console.error('Image source:', imageSrc);
+    console.error('Error details:', {
+      naturalWidth: img?.naturalWidth || 'unknown',
+      naturalHeight: img?.naturalHeight || 'unknown',
+      complete: img?.complete,
+    });
+    
+    setFailedImages(prev => new Set(prev).add(imageSrc));
+  }, []);
+
+  const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
     document.body.style.overflow = 'hidden';
-  };
+  }, []);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightboxIndex(null);
     document.body.style.overflow = '';
-  };
+  }, []);
 
-  const goToPrevious = () => {
-    if (lightboxIndex !== null) {
-      setLightboxIndex(lightboxIndex === 0 ? filteredItems.length - 1 : lightboxIndex - 1);
-    }
-  };
+  const goToPrevious = useCallback(() => {
+    setLightboxIndex(prev => {
+      if (prev === null) return null;
+      return prev === 0 ? filteredItems.length - 1 : prev - 1;
+    });
+  }, [filteredItems.length]);
 
-  const goToNext = () => {
-    if (lightboxIndex !== null) {
-      setLightboxIndex(lightboxIndex === filteredItems.length - 1 ? 0 : lightboxIndex + 1);
-    }
-  };
+  const goToNext = useCallback(() => {
+    setLightboxIndex(prev => {
+      if (prev === null) return null;
+      return prev === filteredItems.length - 1 ? 0 : prev + 1;
+    });
+  }, [filteredItems.length]);
 
   // Keyboard navigation
   useEffect(() => {
@@ -110,7 +176,7 @@ const Gallery = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIndex]);
+  }, [lightboxIndex, closeLightbox, goToPrevious, goToNext]);
 
   // Touch/swipe handlers for mobile
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -189,23 +255,20 @@ const Gallery = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {filteredItems.map((item, index) => (
               <div
-                key={index}
-                className="group relative aspect-square rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 animate-scale-in cursor-pointer"
-                style={{ animationDelay: `${index * 30}ms` }}
+                key={String(item.image)}
+                className="group relative aspect-square rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer bg-muted"
                 onClick={() => openLightbox(index)}
+                style={{ willChange: 'transform' }}
               >
                 <img
                   src={item.image}
-                  alt={item.caption}
+                  alt="Gallery image"
+                  loading="lazy"
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  style={{ willChange: 'transform' }}
+                  onError={(e) => handleImageError(item.image, e)}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-0 left-0 right-0 p-4">
-                    <p className="text-white font-medium text-sm">
-                      {item.caption}
-                    </p>
-                  </div>
-                </div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
               </div>
             ))}
           </div>
@@ -293,12 +356,13 @@ const Gallery = () => {
           >
             <img
               src={filteredItems[lightboxIndex].image}
-              alt={filteredItems[lightboxIndex].caption}
+              alt="Gallery image"
               className="max-w-full max-h-[80vh] object-contain"
+              onError={(e) => {
+                handleImageError(filteredItems[lightboxIndex].image, e);
+                closeLightbox();
+              }}
             />
-            <p className="text-white text-center mt-4 px-4 max-w-2xl">
-              {filteredItems[lightboxIndex].caption}
-            </p>
             <div className="text-white/60 text-sm mt-2">
               {lightboxIndex + 1} / {filteredItems.length}
             </div>

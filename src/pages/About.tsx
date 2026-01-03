@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { ChefHat, Palette, MapPin, Heart, Users, Star, Coffee, ShoppingBag, Sparkles } from "lucide-react";
 import pattyImage from "@/assets/patty-profile.jpg";
 import fruitCarvingImage from "@/assets/fruits-01.jpg";
-import eventImage from "@/assets/events-08.jpg";
+import eventImage from "@/assets/events-02.jpg";
 
 const About = () => {
   return (
