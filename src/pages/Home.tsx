@@ -79,7 +79,7 @@ const Home = () => {
   return (
     <div className="animate-fade-in">
       {/* Hero Section - Professional Dark Design */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900" style={{ height: '100vh' }}>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-20 md:pt-0" style={{ minHeight: '100vh' }}>
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
           style={{ backgroundImage: `url(${heroImage})`, willChange: 'auto', transform: 'translateZ(0)' }}
@@ -87,7 +87,7 @@ const Home = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight">
+            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight">
               <span className="block">Premium Fruit Artistry</span>
               <span className="block text-primary">& Dessert Tables</span>
             </h1>
