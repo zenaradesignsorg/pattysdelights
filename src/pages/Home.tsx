@@ -4,12 +4,12 @@ import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-01.jpg";
 import dessertImage from "@/assets/dessert-table-04.jpg";
-import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
+import bubbleTeaStationImage from "@/assets/bubble-tea-station-02.png";
 import fruitTableImage from "@/assets/fruit-table-01.jpg";
 import juiceStationImage from "@/assets/juice-station-01.jpg";
 import eventImage from "@/assets/events-01.jpg";
-import dessertTableImage2 from "@/assets/dessert-table-03.jpg";
-import bubbleTeaStationImage from "@/assets/bubble-tea-station-02.png";
+import eventImage2 from "@/assets/events-02.jpg";
+import iceCreamImage from "@/assets/ice-cream-01.jpg";
 import pattyAtEventImage from "@/assets/events-03.jpg";
 
 const Home = () => {
@@ -30,7 +30,7 @@ const Home = () => {
       icon: Coffee,
       title: "Beverage Stations",
       description: "Bubble tea, kulfi, tea & juice bars.",
-      image: bubbleTeaImage,
+      image: bubbleTeaStationImage,
     },
     {
       icon: Wrench,
@@ -355,7 +355,7 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[fruitCarvingImage, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, dessertTableImage2, fruitCarvingImage].map((img, index) => (
+            {[fruitCarvingImage, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, iceCreamImage, eventImage2].map((img, index) => (
               <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 group" style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}>
                 <img 
                   src={img} 

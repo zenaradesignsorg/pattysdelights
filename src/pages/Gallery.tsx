@@ -10,6 +10,10 @@ import fruits04 from "@/assets/fruits-04.jpg";
 import fruits05 from "@/assets/fruits-05.jpg";
 import fruits06 from "@/assets/fruits-06.jpg";
 import fruits07 from "@/assets/fruits-07.jpg";
+import fruits08 from "@/assets/fruits-08.jpg";
+import fruits09 from "@/assets/fruits-09.jpg";
+import fruits10 from "@/assets/fruits-10.jpg";
+import fruits11 from "@/assets/fruits-11.jpg";
 // Fruit Tables
 import fruitTable01 from "@/assets/fruit-table-01.jpg";
 import fruitTable02 from "@/assets/fruit-table-02.jpg";
@@ -40,6 +44,9 @@ import events04 from "@/assets/events-04.jpg";
 import events05 from "@/assets/events-05.jpg";
 import events06 from "@/assets/events-06.jpg";
 import events07 from "@/assets/events-07.jpg";
+import events08 from "@/assets/events-08.jpg";
+import events09 from "@/assets/events-09.jpg";
+import events10 from "@/assets/events-10.jpg";
 
 type FilterType = "all" | "fruits" | "desserts" | "beverageStation" | "events";
 
@@ -68,6 +75,10 @@ const Gallery = () => {
       { image: fruits05, category: "fruits" as const },
       { image: fruits06, category: "fruits" as const },
       { image: fruits07, category: "fruits" as const },
+      { image: fruits08, category: "fruits" as const },
+      { image: fruits09, category: "fruits" as const },
+      { image: fruits10, category: "fruits" as const },
+      { image: fruits11, category: "fruits" as const },
       { image: fruitTable01, category: "fruits" as const },
       { image: fruitTable02, category: "fruits" as const },
       // Desserts - dessert-table and ice-cream items
@@ -97,15 +108,19 @@ const Gallery = () => {
       { image: events05, category: "events" as const },
       { image: events06, category: "events" as const },
       { image: events07, category: "events" as const },
+      { image: events08, category: "events" as const },
+      { image: events09, category: "events" as const },
+      { image: events10, category: "events" as const },
     ];
     
-    // Remove duplicates by image source
-    const seen = new Set();
+    // Remove duplicates by image source (using string representation for reliable comparison)
+    const seen = new Set<string>();
     return items.filter(item => {
-      if (seen.has(item.image)) {
+      const imageKey = String(item.image);
+      if (seen.has(imageKey)) {
         return false;
       }
-      seen.add(item.image);
+      seen.add(imageKey);
       return true;
     });
   }, []);
