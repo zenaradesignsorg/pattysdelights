@@ -7,6 +7,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { MapPin, Heart, Sparkles, CheckCircle2 } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitPlattersImage from "@/assets/fruits-06.jpg";
 import fruitCarvingImage from "@/assets/events-01.jpg";
@@ -16,6 +17,7 @@ import bubbleTeaImage from "@/assets/bubble-tea-station-02.png";
 import iceCreamImage from "@/assets/ice-cream-01.jpg";
 import juiceStationImage from "@/assets/juice-station-01.jpg";
 import teaStationImage from "@/assets/tea-station-01.png";
+import charcuterieImage from "@/assets/events-04.jpg";
 
 const Services = () => {
   const services = [
@@ -57,7 +59,7 @@ const Services = () => {
       description: "Interactive bubble tea bar with all the fixings",
       image: bubbleTeaImage,
       features: [
-        "Classic & fruit tea varieties",
+        "Flavors: milk tea, mango, strawberry, honeydew, brown sugar, taro, and more",
         "Boba, jelly & popping pearls",
         "On-site preparation & service",
         "Customizable sweetness levels",
@@ -68,7 +70,7 @@ const Services = () => {
       description: "Delicious frozen treats that everyone loves",
       image: iceCreamImage,
       features: [
-        "Popular flavors selection",
+        "Flavors: mango, pistachio, tropical, oreo, nutella, falooda, chocolate, malai, milo, pineapple, and more",
         "Cups, cones & waffle options",
         "Toppings & sauces bar",
         "Traditional kulfi varieties",
@@ -79,7 +81,7 @@ const Services = () => {
       description: "Warm, comforting tea service for your guests",
       image: teaStationImage,
       features: [
-        "Masala chai & milk tea",
+        "Bru coffee, Masala tea, Milk tea, Black tea, and more",
         "Herbal & specialty options",
         "Samovar or urn setup",
         "Traditional accompaniments",
@@ -90,7 +92,7 @@ const Services = () => {
       description: "Fresh, healthy beverages made to order",
       image: juiceStationImage,
       features: [
-        "Fresh fruit blends",
+        "Flavors include watermelon space, sweet, flooda, pineapple, pina colada, and other fruit blends",
         "Mocktails & specialty drinks",
         "Garnish & presentation bar",
         "Seasonal favorites",
@@ -108,8 +110,19 @@ const Services = () => {
       ],
     },
     {
+      title: "Charcuterie Boards",
+      description: "Elegant boards featuring cured meats, cheeses, and accompaniments",
+      image: charcuterieImage,
+      features: [
+        "Premium cured meats selection",
+        "Artisan cheeses & accompaniments",
+        "Beautifully styled presentation",
+        "Perfect for any gathering size",
+      ],
+    },
+    {
       title: "Custom Requests",
-      description: "Have something special in mind? We can make it happen!",
+      description: "Have something special in mind? We can make it happen! Examples include Vattalappam, Milk flan, dessert cups, and special ice cream.",
       image: heroImage,
       features: [
         "Snack & appetizer bars",
@@ -172,6 +185,149 @@ const Services = () => {
               {services.map((service, index) => (
                 <ServiceCard key={index} {...service} />
               ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Events We Serve Section */}
+      <section className="py-20 bg-gradient-to-br from-muted/30 via-background to-muted/20">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-secondary mb-4">
+              Events We Serve
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-6" />
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+              We bring our services to all types of celebrations and venues across the GTA
+            </p>
+          </div>
+
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {/* Venue Types */}
+              <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-card hover:shadow-hover transition-all duration-300 border border-border/50 hover:border-coral/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-coral/10 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <MapPin className="h-6 w-6 text-coral" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-secondary">
+                    Venue Types
+                  </h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Party hall or banquet hall</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Temple</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>House</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Outdoor venue</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Wedding Events */}
+              <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-card hover:shadow-hover transition-all duration-300 border border-border/50 hover:border-coral/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-coral/10 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Heart className="h-6 w-6 text-coral" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-secondary">
+                    Wedding Events
+                  </h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Wedding</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Reception</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Engagement</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Bride to be</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Mehndi party</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Nalangu party</span>
+                  </li>
+                </ul>
+              </div>
+
+              {/* Life Celebrations */}
+              <div className="group bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-card hover:shadow-hover transition-all duration-300 border border-border/50 hover:border-coral/20">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-coral/10 to-primary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                    <Sparkles className="h-6 w-6 text-coral" />
+                  </div>
+                  <h3 className="text-2xl font-serif font-bold text-secondary">
+                    Life Celebrations
+                  </h3>
+                </div>
+                <ul className="space-y-3">
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Anniversary</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Valaikappu</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Baby shower</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Baby naming ceremony</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Palu kolukkadai ceremony</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Birthday party (kids & adults)</span>
+                  </li>
+                  <li className="flex items-center gap-3 text-foreground">
+                    <CheckCircle2 className="h-5 w-5 text-coral flex-shrink-0" />
+                    <span>Saree ceremony / Puberty function</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            
+            {/* Business Partnerships Note */}
+            <div className="mt-12 max-w-4xl mx-auto">
+              <div className="bg-gradient-to-br from-coral/10 to-primary/10 rounded-2xl p-8 border border-coral/20 shadow-lg">
+                <div className="text-center">
+                  <h3 className="text-2xl md:text-3xl font-serif font-bold text-secondary mb-3">
+                    Partner With Us
+                  </h3>
+                  <p className="text-lg text-foreground leading-relaxed max-w-2xl mx-auto">
+                    Banquet hall owners and party planners—we'd love to work with you! Let's create beautiful experiences together for your clients. Contact us to discuss partnership opportunities and preferred vendor arrangements.
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
         </div>

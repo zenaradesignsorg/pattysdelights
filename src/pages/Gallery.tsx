@@ -14,6 +14,8 @@ import fruits08 from "@/assets/fruits-08.jpg";
 import fruits09 from "@/assets/fruits-09.jpg";
 import fruits10 from "@/assets/fruits-10.jpg";
 import fruits11 from "@/assets/fruits-11.jpg";
+import fruits12 from "@/assets/fruits-12.jpg";
+import fruits13 from "@/assets/fruits-13.jpg";
 // Fruit Tables
 import fruitTable01 from "@/assets/fruit-table-01.jpg";
 import fruitTable02 from "@/assets/fruit-table-02.jpg";
@@ -22,9 +24,13 @@ import dessertTable01 from "@/assets/dessert-table-01.jpg";
 import dessertTable02 from "@/assets/dessert-table-02.jpg";
 import dessertTable03 from "@/assets/dessert-table-03.jpg";
 import dessertTable04 from "@/assets/dessert-table-04.jpg";
+import dessertTable05 from "@/assets/dessert-table-05.jpg";
+import dessertTable06 from "@/assets/dessert-table-06.jpg";
 import iceCream01 from "@/assets/ice-cream-01.jpg";
+import iceCream02 from "@/assets/ice-cream-02.jpg";
 // Beverages
 import bubbleTeaStation02 from "@/assets/bubble-tea-station-02.png";
+import bubbleTeaStation03 from "@/assets/bubble-tea-station-03.png";
 import bubbleTeaTable01 from "@/assets/bubble-tea-table-01.png";
 import teaStation01 from "@/assets/tea-station-01.png";
 import juiceStation01 from "@/assets/juice-station-01.jpg";
@@ -36,6 +42,7 @@ import juiceStation06 from "@/assets/juice-station-06.jpg";
 import juiceStation07 from "@/assets/juice-station-07.jpg";
 import juiceStation08 from "@/assets/juice-station-08.jpg";
 import juiceStation09 from "@/assets/juice-station-09.jpg";
+import juiceStation10 from "@/assets/juice-station-10.jpg";
 // Events
 import events01 from "@/assets/events-01.jpg";
 import events02 from "@/assets/events-02.jpg";
@@ -47,6 +54,11 @@ import events07 from "@/assets/events-07.jpg";
 import events08 from "@/assets/events-08.jpg";
 import events09 from "@/assets/events-09.jpg";
 import events10 from "@/assets/events-10.jpg";
+import events11 from "@/assets/events-11.jpg";
+import events12 from "@/assets/events-12.jpg";
+import events13 from "@/assets/events-13.jpg";
+import events14 from "@/assets/events-14.jpg";
+import events15 from "@/assets/events-15.jpg";
 
 type FilterType = "all" | "fruits" | "desserts" | "beverageStation" | "events";
 
@@ -79,6 +91,8 @@ const Gallery = () => {
       { image: fruits09, category: "fruits" as const },
       { image: fruits10, category: "fruits" as const },
       { image: fruits11, category: "fruits" as const },
+      { image: fruits12, category: "fruits" as const },
+      { image: fruits13, category: "fruits" as const },
       { image: fruitTable01, category: "fruits" as const },
       { image: fruitTable02, category: "fruits" as const },
       // Desserts - dessert-table and ice-cream items
@@ -86,9 +100,13 @@ const Gallery = () => {
       { image: dessertTable02, category: "desserts" as const },
       { image: dessertTable03, category: "desserts" as const },
       { image: dessertTable04, category: "desserts" as const },
+      { image: dessertTable05, category: "desserts" as const },
+      { image: dessertTable06, category: "desserts" as const },
       { image: iceCream01, category: "desserts" as const },
+      { image: iceCream02, category: "desserts" as const },
     // Beverage Station - juice-station, bubble-tea, and tea-station items
     { image: bubbleTeaStation02, category: "beverageStation" as const },
+    { image: bubbleTeaStation03, category: "beverageStation" as const },
     { image: bubbleTeaTable01, category: "beverageStation" as const },
     { image: teaStation01, category: "beverageStation" as const },
     { image: juiceStation01, category: "beverageStation" as const },
@@ -100,6 +118,7 @@ const Gallery = () => {
       { image: juiceStation07, category: "beverageStation" as const },
       { image: juiceStation08, category: "beverageStation" as const },
       { image: juiceStation09, category: "beverageStation" as const },
+      { image: juiceStation10, category: "beverageStation" as const },
       // Events - all events items
       { image: events01, category: "events" as const },
       { image: events02, category: "events" as const },
@@ -111,6 +130,11 @@ const Gallery = () => {
       { image: events08, category: "events" as const },
       { image: events09, category: "events" as const },
       { image: events10, category: "events" as const },
+      { image: events11, category: "events" as const },
+      { image: events12, category: "events" as const },
+      { image: events13, category: "events" as const },
+      { image: events14, category: "events" as const },
+      { image: events15, category: "events" as const },
     ];
     
     // Remove duplicates by image source (using string representation for reliable comparison)
