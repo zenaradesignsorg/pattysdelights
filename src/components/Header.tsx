@@ -31,13 +31,13 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
       {!transparent && (
         <div className="bg-muted py-2">
           <div className="container mx-auto px-4 flex justify-end items-center gap-6 text-sm">
-            <a href="tel:+14165551234" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+            <a href="tel:+16476677559" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
               <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">(416) 555-1234</span>
+              <span className="hidden sm:inline">(647) 667-7559</span>
             </a>
-            <a href="mailto:hello@pattysdelights.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+            <a href="mailto:Pattysdelightsinc@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
               <Mail className="h-4 w-4" />
-              <span className="hidden sm:inline">hello@pattysdelights.com</span>
+              <span className="hidden sm:inline">Pattysdelightsinc@gmail.com</span>
             </a>
           </div>
         </div>

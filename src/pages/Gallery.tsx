@@ -302,7 +302,7 @@ const Gallery = () => {
               Request a Quote
             </a>
             <a 
-              href="tel:+14165551234"
+              href="tel:+16476677559"
               className="inline-flex items-center justify-center gap-2 h-14 px-8 py-4 text-base border-2 border-primary text-primary bg-transparent rounded-full font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               Call Now

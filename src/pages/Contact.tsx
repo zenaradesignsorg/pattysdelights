@@ -12,6 +12,7 @@ import {
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
+import { submitContactForm } from "@/lib/contact-api";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -24,12 +25,37 @@ const Contact = () => {
     budget: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Form submission would be handled here
-    toast.success("Quote request received! We'll be in touch soon.");
-    console.log("Form data:", formData);
+    setIsSubmitting(true);
+
+    try {
+      const result = await submitContactForm(formData);
+
+      if (result.success) {
+        toast.success("Quote request received! We'll be in touch soon.");
+        // Reset form
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          date: "",
+          guestCount: "",
+          services: "",
+          budget: "",
+          message: "",
+        });
+      } else {
+        toast.error(result.error || "Failed to send request. Please try again or call us directly.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      toast.error("An unexpected error occurred. Please try again or call us directly.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (field: string, value: string) => {
@@ -71,10 +97,10 @@ const Contact = () => {
                   </div>
                 </div>
                 <a 
-                  href="tel:+14165551234" 
+                  href="tel:+16476677559" 
                   className="block w-full bg-white text-coral font-bold text-xl md:text-2xl py-4 px-6 rounded-lg text-center hover:bg-white/95 transition-colors shadow-lg hover:shadow-xl"
                 >
-                  (416) 555-1234
+                  (647) 667-7559
                 </a>
                 <p className="text-white/90 text-xs md:text-sm text-center mt-3">
                   Available Mon-Fri: 9am-7pm, Sat-Sun: 10am-5pm
@@ -94,8 +120,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="font-semibold text-secondary mb-1 text-sm md:text-base">Email</p>
-                      <a href="mailto:hello@pattysdelights.com" className="text-sm md:text-base text-muted-foreground hover:text-coral transition-colors break-all">
-                        hello@pattysdelights.com
+                      <a href="mailto:Pattysdelightsinc@gmail.com" className="text-sm md:text-base text-muted-foreground hover:text-coral transition-colors break-all">
+                        Pattysdelightsinc@gmail.com
                       </a>
                     </div>
                   </div>
@@ -164,7 +190,7 @@ const Contact = () => {
                       <Input
                         id="phone"
                         type="tel"
-                        placeholder="(416) 555-1234"
+                        placeholder="(647) 667-7559"
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         required
@@ -260,8 +286,13 @@ const Contact = () => {
                     />
                   </div>
 
-                  <Button type="submit" size="lg" className="w-full bg-coral hover:bg-coral/90 text-white text-base md:text-lg py-6">
-                    Submit Request
+                  <Button 
+                    type="submit" 
+                    size="lg" 
+                    className="w-full bg-coral hover:bg-coral/90 text-white text-base md:text-lg py-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Sending..." : "Submit Request"}
                   </Button>
 
                   <p className="text-xs md:text-sm text-muted-foreground text-center">

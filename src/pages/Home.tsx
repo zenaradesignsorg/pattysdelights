@@ -106,7 +106,7 @@ const Home = () => {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="group relative overflow-hidden border-2 border-white/40 text-white hover:text-coral bg-white/5 hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-full shadow-xl hover:shadow-white/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-                <a href="tel:+14165551234" className="flex items-center">
+                <a href="tel:+16476677559" className="flex items-center">
                   <Phone className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
                   <span className="relative z-10">Call Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-coral/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -409,7 +409,7 @@ const Home = () => {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-2 border-coral text-coral hover:bg-coral hover:text-white px-8 py-3 text-lg font-semibold rounded-xl transition-all duration-300">
-                <a href="tel:+14165551234" className="flex items-center">
+                <a href="tel:+16476677559" className="flex items-center">
                   <Phone className="mr-2 h-5 w-5" />
                   <span>Call me directly</span>
                 </a>
