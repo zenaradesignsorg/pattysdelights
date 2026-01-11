@@ -7,6 +7,8 @@ import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
+import SEO from "./components/SEO";
+import StructuredData from "./components/StructuredData";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -34,6 +36,8 @@ const AppContent = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <ScrollToTop />
+      <SEO />
+      <StructuredData />
       <Header transparent={location.pathname === '/' && !isScrolled} />
       <main className={`flex-1 ${location.pathname === '/' ? '' : 'pt-24'}`}>
         <Routes>

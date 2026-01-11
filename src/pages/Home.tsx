@@ -286,7 +286,7 @@ const Home = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">
-              What Our Clients Say
+              What Our Customers Say
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-6" />
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
@@ -330,7 +330,7 @@ const Home = () => {
             <div className="inline-flex items-center gap-6 px-8 py-6 bg-gradient-to-r from-coral/10 to-primary/10 rounded-2xl border border-coral/20 shadow-lg">
               <div className="flex items-center gap-2">
                 <span className="text-2xl">🥭</span>
-                <span className="text-lg font-semibold text-secondary">100+ clients</span>
+                <span className="text-lg font-semibold text-secondary">100+ customers</span>
               </div>
               <div className="text-center">
                 <p className="font-semibold text-secondary text-lg">Trusted Across the GTA</p>

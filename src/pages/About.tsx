@@ -20,7 +20,7 @@ const About = () => {
                   </h1>
                   <div className="w-16 h-1 bg-gradient-to-r from-coral to-primary rounded-full mb-6 md:mb-8" />
                   <p className="text-base md:text-lg leading-relaxed text-foreground mb-4 md:mb-6">
-                    Patty is the heart behind Patty's Delights—bringing <span className="text-coral font-semibold">10+ years of cooking and baking experience</span> to every celebration. As a GTA small business, she treats each event like family, crafting authentic flavours with a caring aunty's touch.
+                    Patty is the heart behind Patty's Delights—bringing <span className="text-coral font-semibold">10+ years of cooking and baking experience</span> to every celebration. As a GTA small business, she treats each event like family, crafting authentic flavours with a caring mom's touch.
                   </p>
                   <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 md:mb-6">
                     Whether it's a cozy house party or a grand banquet hall, Patty designs, prepares, and sets up beautiful stations that feel personal, warm, and delicious.
@@ -225,7 +225,7 @@ const About = () => {
                 <div className="space-y-6 md:space-y-8 w-full">
                   <div>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-secondary mb-4 md:mb-6">
-                      That Aunty's Touch
+                      A Motherly Touch
                     </h2>
                     <div className="w-16 h-1 bg-gradient-to-r from-coral to-primary rounded-full mb-4 md:mb-6" />
                   </div>
