@@ -264,7 +264,8 @@ const Contact = () => {
                         <SelectValue placeholder="Select budget range" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="under-500">Under $500</SelectItem>
+                        <SelectItem value="under-200">Under $200</SelectItem>
+                        <SelectItem value="200-500">$200 - $500</SelectItem>
                         <SelectItem value="500-1000">$500 - $1,000</SelectItem>
                         <SelectItem value="1000-2000">$1,000 - $2,000</SelectItem>
                         <SelectItem value="2000-plus">$2,000+</SelectItem>
