@@ -16,6 +16,12 @@
     <meta name="twitter:site" content="@pattysdelights" />
     <meta name="twitter:image" content="/placeholder.svg" />
     
+    <!-- Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://www.google-analytics.com https://www.googletagmanager.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    
     <!-- Google Search Console Verification -->
     <!-- Replace with your verification code from Google Search Console -->
     <!-- <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE" /> -->

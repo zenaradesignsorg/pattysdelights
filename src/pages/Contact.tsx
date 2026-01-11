@@ -10,10 +10,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { toast } from "sonner";
 import { submitContactForm } from "@/lib/contact-api";
 import { trackFormSubmit } from "@/lib/analytics";
+import {
+  sanitizeText,
+  validateAndSanitizeEmail,
+  validateAndSanitizePhone,
+  INPUT_LIMITS,
+} from "@/lib/sanitize";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -27,18 +33,78 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const formLoadTime = useRef<number>(Date.now());
+  const honeypotRef = useRef<HTMLInputElement>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Anti-spam: Check honeypot field (should be empty)
+    if (honeypotRef.current && honeypotRef.current.value) {
+      // Bot detected - silently reject
+      console.warn("Spam detected: honeypot field filled");
+      return;
+    }
+
+    // Anti-spam: Check if form was submitted too quickly (less than 3 seconds)
+    const timeSpent = (Date.now() - formLoadTime.current) / 1000;
+    if (timeSpent < 3) {
+      toast.error("Please take your time filling out the form");
+      return;
+    }
+    
+    // Client-side validation
+    const sanitizedName = sanitizeText(formData.name, INPUT_LIMITS.NAME_MAX);
+    const sanitizedEmail = formData.email ? validateAndSanitizeEmail(formData.email) : null;
+    const sanitizedPhone = validateAndSanitizePhone(formData.phone);
+    const sanitizedMessage = sanitizeText(formData.message, INPUT_LIMITS.MESSAGE_MAX);
+
+    // Validate required fields
+    if (!sanitizedName || sanitizedName.length < 1) {
+      toast.error("Please enter your name");
+      return;
+    }
+
+    if (!sanitizedPhone) {
+      toast.error("Please enter a valid phone number");
+      return;
+    }
+
+    if (!sanitizedMessage || sanitizedMessage.length < 10) {
+      toast.error("Please enter a message (at least 10 characters)");
+      return;
+    }
+
+    // Validate email if provided
+    if (formData.email && !sanitizedEmail) {
+      toast.error("Please enter a valid email address");
+      return;
+    }
+
     setIsSubmitting(true);
 
     try {
-      const result = await submitContactForm(formData);
+      // Create sanitized form data with anti-spam metadata
+      const sanitizedFormData = {
+        name: sanitizedName,
+        email: sanitizedEmail || "",
+        phone: sanitizedPhone,
+        date: sanitizeText(formData.date || "", INPUT_LIMITS.DATE_MAX),
+        guestCount: sanitizeText(formData.guestCount || "", 10),
+        services: sanitizeText(formData.services || "", 100),
+        budget: sanitizeText(formData.budget || "", 50),
+        message: sanitizedMessage,
+        // Anti-spam fields
+        _honeypot: "", // Honeypot field (should be empty)
+        _timeSpent: Math.round(timeSpent), // Time spent on form in seconds
+      };
+
+      const result = await submitContactForm(sanitizedFormData);
 
       if (result.success) {
         trackFormSubmit("contact_form", {
-          service_interest: formData.services,
-          budget_range: formData.budget,
+          service_interest: sanitizedFormData.services,
+          budget_range: sanitizedFormData.budget,
         });
         toast.success("Quote request received! We'll be in touch soon.");
         // Reset form
@@ -176,7 +242,21 @@ const Contact = () => {
                   Fill out the form below and we'll get back to you with a custom quote
                 </p>
 
-                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
+                <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6 relative">
+                  {/* Honeypot field - hidden from users but visible to bots */}
+                  <div style={{ position: 'absolute', left: '-9999px', opacity: 0, pointerEvents: 'none' }} aria-hidden="true">
+                    <Label htmlFor="website">Website (leave blank)</Label>
+                    <Input
+                      id="website"
+                      name="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                      ref={honeypotRef}
+                      aria-hidden="true"
+                    />
+                  </div>
+                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                     <div className="space-y-2">
                       <Label htmlFor="name" className="text-sm md:text-base">Name *</Label>
@@ -186,6 +266,7 @@ const Contact = () => {
                         value={formData.name}
                         onChange={(e) => handleChange("name", e.target.value)}
                         required
+                        maxLength={INPUT_LIMITS.NAME_MAX}
                         className="border-border focus:border-coral text-sm md:text-base"
                       />
                     </div>
@@ -199,6 +280,7 @@ const Contact = () => {
                         value={formData.phone}
                         onChange={(e) => handleChange("phone", e.target.value)}
                         required
+                        maxLength={INPUT_LIMITS.PHONE_MAX}
                         className="border-border focus:border-coral text-sm md:text-base"
                       />
                     </div>
@@ -213,6 +295,7 @@ const Contact = () => {
                         placeholder="your@email.com"
                         value={formData.email}
                         onChange={(e) => handleChange("email", e.target.value)}
+                        maxLength={INPUT_LIMITS.EMAIL_MAX}
                         className="border-border focus:border-coral text-sm md:text-base"
                       />
                     </div>
@@ -224,6 +307,7 @@ const Contact = () => {
                         type="date"
                         value={formData.date}
                         onChange={(e) => handleChange("date", e.target.value)}
+                        maxLength={INPUT_LIMITS.DATE_MAX}
                         className="border-border focus:border-coral text-sm md:text-base"
                       />
                     </div>
@@ -238,6 +322,8 @@ const Contact = () => {
                         placeholder="50"
                         value={formData.guestCount}
                         onChange={(e) => handleChange("guestCount", e.target.value)}
+                        min="1"
+                        max="100000"
                         className="border-border focus:border-coral text-sm md:text-base"
                       />
                     </div>
@@ -288,8 +374,12 @@ const Contact = () => {
                       value={formData.message}
                       onChange={(e) => handleChange("message", e.target.value)}
                       required
+                      maxLength={INPUT_LIMITS.MESSAGE_MAX}
                       className="border-border focus:border-coral resize-none text-sm md:text-base"
                     />
+                    <p className="text-xs text-muted-foreground text-right mt-1">
+                      {formData.message.length} / {INPUT_LIMITS.MESSAGE_MAX} characters
+                    </p>
                   </div>
 
                   <Button 

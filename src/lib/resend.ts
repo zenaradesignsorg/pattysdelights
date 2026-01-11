@@ -1,10 +1,18 @@
 import { Resend } from "resend";
+import {
+  escapeHtml,
+  sanitizeText,
+  validateAndSanitizeEmail,
+  sanitizeEmailHeader,
+  INPUT_LIMITS,
+} from "./sanitize";
 
-// Initialize Resend client
-// The API key will be read from environment variable VITE_RESEND_API_KEY
-// For server-side usage, use RESEND_API_KEY instead
+// NOTE: This function should only be used server-side
+// Client-side usage is disabled for security (API keys should never be exposed)
 const getResendClient = () => {
-  const apiKey = import.meta.env.VITE_RESEND_API_KEY || import.meta.env.RESEND_API_KEY;
+  // Only use server-side environment variable (RESEND_API_KEY)
+  // VITE_ prefixed variables are exposed to the client bundle - DO NOT USE for API keys
+  const apiKey = import.meta.env.RESEND_API_KEY;
   
   if (!apiKey) {
     console.warn("Resend API key not found. Email functionality will be disabled.");
@@ -23,50 +31,63 @@ export interface ContactFormData {
   services: string;
   budget: string;
   message: string;
+  // Anti-spam fields (optional, may not be present)
+  _honeypot?: string;
+  _timeSpent?: number;
 }
 
 export const sendContactEmail = async (formData: ContactFormData): Promise<{ success: boolean; error?: string }> => {
   const resend = getResendClient();
   
   if (!resend) {
-    // In development, if API key is not set, return success for testing
-    if (import.meta.env.DEV) {
-      console.log("Resend not configured. Form data:", formData);
-      return { success: true };
-    }
+    // Server-side only - this should not be called from client
     return { success: false, error: "Email service not configured" };
   }
 
   try {
-    // Format the email content
+    // Sanitize all inputs
+    const sanitizedName = sanitizeText(formData.name, INPUT_LIMITS.NAME_MAX);
+    const sanitizedEmail = formData.email ? validateAndSanitizeEmail(formData.email) : null;
+    const sanitizedPhone = sanitizeText(formData.phone, INPUT_LIMITS.PHONE_MAX);
+    const sanitizedDate = sanitizeText(formData.date || "", INPUT_LIMITS.DATE_MAX);
+    const sanitizedGuestCount = sanitizeText(formData.guestCount || "", 10);
+    const sanitizedServices = sanitizeText(formData.services || "", 100);
+    const sanitizedBudget = sanitizeText(formData.budget || "", 50);
+    const sanitizedMessage = sanitizeText(formData.message, INPUT_LIMITS.MESSAGE_MAX);
+
+    // Validate required fields after sanitization
+    if (!sanitizedName || !sanitizedPhone || !sanitizedMessage) {
+      return { success: false, error: "Invalid or missing required fields" };
+    }
+
+    // Sanitize email header fields to prevent header injection
+    const safeSubject = sanitizeEmailHeader(`New Quote Request from ${sanitizedName}`);
+    const safeReplyTo = sanitizedEmail || undefined;
+
+    // Format the email content (plain text)
     const emailContent = `
 New Quote Request from Patty's Delights Website
 
 Contact Information:
-- Name: ${formData.name}
-- Email: ${formData.email || "Not provided"}
-- Phone: ${formData.phone}
+- Name: ${sanitizedName}
+- Email: ${sanitizedEmail || "Not provided"}
+- Phone: ${sanitizedPhone}
 
 Event Details:
-- Date: ${formData.date || "Not specified"}
-- Guest Count: ${formData.guestCount || "Not specified"}
-- Services: ${formData.services || "Not specified"}
-- Budget: ${formData.budget || "Not specified"}
+- Date: ${sanitizedDate || "Not specified"}
+- Guest Count: ${sanitizedGuestCount || "Not specified"}
+- Services: ${sanitizedServices || "Not specified"}
+- Budget: ${sanitizedBudget || "Not specified"}
 
 Message:
-${formData.message}
+${sanitizedMessage}
 
 ---
 This email was sent from the contact form on Patty's Delights website.
     `.trim();
 
-    const result = await resend.emails.send({
-      from: "Patty's Delights <onboarding@resend.dev>", // Update this with your verified domain
-      to: ["Pattysdelightsinc@gmail.com"], // Your business email
-      replyTo: formData.email || undefined,
-      subject: `New Quote Request from ${formData.name}`,
-      text: emailContent,
-      html: `
+    // HTML email with all user input properly escaped
+    const htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
           <h2 style="color: #8B4513; border-bottom: 2px solid #FF6B6B; padding-bottom: 10px;">
             New Quote Request from Patty's Delights Website
@@ -74,22 +95,22 @@ This email was sent from the contact form on Patty's Delights website.
           
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #333; margin-top: 0;">Contact Information</h3>
-            <p><strong>Name:</strong> ${formData.name}</p>
-            <p><strong>Email:</strong> ${formData.email || "Not provided"}</p>
-            <p><strong>Phone:</strong> ${formData.phone}</p>
+            <p><strong>Name:</strong> ${escapeHtml(sanitizedName)}</p>
+            <p><strong>Email:</strong> ${sanitizedEmail ? escapeHtml(sanitizedEmail) : "Not provided"}</p>
+            <p><strong>Phone:</strong> ${escapeHtml(sanitizedPhone)}</p>
           </div>
           
           <div style="background-color: #f9f9f9; padding: 20px; border-radius: 8px; margin: 20px 0;">
             <h3 style="color: #333; margin-top: 0;">Event Details</h3>
-            <p><strong>Date:</strong> ${formData.date || "Not specified"}</p>
-            <p><strong>Guest Count:</strong> ${formData.guestCount || "Not specified"}</p>
-            <p><strong>Services:</strong> ${formData.services || "Not specified"}</p>
-            <p><strong>Budget:</strong> ${formData.budget || "Not specified"}</p>
+            <p><strong>Date:</strong> ${sanitizedDate ? escapeHtml(sanitizedDate) : "Not specified"}</p>
+            <p><strong>Guest Count:</strong> ${sanitizedGuestCount ? escapeHtml(sanitizedGuestCount) : "Not specified"}</p>
+            <p><strong>Services:</strong> ${sanitizedServices ? escapeHtml(sanitizedServices) : "Not specified"}</p>
+            <p><strong>Budget:</strong> ${sanitizedBudget ? escapeHtml(sanitizedBudget) : "Not specified"}</p>
           </div>
           
           <div style="background-color: #fff5f5; padding: 20px; border-radius: 8px; margin: 20px 0; border-left: 4px solid #FF6B6B;">
             <h3 style="color: #333; margin-top: 0;">Message</h3>
-            <p style="white-space: pre-wrap; line-height: 1.6;">${formData.message}</p>
+            <p style="white-space: pre-wrap; line-height: 1.6;">${escapeHtml(sanitizedMessage)}</p>
           </div>
           
           <hr style="border: none; border-top: 1px solid #eee; margin: 30px 0;">
@@ -97,7 +118,15 @@ This email was sent from the contact form on Patty's Delights website.
             This email was sent from the contact form on Patty's Delights website.
           </p>
         </div>
-      `,
+      `;
+
+    const result = await resend.emails.send({
+      from: "Patty's Delights <onboarding@resend.dev>", // Update this with your verified domain
+      to: ["Pattysdelightsinc@gmail.com"], // Your business email
+      replyTo: safeReplyTo,
+      subject: safeSubject,
+      text: emailContent,
+      html: htmlContent,
     });
 
     if (result.error) {
