@@ -2,13 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle } from "lucide-react";
 import heroImage from "@/assets/hero-fruits.jpg";
-import fruitCarvingImage from "@/assets/fruits-01.jpg";
+import fruitCarvingImage from "@/assets/fruits-13.jpg";
+import fruits08Image from "@/assets/fruits-08.jpg";
 import dessertImage from "@/assets/dessert-table-04.jpg";
 import bubbleTeaStationImage from "@/assets/bubble-tea-station-02.png";
 import fruitTableImage from "@/assets/fruit-table-01.jpg";
 import juiceStationImage from "@/assets/juice-station-01.jpg";
 import eventImage from "@/assets/events-01.jpg";
-import eventImage2 from "@/assets/events-02.jpg";
+import eventImage2 from "@/assets/events-09.jpg";
 import iceCreamImage from "@/assets/ice-cream-01.jpg";
 import pattyAtEventImage from "@/assets/events-03.jpg";
 
@@ -355,7 +356,7 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[fruitCarvingImage, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, iceCreamImage, eventImage2].map((img, index) => (
+            {[fruits08Image, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, iceCreamImage, eventImage2].map((img, index) => (
               <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 group" style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}>
                 <img 
                   src={img} 
