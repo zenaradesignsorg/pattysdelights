@@ -195,7 +195,7 @@ const About = () => {
                   <div>
                     <h4 className="text-base md:text-lg font-semibold text-secondary mb-1 md:mb-2">Asian Community Approved</h4>
                     <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                      Culturally aware catering with authentic flavors and presentation that honors your traditions.
+                      Culturally aware catering with authentic flavors and presentation that honors your traditions. Trusted by the South Asian and Tamil communities across the GTA.
                     </p>
                   </div>
                 </div>
