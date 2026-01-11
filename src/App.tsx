@@ -9,6 +9,7 @@ import Footer from "./components/Footer";
 import ScrollToTop from "./components/ScrollToTop";
 import SEO from "./components/SEO";
 import StructuredData from "./components/StructuredData";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Services from "./pages/Services";
@@ -35,6 +36,7 @@ const AppContent = () => {
   
   return (
     <div className="flex flex-col min-h-screen">
+      <GoogleAnalytics />
       <ScrollToTop />
       <SEO />
       <StructuredData />

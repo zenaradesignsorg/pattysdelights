@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import MobileNav from "./MobileNav";
+import { trackPhoneClick, trackEmailClick } from "@/lib/analytics";
 
 const Header = ({ transparent = false }: { transparent?: boolean }) => {
   const location = useLocation();
@@ -31,11 +32,19 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
       {!transparent && (
         <div className="bg-muted py-2">
           <div className="container mx-auto px-4 flex justify-end items-center gap-6 text-sm">
-            <a href="tel:+16476677559" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+            <a 
+              href="tel:+16476677559" 
+              onClick={trackPhoneClick}
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            >
               <Phone className="h-4 w-4" />
               <span className="hidden sm:inline">(647) 667-7559</span>
             </a>
-            <a href="mailto:Pattysdelightsinc@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+            <a 
+              href="mailto:Pattysdelightsinc@gmail.com" 
+              onClick={trackEmailClick}
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+            >
               <Mail className="h-4 w-4" />
               <span className="hidden sm:inline">Pattysdelightsinc@gmail.com</span>
             </a>

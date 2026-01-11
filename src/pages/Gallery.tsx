@@ -2,6 +2,7 @@ import { useState, useEffect, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Badge } from "@/components/ui/badge";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
+import { trackPhoneClick } from "@/lib/analytics";
 // Fruits
 import fruits01 from "@/assets/fruits-01.jpg";
 import fruits02 from "@/assets/fruits-02.jpg";
@@ -342,6 +343,7 @@ const Gallery = () => {
             </a>
             <a 
               href="tel:+16476677559"
+              onClick={trackPhoneClick}
               className="inline-flex items-center justify-center gap-2 h-14 px-8 py-4 text-base border-2 border-primary text-primary bg-transparent rounded-full font-semibold hover:bg-primary hover:text-primary-foreground transition-all duration-300"
             >
               Call Now

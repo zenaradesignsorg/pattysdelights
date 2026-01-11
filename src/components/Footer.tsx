@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Instagram, Clock, Star } from "lucide-react";
+import { trackPhoneClick, trackEmailClick, trackExternalLink } from "@/lib/analytics";
 
 const Footer = () => {
   const handleLinkClick = () => {
@@ -29,7 +30,14 @@ const Footer = () => {
               Serving the Greater Toronto Area with fresh, handcrafted treats and beautiful event styling.
             </p>
             <div className="flex gap-4">
-              <a href="https://www.instagram.com/pattys.delights/" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-primary transition-colors" aria-label="Follow us on Instagram">
+              <a 
+                href="https://www.instagram.com/pattys.delights/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                onClick={() => trackExternalLink("https://www.instagram.com/pattys.delights/", "Instagram")}
+                className="text-muted-foreground hover:text-primary transition-colors" 
+                aria-label="Follow us on Instagram"
+              >
                 <Instagram className="h-5 w-5" />
               </a>
             </div>
@@ -73,13 +81,21 @@ const Footer = () => {
             <ul className="space-y-3">
               <li className="flex items-start gap-2 text-muted-foreground">
                 <Phone className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <a href="tel:+16476677559" className="hover:text-primary transition-colors">
+                <a 
+                  href="tel:+16476677559" 
+                  onClick={trackPhoneClick}
+                  className="hover:text-primary transition-colors"
+                >
                   (647) 667-7559
                 </a>
               </li>
               <li className="flex items-start gap-2 text-muted-foreground">
                 <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <a href="mailto:Pattysdelightsinc@gmail.com" className="hover:text-primary transition-colors">
+                <a 
+                  href="mailto:Pattysdelightsinc@gmail.com" 
+                  onClick={trackEmailClick}
+                  className="hover:text-primary transition-colors"
+                >
                   Pattysdelightsinc@gmail.com
                 </a>
               </li>

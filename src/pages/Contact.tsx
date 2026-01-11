@@ -13,6 +13,7 @@ import { Phone, Mail, Clock, MapPin } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { submitContactForm } from "@/lib/contact-api";
+import { trackFormSubmit } from "@/lib/analytics";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -35,6 +36,10 @@ const Contact = () => {
       const result = await submitContactForm(formData);
 
       if (result.success) {
+        trackFormSubmit("contact_form", {
+          service_interest: formData.services,
+          budget_range: formData.budget,
+        });
         toast.success("Quote request received! We'll be in touch soon.");
         // Reset form
         setFormData({

@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle } from "lucide-react";
+import { trackPhoneClick } from "@/lib/analytics";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-13.jpg";
 import fruits08Image from "@/assets/fruits-08.jpg";
@@ -107,7 +108,7 @@ const Home = () => {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="group relative overflow-hidden border-2 border-white/40 text-white hover:text-coral bg-white/5 hover:bg-white/10 backdrop-blur-sm px-8 py-4 text-lg font-semibold rounded-full shadow-xl hover:shadow-white/20 transition-all duration-300 transform hover:scale-105 hover:-translate-y-1">
-                <a href="tel:+16476677559" className="flex items-center">
+                <a href="tel:+16476677559" onClick={trackPhoneClick} className="flex items-center">
                   <Phone className="mr-3 h-5 w-5 group-hover:rotate-12 transition-transform duration-300" />
                   <span className="relative z-10">Call Now</span>
                   <div className="absolute inset-0 bg-gradient-to-r from-coral/10 to-primary/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -410,7 +411,7 @@ const Home = () => {
                 </Link>
               </Button>
               <Button asChild variant="outline" size="lg" className="border-2 border-coral text-coral hover:bg-coral hover:text-white px-8 py-3 text-lg font-semibold rounded-xl transition-all duration-300">
-                <a href="tel:+16476677559" className="flex items-center">
+                <a href="tel:+16476677559" onClick={trackPhoneClick} className="flex items-center">
                   <Phone className="mr-2 h-5 w-5" />
                   <span>Call me directly</span>
                 </a>
