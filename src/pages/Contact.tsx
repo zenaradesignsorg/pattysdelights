@@ -140,11 +140,11 @@ const Contact = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto">
             <h1 className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-serif font-bold text-secondary mb-4 md:mb-6">
-              Get in Touch
+              Let's Talk About Your Event
             </h1>
             <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-4 md:mb-6" />
             <p className="text-base md:text-lg lg:text-xl text-foreground leading-relaxed px-4">
-              Tell us about your event—we'll bring the treats
+              Share your plans—we'll make them delicious and beautiful.
             </p>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle } from "lucide-react";
+import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle, Building2 } from "lucide-react";
 import { trackPhoneClick } from "@/lib/analytics";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-13.jpg";
@@ -89,14 +89,13 @@ const Home = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-serif font-bold text-white mb-6 leading-tight">
-              <span className="block">Premium Fruit Artistry</span>
-              <span className="block text-primary">& Dessert Tables</span>
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(242, 132, 140, 0.3)' }}>
+              <span className="text-white">Your party, </span>
+              <span className="text-coral">our passion</span>
             </h1>
             
             <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
-              Welcome to Patty's world of sweet indulgence, where every bite tells a tale of tradition and taste. 
-              Handcrafted with love, served with excellence.
+              Bringing mom's cooking to your celebration. Patty creates everything by hand—savory platters, sweet treats, stunning fruit art, and more. Made with love, just like home.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -198,7 +197,7 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8 max-w-7xl mx-auto">
             <div className="text-center group">
               <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-shadow duration-300 group-hover:scale-105" style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}>
                 <Sprout className="h-10 w-10" />
@@ -244,6 +243,18 @@ const Home = () => {
               </h3>
               <p className="text-muted-foreground leading-relaxed">
                 On-site setup and service that's flawless from start to finish
+              </p>
+            </div>
+            
+            <div className="text-center group">
+              <div className="w-20 h-20 rounded-2xl bg-gradient-to-br from-coral to-primary text-white flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:shadow-coral/25 transition-shadow duration-300 group-hover:scale-105" style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}>
+                <Building2 className="h-10 w-10" />
+              </div>
+              <h3 className="text-xl font-serif font-bold text-secondary mb-3">
+                Venue Coordination
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Coordinates with banquet halls or provides venue space through partnerships.
               </p>
             </div>
           </div>
@@ -397,10 +408,10 @@ const Home = () => {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl md:text-5xl font-serif font-bold text-secondary mb-6">
-              Tell me about your event
+              Tell Me About Your Celebration
             </h2>
             <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Whether it's a cozy house party or a grand celebration, I'd love to hear your vision and create something beautiful together.
+              Planning something small at home? Hosting 500 people? Share your ideas and let's create something your guests will remember.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center">

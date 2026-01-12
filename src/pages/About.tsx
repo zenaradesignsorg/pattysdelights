@@ -20,13 +20,16 @@ const About = () => {
                   </h1>
                   <div className="w-16 h-1 bg-gradient-to-r from-coral to-primary rounded-full mb-6 md:mb-8" />
                   <p className="text-base md:text-lg leading-relaxed text-foreground mb-4 md:mb-6">
-                    Patty is the heart behind Patty's Delights—bringing <span className="text-coral font-semibold">10+ years of cooking and baking experience</span> to every celebration. As a GTA small business, she treats each event like family, crafting authentic flavours with a caring mom's touch.
+                    Patty is the mom behind Patty's Delights—with over 10 years turning celebrations into memories through food. Based in Greater Toronto Area, she runs a small family business where every event gets the same love and attention she'd give her own.
                   </p>
                   <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 md:mb-6">
-                    Whether it's a cozy house party or a grand banquet hall, Patty designs, prepares, and sets up beautiful stations that feel personal, warm, and delicious.
+                    From small house parties to big banquet hall events, Patty designs, cooks, and sets up every station. If you have a special vision for your event, her goal is to reflect that in everything she does as well.
                   </p>
-                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground">
-                    From intricate fruit carvings to homemade desserts and refreshing beverage stations, every detail is crafted with love and expertise. Patty's passion is making your special moments even more memorable with food that looks beautiful and tastes incredible.
+                  <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 md:mb-6">
+                    She knows family gatherings bring together different generations with different tastes: honouring the flavours that connect us to our Tamil roots while welcoming what younger family members are excited to explore. Every detail is made with love, skill, and the care only a mom can bring.
+                  </p>
+                  <p className="text-base md:text-lg leading-relaxed text-foreground">
+                    Patty's goal is simple: make your special day even more special with food that looks stunning and tastes like home.
                   </p>
                 </div>
                 
@@ -101,10 +104,10 @@ const About = () => {
                     <Palette className="h-7 w-7 md:h-8 md:w-8 text-primary" />
                   </div>
                   <h3 className="text-xl md:text-2xl font-serif font-bold text-secondary mb-3 md:mb-4">
-                    Art Meets Tradition
+                    Where Art Meets Home Cooking
                   </h3>
                   <p className="text-sm md:text-base text-muted-foreground leading-relaxed">
-                    Patty combines time-honored cooking techniques with artistic presentation. Every fruit carving tells a story.
+                    Traditional recipes your family loves, presented beautifully. Every fruit carving is done by hand. Every dish tells a story.
                   </p>
                 </div>
               </div>
@@ -193,9 +196,9 @@ const About = () => {
                     </div>
                   </div>
                   <div>
-                    <h4 className="text-base md:text-lg font-semibold text-secondary mb-1 md:mb-2">Asian Community Approved</h4>
+                    <h4 className="text-base md:text-lg font-semibold text-secondary mb-1 md:mb-2">South Asian Community Approved</h4>
                     <p className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                      Culturally aware catering with authentic flavors and presentation that honors your traditions. Trusted by the South Asian and Tamil communities across the GTA.
+                      Patty understands family celebrations mean something different to each generation. Traditional Tamil flavours that connect you to home, or new tastes that bring excitement. She tailors everything to what you're looking for.
                     </p>
                   </div>
                 </div>
@@ -225,22 +228,22 @@ const About = () => {
                 <div className="space-y-6 md:space-y-8 w-full">
                   <div>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl font-serif font-bold text-secondary mb-4 md:mb-6">
-                      A Motherly Touch
+                      That Amma's Touch
                     </h2>
                     <div className="w-16 h-1 bg-gradient-to-r from-coral to-primary rounded-full mb-4 md:mb-6" />
                   </div>
                   
                   <div className="space-y-4 md:space-y-6">
                     <p className="text-base md:text-lg text-foreground leading-relaxed">
-                      What started as a passion for creating beautiful food for family gatherings has blossomed into Patty's Delights. Over the past decade, Patty has honed her skills in both traditional cooking and artistic food presentation.
+                      What started as a love for cooking for family gatherings (making fruit displays for a niece's wedding, baking for her kids' birthday celebrations, serving dinner at family gatherings, and so on) grew into Patty's Delights. Over 10 years, Patty perfected her craft while never losing that home-cooked feeling.
                     </p>
                     
                     <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
-                      Every fruit carving tells a story. Every dessert table reflects the personality of your celebration. Every beverage station is designed to delight guests and create lasting memories.
+                      Patty's approach hasn't changed: treat your event like it's her own family's special day. That's what turns catering into something memorable.
                     </p>
                     
                     <p className="text-base md:text-lg text-foreground leading-relaxed font-medium">
-                      Patty's approach is simple: treat every event like it's your own family celebration. That's the difference between catering and creating an experience.
+                      When you choose Patty's Delights, it feels like mom showed up to help.
                     </p>
                   </div>
                   

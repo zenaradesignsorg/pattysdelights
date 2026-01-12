@@ -27,7 +27,7 @@ const Footer = () => {
               Patty's Delights
             </h3>
             <p className="text-muted-foreground mb-4">
-              Serving the Greater Toronto Area with fresh, handcrafted treats and beautiful event styling.
+              Serving the Greater Toronto Area with fresh, homemade food and beautiful setups. Our goal is to bring a mom's care to every celebration.
             </p>
             <div className="flex gap-4">
               <a 

@@ -114,10 +114,10 @@ const Services = () => {
       description: "Elegant boards featuring cured meats, cheeses, and accompaniments",
       image: charcuterieImage,
       features: [
-        "Premium cured meats selection",
-        "Artisan cheeses & accompaniments",
-        "Beautifully styled presentation",
-        "Perfect for any gathering size",
+        "Premium cured meats & artisan cheeses",
+        "Custom themes to match your event",
+        "Grazing tables or individual boards",
+        "Seasonal fruits, nuts, olives & crackers",
       ],
     },
     {
@@ -134,6 +134,18 @@ const Services = () => {
   ];
 
   const faqs = [
+    {
+      question: "Who do you work with?",
+      answer: "Patty's Delights serves everyone—from banquet hall owners looking for a reliable catering partner, to event planners coordinating celebrations, to families planning their own special moments at home. Whether you're hosting 20 people or 500, Patty works with you to create something memorable.",
+    },
+    {
+      question: "What size events do you cater?",
+      answer: "Big or small, every event gets the same care and attention. Patty handles everything from intimate house parties to grand banquet hall celebrations. You don't need a huge budget or a fancy venue—if it matters to you, it matters to us. The food is always made fresh, crafted with skill, and served with heart.",
+    },
+    {
+      question: "Do you coordinate directly with halls?",
+      answer: "Yes! If you're hosting at a banquet hall, Patty works seamlessly with their team to ensure everything runs smoothly. She can also connect you with partner venues if you need a space for your event.",
+    },
     {
       question: "Can you accommodate dietary restrictions?",
       answer: "Absolutely! We work with you to ensure all guests can enjoy our offerings. We can accommodate allergies, vegetarian, vegan, halal, and other dietary needs. Just let us know your requirements when you inquire.",
@@ -156,7 +168,7 @@ const Services = () => {
     },
     {
       question: "How far in advance should I book?",
-      answer: "We recommend booking 2-4 weeks in advance, especially for weekends and peak seasons. However, we'll do our best to accommodate last-minute requests when possible. Reach out and let's see what we can do!",
+      answer: "For larger events, we recommend reaching out 1-2 weeks in advance. For home parties, about a week is ideal. That said, if you have a last-minute celebration, don't hesitate to contact us—we'll do our best to make it happen!",
     },
   ];
 
@@ -199,7 +211,7 @@ const Services = () => {
             </h2>
             <div className="w-24 h-1 bg-gradient-to-r from-coral to-primary mx-auto rounded-full mb-6" />
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              We bring our services to all types of celebrations and venues across the GTA
+              No matter who you are (a banquet hall owner, party planner, or someone planning their own celebration), Patty works with you to make your event special.
             </p>
           </div>
 
