@@ -7,7 +7,7 @@
   <!-- Home Page -->
   <url>
     <loc>https://www.pattysdelights.com/</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -15,7 +15,7 @@
   <!-- About Page -->
   <url>
     <loc>https://www.pattysdelights.com/about</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -23,7 +23,7 @@
   <!-- Services Page -->
   <url>
     <loc>https://www.pattysdelights.com/services</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
@@ -31,7 +31,7 @@
   <!-- Gallery Page -->
   <url>
     <loc>https://www.pattysdelights.com/gallery</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -39,7 +39,7 @@
   <!-- Contact Page -->
   <url>
     <loc>https://www.pattysdelights.com/contact</loc>
-    <lastmod>2024-01-01</lastmod>
+    <lastmod>2026-01-13</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
