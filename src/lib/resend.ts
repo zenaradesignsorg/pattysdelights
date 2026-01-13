@@ -121,7 +121,7 @@ This email was sent from the contact form on Patty's Delights website.
       `;
 
     const result = await resend.emails.send({
-      from: "Patty's Delights <onboarding@resend.dev>", // Update this with your verified domain
+      from: "Patty's Delights <noreply@pattysdelights.com>",
       to: ["Pattysdelightsinc@gmail.com"], // Your business email
       replyTo: safeReplyTo,
       subject: safeSubject,

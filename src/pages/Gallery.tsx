@@ -332,7 +332,7 @@ const Gallery = () => {
                     alt="Gallery image"
                     loading={isInitialLoad ? "eager" : "lazy"}
                     decoding="async"
-                    fetchPriority={isInitialLoad ? "high" : "auto"}
+                    {...({ fetchpriority: isInitialLoad ? "high" : "auto" } as any)}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     style={{ willChange: 'transform' }}
                     onError={(e) => handleImageError(item.image, e)}
@@ -452,7 +452,7 @@ const Gallery = () => {
               className="max-w-full max-h-[80vh] object-contain"
               loading="eager"
               decoding="async"
-              fetchPriority="high"
+              {...({ fetchpriority: "high" } as any)}
               onError={(e) => {
                 handleImageError(filteredItems[lightboxIndex].image, e);
                 closeLightbox();

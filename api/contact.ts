@@ -201,7 +201,7 @@ This email was sent from the contact form on Patty's Delights website.
 
     // Send email via Resend
     const result = await resend.emails.send({
-      from: "Patty's Delights <onboarding@resend.dev>", // TODO: Update with your verified domain
+      from: "Patty's Delights <noreply@pattysdelights.com>",
       to: ["Pattysdelightsinc@gmail.com"],
       replyTo: safeReplyTo,
       subject: safeSubject,

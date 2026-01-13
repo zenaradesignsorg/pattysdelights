@@ -150,7 +150,7 @@ const Home = () => {
                       alt={highlight.title}
                       loading={index < 2 ? "eager" : "lazy"}
                       decoding="async"
-                      fetchPriority={index < 2 ? "high" : "auto"}
+                      {...({ fetchpriority: index < 2 ? "high" : "auto" } as any)}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       style={{ willChange: 'transform' }}
                     />
@@ -381,7 +381,7 @@ const Home = () => {
                     alt={`Gallery ${index + 1}`}
                     loading={isAboveFold ? "eager" : "lazy"}
                     decoding="async"
-                    fetchPriority={isAboveFold ? "high" : "auto"}
+                    {...({ fetchpriority: isAboveFold ? "high" : "auto" } as any)}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     style={{ willChange: 'transform' }}
                   />

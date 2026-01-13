@@ -72,7 +72,7 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
                   className="h-12 md:h-16 w-auto object-contain"
                   loading="eager"
                   decoding="async"
-                  fetchPriority="high"
+                  {...({ fetchpriority: "high" } as any)}
                   style={{ 
                     filter: transparent 
                       ? 'drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(1.15) contrast(1.1)' 
