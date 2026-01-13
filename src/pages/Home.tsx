@@ -14,69 +14,71 @@ import eventImage2 from "@/assets/events-09.jpg";
 import iceCreamImage from "@/assets/ice-cream-01.jpg";
 import pattyAtEventImage from "@/assets/events-03.jpg";
 
+// Static data moved outside component to prevent recreation on every render
+const highlights = [
+  {
+    icon: Grape,
+    title: "Fruit Platters & Carving",
+    description: "Edible art that tastes as good as it looks.",
+    image: fruitCarvingImage,
+  },
+  {
+    icon: Cake,
+    title: "Dessert Tables",
+    description: "Homemade favourites, beautifully styled.",
+    image: dessertImage,
+  },
+  {
+    icon: Coffee,
+    title: "Beverage Stations",
+    description: "Bubble tea, kulfi, tea & juice bars.",
+    image: bubbleTeaStationImage,
+  },
+  {
+    icon: Wrench,
+    title: "Custom Requests",
+    description: "We tailor every station to your event.",
+    image: heroImage,
+  },
+];
+
+const steps = [
+  {
+    number: "01",
+    title: "Inquire",
+    description: "Tell us about your event and vision",
+  },
+  {
+    number: "02",
+    title: "Customize",
+    description: "We'll design the perfect menu and stations",
+  },
+  {
+    number: "03",
+    title: "Enjoy",
+    description: "On-site setup & smiles guaranteed",
+  },
+];
+
+const testimonials = [
+  {
+    text: "Patty's fruit carving was the highlight of our wedding! Absolutely stunning and delicious.",
+    author: "Sarah Mitchell",
+    event: "Wedding Reception",
+  },
+  {
+    text: "The bubble tea station was a hit at our corporate event. Professional setup and amazing service!",
+    author: "James Chen",
+    event: "Corporate Event",
+  },
+  {
+    text: "Beautiful dessert table that looked too good to eat! Patty's attention to detail is incredible.",
+    author: "Priya Sharma",
+    event: "Baby Shower",
+  },
+];
+
 const Home = () => {
-  const highlights = [
-    {
-      icon: Grape,
-      title: "Fruit Platters & Carving",
-      description: "Edible art that tastes as good as it looks.",
-      image: fruitCarvingImage,
-    },
-    {
-      icon: Cake,
-      title: "Dessert Tables",
-      description: "Homemade favourites, beautifully styled.",
-      image: dessertImage,
-    },
-    {
-      icon: Coffee,
-      title: "Beverage Stations",
-      description: "Bubble tea, kulfi, tea & juice bars.",
-      image: bubbleTeaStationImage,
-    },
-    {
-      icon: Wrench,
-      title: "Custom Requests",
-      description: "We tailor every station to your event.",
-      image: heroImage,
-    },
-  ];
-
-  const steps = [
-    {
-      number: "01",
-      title: "Inquire",
-      description: "Tell us about your event and vision",
-    },
-    {
-      number: "02",
-      title: "Customize",
-      description: "We'll design the perfect menu and stations",
-    },
-    {
-      number: "03",
-      title: "Enjoy",
-      description: "On-site setup & smiles guaranteed",
-    },
-  ];
-
-  const testimonials = [
-    {
-      text: "Patty's fruit carving was the highlight of our wedding! Absolutely stunning and delicious.",
-      author: "Sarah Mitchell",
-      event: "Wedding Reception",
-    },
-    {
-      text: "The bubble tea station was a hit at our corporate event. Professional setup and amazing service!",
-      author: "James Chen",
-      event: "Corporate Event",
-    },
-    {
-      text: "Beautiful dessert table that looked too good to eat! Patty's attention to detail is incredible.",
-      author: "Priya Sharma",
-      event: "Baby Shower",
-    },
-  ];
 
   return (
     <div className="animate-fade-in">

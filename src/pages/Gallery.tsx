@@ -172,6 +172,15 @@ const Gallery = () => {
     return filteredItems.slice(0, visibleCount);
   }, [filteredItems, visibleCount]);
 
+  // Pre-compute image-to-index mapping for O(1) lookup instead of O(n) findIndex
+  const imageIndexMap = useMemo(() => {
+    const map = new Map<string | any, number>();
+    filteredItems.forEach((item, index) => {
+      map.set(item.image, index);
+    });
+    return map;
+  }, [filteredItems]);
+
   const hasMore = visibleCount < filteredItems.length;
 
   const handleLoadMore = useCallback(() => {
@@ -316,8 +325,8 @@ const Gallery = () => {
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {visibleItems.map((item, index) => {
-              // Find the actual index in filteredItems for lightbox navigation
-              const actualIndex = filteredItems.findIndex(filteredItem => filteredItem.image === item.image);
+              // Use pre-computed Map for O(1) lookup instead of O(n) findIndex
+              const actualIndex = imageIndexMap.get(item.image) ?? 0;
               const isInitialLoad = index < IMAGES_PER_PAGE;
               
               return (

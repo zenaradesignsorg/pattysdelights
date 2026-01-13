@@ -1,21 +1,24 @@
+import { memo } from "react";
 import { Link } from "react-router-dom";
 import { Phone, Mail, MapPin, Instagram, Clock, Star } from "lucide-react";
 import { trackPhoneClick, trackEmailClick, trackExternalLink } from "@/lib/analytics";
 
-const Footer = () => {
+// Static service areas moved outside component to prevent recreation on every render
+const serviceAreas = [
+  "Toronto",
+  "Mississauga",
+  "Brampton",
+  "Markham",
+  "Vaughan",
+  "Scarborough",
+  "Oakville",
+];
+
+const Footer = memo(() => {
   const handleLinkClick = () => {
     // Ensure instant scroll to top on navigation (no animation for instant feel)
     window.scrollTo(0, 0);
   };
-  const serviceAreas = [
-    "Toronto",
-    "Mississauga",
-    "Brampton",
-    "Markham",
-    "Vaughan",
-    "Scarborough",
-    "Oakville",
-  ];
   
   return (
     <footer className="bg-cream border-t border-border">
@@ -162,6 +165,8 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+});
+
+Footer.displayName = "Footer";
 
 export default Footer;

@@ -1,3 +1,4 @@
+import { memo } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
@@ -5,16 +6,17 @@ import MobileNav from "./MobileNav";
 import { trackPhoneClick, trackEmailClick } from "@/lib/analytics";
 import logoImage from "@/assets/pattysdelightslogo-removebg.png";
 
-const Header = ({ transparent = false }: { transparent?: boolean }) => {
+// Static navigation links moved outside component to prevent recreation on every render
+const navLinks = [
+  { name: "Home", path: "/" },
+  { name: "About", path: "/about" },
+  { name: "Services", path: "/services" },
+  { name: "Gallery", path: "/gallery" },
+  { name: "Contact", path: "/contact" },
+];
+
+const Header = memo(({ transparent = false }: { transparent?: boolean }) => {
   const location = useLocation();
-  
-  const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "About", path: "/about" },
-    { name: "Services", path: "/services" },
-    { name: "Gallery", path: "/gallery" },
-    { name: "Contact", path: "/contact" },
-  ];
   
   const isActive = (path: string) => location.pathname === path;
   
@@ -122,6 +124,8 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
       </div>
     </header>
   );
-};
+});
+
+Header.displayName = "Header";
 
 export default Header;
