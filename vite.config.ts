@@ -15,25 +15,6 @@ export default defineConfig(() => ({
     },
   },
   build: {
-    rollupOptions: {
-      output: {
-        manualChunks: (id) => {
-          // Only split node_modules into vendor chunk
-          if (id.includes('node_modules')) {
-            // Keep React and React DOM together
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
-              return 'vendor-react';
-            }
-            // Keep UI libraries together
-            if (id.includes('@radix-ui') || id.includes('lucide-react')) {
-              return 'vendor-ui';
-            }
-            // All other node_modules
-            return 'vendor';
-          }
-        },
-      },
-    },
     chunkSizeWarningLimit: 1000,
     minify: 'esbuild',
     sourcemap: false,
