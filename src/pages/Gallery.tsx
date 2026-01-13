@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { createPortal } from "react-dom";
 import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { trackPhoneClick } from "@/lib/analytics";
 // Fruits
@@ -68,6 +69,9 @@ const Gallery = () => {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [failedImages, setFailedImages] = useState<Set<string>>(new Set());
+  const [visibleCount, setVisibleCount] = useState<number>(8);
+  
+  const IMAGES_PER_PAGE = 8;
 
   const filters: { label: string; value: FilterType }[] = [
     { label: "All", value: "all" },
@@ -157,6 +161,22 @@ const Gallery = () => {
     }
     return galleryItems.filter(item => item.category === activeFilter && !failedImages.has(item.image));
   }, [activeFilter, galleryItems, failedImages]);
+
+  // Reset visible count when filter changes
+  useEffect(() => {
+    setVisibleCount(IMAGES_PER_PAGE);
+  }, [activeFilter]);
+
+  // Get visible items based on pagination
+  const visibleItems = useMemo(() => {
+    return filteredItems.slice(0, visibleCount);
+  }, [filteredItems, visibleCount]);
+
+  const hasMore = visibleCount < filteredItems.length;
+
+  const handleLoadMore = useCallback(() => {
+    setVisibleCount(prev => prev + IMAGES_PER_PAGE);
+  }, []);
 
   const handleImageError = useCallback((imageSrc: string, event?: React.SyntheticEvent<HTMLImageElement, Event>) => {
     const img = event?.currentTarget;
@@ -295,24 +315,39 @@ const Gallery = () => {
       <section className="py-12 bg-background">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {filteredItems.map((item, index) => (
-              <div
-                key={String(item.image)}
-                className="group relative aspect-square rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer bg-muted"
-                onClick={() => openLightbox(index)}
-                style={{ willChange: 'transform' }}
-              >
-                <img
-                  src={item.image}
-                  alt="Gallery image"
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            {visibleItems.map((item, index) => {
+              // Find the actual index in filteredItems for lightbox navigation
+              const actualIndex = filteredItems.findIndex(filteredItem => filteredItem.image === item.image);
+              const isInitialLoad = index < IMAGES_PER_PAGE;
+              
+              return (
+                <div
+                  key={String(item.image)}
+                  className="group relative aspect-square rounded-2xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 cursor-pointer bg-muted"
+                  onClick={() => openLightbox(actualIndex)}
                   style={{ willChange: 'transform' }}
-                  onError={(e) => handleImageError(item.image, e)}
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-              </div>
-            ))}
+                >
+                  <img
+                    src={item.image}
+                    alt="Gallery image"
+                    loading={isInitialLoad ? "eager" : "lazy"}
+                    decoding="async"
+                    fetchPriority={isInitialLoad ? "high" : "auto"}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    style={{ willChange: 'transform' }}
+                    onError={(e) => handleImageError(item.image, e)}
+                    onLoad={(e) => {
+                      // Mark image as loaded for potential future optimizations
+                      const img = e.currentTarget;
+                      if (img.complete && img.naturalHeight !== 0) {
+                        // Image loaded successfully
+                      }
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                </div>
+              );
+            })}
           </div>
 
           {filteredItems.length === 0 && (
@@ -320,6 +355,20 @@ const Gallery = () => {
               <p className="text-xl text-muted-foreground">
                 No items found for this category
               </p>
+            </div>
+          )}
+
+          {/* Load More Button */}
+          {hasMore && (
+            <div className="text-center mt-12">
+              <Button
+                onClick={handleLoadMore}
+                size="lg"
+                variant="outline"
+                className="bg-white hover:bg-muted border-2 border-primary text-primary hover:text-primary px-8 py-6 text-lg font-semibold rounded-full transition-all duration-300"
+              >
+                View More ({filteredItems.length - visibleCount} remaining)
+              </Button>
             </div>
           )}
         </div>
@@ -401,6 +450,9 @@ const Gallery = () => {
               src={filteredItems[lightboxIndex].image}
               alt="Gallery image"
               className="max-w-full max-h-[80vh] object-contain"
+              loading="eager"
+              decoding="async"
+              fetchPriority="high"
               onError={(e) => {
                 handleImageError(filteredItems[lightboxIndex].image, e);
                 closeLightbox();

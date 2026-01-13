@@ -148,7 +148,9 @@ const Home = () => {
                     <img 
                       src={highlight.image} 
                       alt={highlight.title}
-                      loading="lazy"
+                      loading={index < 2 ? "eager" : "lazy"}
+                      decoding="async"
+                      fetchPriority={index < 2 ? "high" : "auto"}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                       style={{ willChange: 'transform' }}
                     />
@@ -368,17 +370,24 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
-            {[fruits08Image, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, iceCreamImage, eventImage2].map((img, index) => (
-              <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 group" style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}>
-                <img 
-                  src={img} 
-                  alt={`Gallery ${index + 1}`}
-                  loading="lazy"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  style={{ willChange: 'transform' }}
-                />
-              </div>
-            ))}
+            {[fruits08Image, dessertImage, bubbleTeaStationImage, fruitTableImage, juiceStationImage, eventImage, iceCreamImage, eventImage2].map((img, index) => {
+              // First 4 images load eagerly, rest lazy load
+              const isAboveFold = index < 4;
+              
+              return (
+                <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 group" style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}>
+                  <img 
+                    src={img} 
+                    alt={`Gallery ${index + 1}`}
+                    loading={isAboveFold ? "eager" : "lazy"}
+                    decoding="async"
+                    fetchPriority={isAboveFold ? "high" : "auto"}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    style={{ willChange: 'transform' }}
+                  />
+                </div>
+              );
+            })}
           </div>
           
           <div className="text-center">
