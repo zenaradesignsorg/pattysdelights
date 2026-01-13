@@ -19,36 +19,38 @@ declare global {
 }
 
 // Get GA4 Measurement ID from environment variable
-const GA4_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID || 'G-XXXXXXXXXX';
+const GA4_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID || 'G-DLRC2DY0R2';
 
 /**
  * Initialize Google Analytics 4
  * This should be called once when the app loads
+ * Note: The gtag.js script is loaded in index.html, so we just ensure gtag is available
  */
 export const initGA4 = () => {
-  // Only initialize if we have a valid measurement ID (not placeholder)
-  if (!GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+  // Only initialize if we have a valid measurement ID
+  if (!GA4_MEASUREMENT_ID) {
     if (import.meta.env.DEV) {
-      console.log('GA4: Placeholder tracking ID detected. Analytics will not be active until configured.');
+      console.log('GA4: No tracking ID configured. Analytics will not be active.');
     }
     return;
   }
 
-  // Initialize dataLayer
+  // Ensure dataLayer and gtag are initialized (script in index.html should handle this)
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function() {
-    window.dataLayer.push(arguments);
-  };
-  window.gtag('js', new Date());
-  window.gtag('config', GA4_MEASUREMENT_ID, {
-    page_path: window.location.pathname,
-  });
+  
+  // If gtag is not already defined (should be from index.html), define it
+  if (!window.gtag) {
+    window.gtag = function() {
+      window.dataLayer.push(arguments);
+    };
+  }
 
-  // Load the GA4 script
-  const script = document.createElement('script');
-  script.async = true;
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA4_MEASUREMENT_ID}`;
-  document.head.appendChild(script);
+  // Track initial page view
+  if (window.gtag) {
+    window.gtag('config', GA4_MEASUREMENT_ID, {
+      page_path: window.location.pathname,
+    });
+  }
 };
 
 /**
@@ -56,7 +58,7 @@ export const initGA4 = () => {
  * Call this when the route changes
  */
 export const trackPageView = (path: string, title?: string) => {
-  if (!window.gtag || !GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+  if (!window.gtag || !GA4_MEASUREMENT_ID) {
     return;
   }
 
@@ -75,9 +77,9 @@ export const trackEvent = (
   eventName: string,
   eventParams?: Record<string, any>
 ) => {
-  if (!window.gtag || !GA4_MEASUREMENT_ID || GA4_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
+  if (!window.gtag || !GA4_MEASUREMENT_ID) {
     if (import.meta.env.DEV) {
-      console.log('GA4 Event (not tracked - placeholder ID):', eventName, eventParams);
+      console.log('GA4 Event (not tracked - no ID):', eventName, eventParams);
     }
     return;
   }
