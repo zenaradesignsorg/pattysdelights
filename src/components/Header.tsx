@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import MobileNav from "./MobileNav";
 import { trackPhoneClick, trackEmailClick } from "@/lib/analytics";
+import logoImage from "@/assets/pattysdelightslogo-removebg.png";
 
 const Header = ({ transparent = false }: { transparent?: boolean }) => {
   const location = useLocation();
@@ -54,18 +55,40 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
       
       {/* Main header */}
       <div className={`container mx-auto px-4 ${transparent ? 'py-6' : 'py-4'}`}>
-        <div className="flex items-center justify-between">
-          <Link 
-            to="/" 
-            onClick={handleLinkClick}
-            className={`text-2xl md:text-3xl font-serif font-bold hover:text-primary transition-colors ${
-              transparent ? 'text-white' : 'text-secondary'
-            }`}
-          >
-            Patty's Delights
-          </Link>
+        <div className="flex items-center">
+          {/* Left: Logo + Brand */}
+          <div className="flex-1">
+            <Link 
+              to="/" 
+              onClick={handleLinkClick}
+              className={`flex items-center gap-3 hover:opacity-80 transition-opacity duration-300 ${
+                transparent ? 'text-white' : 'text-secondary'
+              }`}
+            >
+              <div className="relative">
+                <img 
+                  src={logoImage} 
+                  alt="Patty's Delights Logo" 
+                  className="h-12 md:h-16 w-auto object-contain"
+                  loading="eager"
+                  decoding="async"
+                  fetchPriority="high"
+                  style={{ 
+                    filter: transparent 
+                      ? 'drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(1.15) contrast(1.1)' 
+                      : 'drop-shadow(0 1px 4px rgba(0,0,0,0.3))',
+                    maxWidth: '140px'
+                  }}
+                />
+              </div>
+              <span className="text-2xl md:text-3xl font-serif font-bold">
+                Patty's Delights
+              </span>
+            </Link>
+          </div>
           
-          <nav className="hidden md:flex items-center gap-8">
+          {/* Center: Navigation Links */}
+          <nav className="hidden md:flex items-center gap-8 flex-1 justify-center">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -84,7 +107,8 @@ const Header = ({ transparent = false }: { transparent?: boolean }) => {
             ))}
           </nav>
           
-          <div className="flex items-center gap-4">
+          {/* Right: Button + Mobile Nav */}
+          <div className="flex items-center gap-4 flex-1 justify-end">
             <Button asChild size={transparent ? "sm" : "lg"} className={`hidden md:inline-flex ${
               transparent 
                 ? "bg-white text-primary hover:bg-white/90" 

@@ -89,12 +89,12 @@ const Home = () => {
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-serif font-bold mb-6 leading-tight" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(242, 132, 140, 0.3)' }}>
+            <h1 className="text-5xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-serif font-bold mb-4 sm:mb-6 leading-tight px-2 sm:px-0" style={{ textShadow: '0 4px 20px rgba(0, 0, 0, 0.5), 0 0 40px rgba(242, 132, 140, 0.3)' }}>
               <span className="text-white">Your party, </span>
               <span className="text-coral">our passion</span>
             </h1>
             
-            <p className="text-lg md:text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-white/90 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-4">
               Bringing mom's cooking to your celebration. Patty creates everything by hand—savory platters, sweet treats, stunning fruit art, and more. Made with love, just like home.
             </p>
             
