@@ -18,16 +18,17 @@ export default defineConfig(() => ({
     rollupOptions: {
       output: {
         manualChunks: (id) => {
-          // Vendor chunk for React and React DOM
+          // Only split node_modules into vendor chunk
           if (id.includes('node_modules')) {
+            // Keep React and React DOM together
             if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) {
               return 'vendor-react';
             }
-            // UI library chunk (Radix UI, Lucide icons)
+            // Keep UI libraries together
             if (id.includes('@radix-ui') || id.includes('lucide-react')) {
               return 'vendor-ui';
             }
-            // Other vendor dependencies
+            // All other node_modules
             return 'vendor';
           }
         },

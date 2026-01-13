@@ -1,4 +1,4 @@
-import { Suspense, lazy, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -10,14 +10,12 @@ import ScrollToTop from "./components/ScrollToTop";
 import SEO from "./components/SEO";
 import StructuredData from "./components/StructuredData";
 import GoogleAnalytics from "./components/GoogleAnalytics";
-
-// Lazy load page components for code splitting
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Services = lazy(() => import("./pages/Services"));
-const Gallery = lazy(() => import("./pages/Gallery"));
-const Contact = lazy(() => import("./pages/Contact"));
-const NotFound = lazy(() => import("./pages/NotFound"));
+import Home from "./pages/Home";
+import About from "./pages/About";
+import Services from "./pages/Services";
+import Gallery from "./pages/Gallery";
+import Contact from "./pages/Contact";
+import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
@@ -59,16 +57,14 @@ const AppContent = () => {
       <StructuredData />
       <Header transparent={location.pathname === '/' && !isScrolled} />
       <main className={`flex-1 ${location.pathname === '/' ? '' : 'pt-24'}`}>
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="animate-pulse text-muted-foreground">Loading...</div></div>}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/gallery" element={<Gallery />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="*" element={<NotFound />} />
+        </Routes>
       </main>
       <Footer />
     </div>
