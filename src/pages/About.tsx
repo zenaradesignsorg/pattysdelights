@@ -20,10 +20,10 @@ const About = () => {
                   </h1>
                   <div className="w-16 h-1 bg-gradient-to-r from-coral to-primary rounded-full mb-6 md:mb-8" />
                   <p className="text-base md:text-lg leading-relaxed text-foreground mb-4 md:mb-6">
-                    Patty is the mom behind Patty's Delights—with over 10 years turning celebrations into memories through food. Based in Greater Toronto Area, she runs a small family business where every event gets the same love and attention she'd give her own.
+                    Patty is the mom behind Patty's Delights—with 10 years of catering experience and 18 years of retail business experience. Based in Greater Toronto Area, she runs a small family business where every event gets the same love and attention she'd give her own.
                   </p>
                   <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 md:mb-6">
-                    From small house parties to big banquet hall events, Patty designs, cooks, and sets up every station. If you have a special vision for your event, her goal is to reflect that in everything she does as well.
+                    With her extensive background in retail, Patty understands customer service, quality, and attention to detail, ensuring every customer feels valued and satisfied. From small house parties to big banquet hall events, Patty designs, cooks, and sets up every station. If you have a special vision for your event, her goal is to reflect that in everything she does as well.
                   </p>
                   <p className="text-base md:text-lg leading-relaxed text-muted-foreground mb-4 md:mb-6">
                     She knows family gatherings bring together different generations with different tastes: honouring the flavours that connect us to our Tamil roots while welcoming what younger family members are excited to explore. Every detail is made with love, skill, and the care only a mom can bring.
@@ -235,7 +235,7 @@ const About = () => {
                   
                   <div className="space-y-4 md:space-y-6">
                     <p className="text-base md:text-lg text-foreground leading-relaxed">
-                      What started as a love for cooking for family gatherings (making fruit displays for a niece's wedding, baking for her kids' birthday celebrations, serving dinner at family gatherings, and so on) grew into Patty's Delights. Over 10 years, Patty perfected her craft while never losing that home-cooked feeling.
+                      What started as a love for cooking for family gatherings (making fruit displays for a niece's wedding, baking for her kids' birthday celebrations, serving dinner at family gatherings, and so on) grew into Patty's Delights. With 10 years of catering experience and 18 years of retail business experience, Patty has perfected her craft while never losing that home-cooked feeling. Her deep understanding of customer service, quality, and attention to detail ensures every customer feels valued and satisfied.
                     </p>
                     
                     <p className="text-base md:text-lg text-muted-foreground leading-relaxed">
