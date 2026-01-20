@@ -18,9 +18,11 @@ import fruits10 from "@/assets/fruits-10.jpg";
 import fruits11 from "@/assets/fruits-11.jpg";
 import fruits12 from "@/assets/fruits-12.jpg";
 import fruits13 from "@/assets/fruits-13.jpg";
+import fruits14 from "@/assets/fruits-14.jpg";
 // Fruit Tables
 import fruitTable01 from "@/assets/fruit-table-01.jpg";
 import fruitTable02 from "@/assets/fruit-table-02.jpg";
+import fruitTable03 from "@/assets/fruit-table-03.jpg";
 // Desserts
 import dessertTable01 from "@/assets/dessert-table-01.jpg";
 import dessertTable02 from "@/assets/dessert-table-02.jpg";
@@ -61,6 +63,8 @@ import events12 from "@/assets/events-12.jpg";
 import events13 from "@/assets/events-13.jpg";
 import events14 from "@/assets/events-14.jpg";
 import events15 from "@/assets/events-15.jpg";
+import events16 from "@/assets/events-16.jpg";
+import events17 from "@/assets/events-17.jpg";
 
 type FilterType = "all" | "fruits" | "desserts" | "beverageStation" | "events";
 
@@ -98,8 +102,10 @@ const Gallery = () => {
       { image: fruits11, category: "fruits" as const },
       { image: fruits12, category: "fruits" as const },
       { image: fruits13, category: "fruits" as const },
+      { image: fruits14, category: "fruits" as const },
       { image: fruitTable01, category: "fruits" as const },
       { image: fruitTable02, category: "fruits" as const },
+      { image: fruitTable03, category: "fruits" as const },
       // Desserts - dessert-table and ice-cream items
       { image: dessertTable01, category: "desserts" as const },
       { image: dessertTable02, category: "desserts" as const },
@@ -140,6 +146,8 @@ const Gallery = () => {
       { image: events13, category: "events" as const },
       { image: events14, category: "events" as const },
       { image: events15, category: "events" as const },
+      { image: events16, category: "events" as const },
+      { image: events17, category: "events" as const },
     ];
     
     // Remove duplicates by image source (using string representation for reliable comparison)
