@@ -1,6 +1,7 @@
+import { useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle, Building2 } from "lucide-react";
+import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle, Building2, ChevronDown, ChevronUp } from "lucide-react";
 import { trackPhoneClick } from "@/lib/analytics";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-13.jpg";
@@ -62,23 +63,43 @@ const steps = [
 
 const testimonials = [
   {
-    text: "Patty's fruit carving was the highlight of our wedding! Absolutely stunning and delicious.",
-    author: "Sarah Mitchell",
-    event: "Wedding Reception",
+    id: 'vathana',
+    text: "We had a wonderful experience with this catering service for my mom's and my birthday party. The appetizers were delicious and beautifully prepared, and the desserts were an absolute highlight—fresh, flavorful, and perfectly presented. The decorative fruit arrangements added an elegant touch and truly elevated the overall look of the event. The entire setup was well organized, clean, and visually impressive. Their attention to detail and professionalism made everything run smoothly. We are very happy with their service and would highly recommend them for any special occasions.",
+    author: "Vathana Sasikumar",
+    event: "Birthday Party",
   },
   {
-    text: "The bubble tea station was a hit at our corporate event. Professional setup and amazing service!",
-    author: "James Chen",
-    event: "Corporate Event",
+    id: 'bavika',
+    text: "We've been ordering from Padmini for the past two years, and the experience has been nothing short of excellent every single time. Her food is consistently delicious, flavorful, and clearly made with great care. She prepares a wide range of dishes, from outstanding vegetarian and non-vegetarian biriyanis to lasagnas, pastas, and hands-down the best rolls in town. Padmini is incredibly thoughtful and always offers helpful suggestions when planning food for house parties, making the entire process seamless. Her desserts are truly exceptional. Her kulfis are a crowd favorite and always leave everyone wanting more. She also customizes meal packages to suit individual needs, delivers everything on time, and ensures the food is carefully packed. We highly recommend her for any party or dessert service.",
+    author: "Bavika Atputhajeyam",
+    event: "House Parties",
   },
   {
-    text: "Beautiful dessert table that looked too good to eat! Patty's attention to detail is incredible.",
-    author: "Priya Sharma",
-    event: "Baby Shower",
+    id: 'ragavi',
+    text: "Patty's Delights has been absolutely amazing every single time. I've ordered a variety of appetizers, desserts, fruit platters, and more, and everything has always been fresh, beautifully presented, and incredibly delicious. You can truly taste the care and quality put into the food. On top of that, the service is outstanding—professional, reliable, and so easy to work with. I recommend Patty's Delights to everyone I know and will definitely continue to do so. Highly recommend!",
+    author: "Ragavi",
+    event: "Various Events",
   },
 ];
 
 const Home = () => {
+  const [expandedTestimonials, setExpandedTestimonials] = useState<Record<string, boolean>>({});
+  const TRUNCATE_LENGTH = 180; // Uniform length for all testimonials when collapsed
+
+  const toggleTestimonial = useCallback((id: string) => {
+    setExpandedTestimonials(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  }, []);
+
+  const truncateText = (text: string, maxLength: number): string => {
+    if (text.length <= maxLength) return text;
+    // Find the last space before maxLength to avoid cutting words
+    const truncated = text.substring(0, maxLength);
+    const lastSpace = truncated.lastIndexOf(' ');
+    return lastSpace > 0 ? truncated.substring(0, lastSpace) : truncated;
+  };
 
   return (
     <div className="animate-fade-in">
@@ -312,35 +333,78 @@ const Home = () => {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={index}
-                className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-white/20 hover:border-coral/20"
-                style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}
-              >
-                <div className="absolute top-6 right-6 text-6xl text-coral/20 font-serif">"</div>
-                <div className="flex items-center mb-6">
-                  <div className="flex text-coral text-xl">
-                    {[...Array(5)].map((_, i) => (
-                      <span key={i} className="mr-1">⭐</span>
-                    ))}
+            {testimonials.map((testimonial, index) => {
+              const isExpanded = expandedTestimonials[testimonial.id] === true;
+              const shouldTruncate = testimonial.text.length > TRUNCATE_LENGTH;
+              const displayText = isExpanded || !shouldTruncate 
+                ? testimonial.text 
+                : truncateText(testimonial.text, TRUNCATE_LENGTH) + '...';
+              
+              const handleToggle = (e: React.MouseEvent<HTMLButtonElement>) => {
+                e.stopPropagation();
+                e.preventDefault();
+                toggleTestimonial(testimonial.id);
+              };
+              
+              return (
+                <div 
+                  key={testimonial.id}
+                  className="group relative bg-white/80 backdrop-blur-sm rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-300 border border-white/20 hover:border-coral/20"
+                  style={{ 
+                    willChange: 'box-shadow', 
+                    transform: 'translateZ(0)',
+                    alignSelf: 'start'
+                  }}
+                >
+                  <div className="absolute top-6 right-6 text-6xl text-coral/20 font-serif">"</div>
+                  <div className="flex items-center mb-6 relative z-10">
+                    <div className="flex text-coral text-xl">
+                      {[...Array(5)].map((_, i) => (
+                        <span key={i} className="mr-1">⭐</span>
+                      ))}
+                    </div>
                   </div>
+                  <div className="relative z-10 mb-4">
+                    <p className="text-foreground text-lg leading-relaxed">
+                      {displayText}
+                    </p>
+                  </div>
+                  {shouldTruncate && (
+                    <div className="relative z-20 mb-6">
+                      <button
+                        onClick={handleToggle}
+                        className="flex items-center gap-1 text-coral hover:text-primary font-medium text-sm transition-colors duration-200 cursor-pointer"
+                        type="button"
+                        aria-expanded={isExpanded}
+                        aria-label={isExpanded ? "Collapse review" : "Expand review"}
+                      >
+                        {isExpanded ? (
+                          <>
+                            <span>Read less</span>
+                            <ChevronUp className="h-4 w-4" />
+                          </>
+                        ) : (
+                          <>
+                            <span>Read more</span>
+                            <ChevronDown className="h-4 w-4" />
+                          </>
+                        )}
+                      </button>
+                    </div>
+                  )}
+                  <div className="flex items-center relative z-10">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-coral to-primary flex items-center justify-center text-white font-bold text-lg mr-4">
+                      {testimonial.author.charAt(0)}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-lg" style={{ color: '#8B4513' }}>{testimonial.author}</p>
+                      <p className="text-sm text-coral font-medium">{testimonial.event}</p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 bg-gradient-to-br from-coral/5 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                 </div>
-                <p className="text-foreground mb-8 text-lg leading-relaxed relative z-10">
-                  {testimonial.text}
-                </p>
-                <div className="flex items-center">
-                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-coral to-primary flex items-center justify-center text-white font-bold text-lg mr-4">
-                    {testimonial.author.charAt(0)}
-                  </div>
-                  <div>
-                    <p className="font-semibold text-lg" style={{ color: '#8B4513' }}>{testimonial.author}</p>
-                    <p className="text-sm text-coral font-medium">{testimonial.event}</p>
-                  </div>
-                </div>
-                <div className="absolute inset-0 bg-gradient-to-br from-coral/5 to-primary/5 rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
-            ))}
+              );
+            })}
           </div>
           
           <div className="text-center mt-16">
