@@ -32,7 +32,7 @@ const highlights = [
   {
     icon: Coffee,
     title: "Beverage Stations",
-    description: "Bubble tea, kulfi, tea & juice bars.",
+    description: "Bubble tea, tea & juice bars.",
     image: bubbleTeaStationImage,
   },
   {
@@ -79,6 +79,12 @@ const testimonials = [
     text: "Patty's Delights has been absolutely amazing every single time. I've ordered a variety of appetizers, desserts, fruit platters, and more, and everything has always been fresh, beautifully presented, and incredibly delicious. You can truly taste the care and quality put into the food. On top of that, the service is outstanding—professional, reliable, and so easy to work with. I recommend Patty's Delights to everyone I know and will definitely continue to do so. Highly recommend!",
     author: "Ragavi",
     event: "Various Events",
+  },
+  {
+    id: 'thivyan',
+    text: "Patty's Delights has been providing dessert and fruit cravings services for all Royal Creation Events since 2022, and they have consistently exceeded our expectations. The fruit platters are beautifully arranged, the desserts are always fresh and delicious, and the setup is completed on time without any issues. Our guests frequently compliment the presentation and flavors. Their service truly adds a special touch to our events, and we will definitely continue working with them.",
+    author: "Thivyan Kathrikamanathan",
+    event: "Royal Creation Event Planner",
   },
 ];
 
@@ -332,7 +338,7 @@ const Home = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {testimonials.map((testimonial, index) => {
               const isExpanded = expandedTestimonials[testimonial.id] === true;
               const shouldTruncate = testimonial.text.length > TRUNCATE_LENGTH;
