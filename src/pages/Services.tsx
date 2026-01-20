@@ -71,9 +71,8 @@ const Services = () => {
       image: iceCreamImage,
       features: [
         "Flavors: mango, pistachio, tropical, oreo, nutella, falooda, chocolate, malai, milo, pineapple, and more",
-        "Cups, cones & waffle options",
-        "Toppings & sauces bar",
-        "Traditional kulfi varieties",
+        "Special ice cream & kulfi cup with or without lid (different sizes available)",
+        "Toppings (with or without nuts) & sauces bar",
       ],
     },
     {
@@ -92,7 +91,7 @@ const Services = () => {
       description: "Fresh, healthy beverages made to order",
       image: juiceStationImage,
       features: [
-        "Flavors include watermelon space, sweet, flooda, pineapple, pina colada, and other fruit blends",
+        "Flavors include watermelon spice, sweet, flooda, pineapple, pina colada, and other fruit blends",
         "Mocktails & specialty drinks",
         "Garnish & presentation bar",
         "Seasonal favorites",
