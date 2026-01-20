@@ -161,6 +161,18 @@ const Footer = memo(() => {
         {/* Copyright */}
         <div className="text-center text-sm text-muted-foreground pt-6 border-t border-border">
           <p>&copy; {new Date().getFullYear()} Patty's Delights. All rights reserved.</p>
+          <p className="mt-2">
+            Website created by{" "}
+            <a 
+              href="https://zenaradesigns.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => trackExternalLink("https://zenaradesigns.com", "Zenara Designs")}
+              className="text-primary hover:text-coral transition-colors underline"
+            >
+              Zenara Designs
+            </a>
+          </p>
         </div>
       </div>
     </footer>
