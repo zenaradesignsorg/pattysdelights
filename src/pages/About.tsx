@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChefHat, Palette, MapPin, Heart, Users, Star, Coffee, ShoppingBag, Sparkles } from "lucide-react";
-import pattyImage from "@/assets/patty-profile.jpg";
+import pattyImage from "@/assets/patty-profile-2.jpg";
 import fruitCarvingImage from "@/assets/fruits-01.jpg";
 import eventImage from "@/assets/events-02.jpg";
 
@@ -50,6 +50,7 @@ const About = () => {
                     alt="Patty - Owner of Patty's Delights"
                     loading="lazy"
                     className="w-full h-full object-cover"
+                    style={{ objectPosition: 'center 20%' }}
                   />
                 </div>
               </div>
