@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import MobileNav from "./MobileNav";
 import { trackPhoneClick, trackEmailClick } from "@/lib/analytics";
+import { SafeImage } from "@/components/SafeImage";
 import logoImage from "@/assets/pattysdelightslogo-removebg.png";
 
 // Static navigation links moved outside component to prevent recreation on every render
@@ -68,13 +69,12 @@ const Header = memo(({ transparent = false }: { transparent?: boolean }) => {
               }`}
             >
               <div className="relative">
-                <img 
+                <SafeImage 
                   src={logoImage} 
                   alt="Patty's Delights Logo" 
                   className="h-12 md:h-16 w-auto object-contain"
-                  loading="eager"
-                  decoding="async"
-                  {...({ fetchpriority: "high" } as any)}
+                  priority={true}
+                  objectFit="contain"
                   style={{ 
                     filter: transparent 
                       ? 'drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(1.15) contrast(1.1)' 

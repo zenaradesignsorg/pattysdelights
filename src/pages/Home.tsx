@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Grape, Cake, Coffee, Wrench, ArrowRight, Phone, Sprout, Sparkles, Heart, CheckCircle, Building2, ChevronDown, ChevronUp } from "lucide-react";
 import { trackPhoneClick } from "@/lib/analytics";
+import { SafeImage } from "@/components/SafeImage";
+import { getOptimizedImageUrl } from "@/components/BackgroundImage";
 import heroImage from "@/assets/hero-fruits.jpg";
 import fruitCarvingImage from "@/assets/fruits-13.jpg";
 import fruits08Image from "@/assets/fruits-08.jpg";
@@ -113,7 +115,7 @@ const Home = () => {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 pt-20 md:pt-0" style={{ minHeight: '100vh' }}>
         <div 
           className="absolute inset-0 bg-cover bg-center opacity-30"
-          style={{ backgroundImage: `url(${heroImage})`, willChange: 'auto', transform: 'translateZ(0)' }}
+          style={{ backgroundImage: `url(${getOptimizedImageUrl(heroImage)})`, willChange: 'auto', transform: 'translateZ(0)' }}
         />
         
         <div className="container mx-auto px-4 relative z-10">
@@ -174,13 +176,12 @@ const Home = () => {
                   style={{ willChange: 'transform, box-shadow', transform: 'translateZ(0)' }}
                 >
                   <div className="aspect-square overflow-hidden relative">
-                    <img 
+                    <SafeImage 
                       src={highlight.image} 
                       alt={highlight.title}
-                      loading={index < 2 ? "eager" : "lazy"}
-                      decoding="async"
-                      {...({ fetchpriority: index < 2 ? "high" : "auto" } as any)}
+                      priority={index < 2}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                      objectFit="cover"
                       style={{ willChange: 'transform' }}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
@@ -293,11 +294,12 @@ const Home = () => {
           {/* Patty at Event Section */}
           <div className="mt-20 max-w-5xl mx-auto">
             <div className="relative rounded-3xl overflow-hidden shadow-2xl group" style={{ willChange: 'auto', transform: 'translateZ(0)' }}>
-              <img 
+              <SafeImage 
                 src={pattyAtEventImage} 
                 alt="Patty at an event with her beautiful fruit displays"
-                loading="lazy"
+                priority={false}
                 className="w-full h-[500px] md:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+                objectFit="cover"
                 style={{ willChange: 'transform' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-black/20"></div>
@@ -448,13 +450,12 @@ const Home = () => {
               
               return (
                 <div key={index} className="aspect-square rounded-xl overflow-hidden shadow-card hover:shadow-hover transition-shadow duration-300 group" style={{ willChange: 'box-shadow', transform: 'translateZ(0)' }}>
-                  <img 
+                  <SafeImage 
                     src={img} 
                     alt={`Gallery ${index + 1}`}
-                    loading={isAboveFold ? "eager" : "lazy"}
-                    decoding="async"
-                    {...({ fetchpriority: isAboveFold ? "high" : "auto" } as any)}
+                    priority={isAboveFold}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    objectFit="cover"
                     style={{ willChange: 'transform' }}
                   />
                 </div>

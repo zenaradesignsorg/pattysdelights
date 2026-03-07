@@ -3,12 +3,33 @@ interface ImageProps {
   alt: string;
   className?: string;
   priority?: boolean; // If true, it's for Hero images
+  objectFit?: string; // For object-cover, object-contain, etc.
+  objectPosition?: string; // For positioning (e.g., 'center 20%')
+  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+  onLoad?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
+  style?: React.CSSProperties;
 }
 
-export const SafeImage = ({ src, alt, className, priority = false }: ImageProps) => {
+export const SafeImage = ({ 
+  src, 
+  alt, 
+  className, 
+  priority = false,
+  objectFit,
+  objectPosition,
+  onError,
+  onLoad,
+  style
+}: ImageProps) => {
   // These are handled by vite-imagetools at build time
   const avif = `${src}?format=avif`;
   const webp = `${src}?format=webp`;
+
+  const imgStyle: React.CSSProperties = {
+    ...style,
+    ...(objectFit && { objectFit }),
+    ...(objectPosition && { objectPosition }),
+  };
 
   return (
     <picture className={className}>
@@ -19,7 +40,10 @@ export const SafeImage = ({ src, alt, className, priority = false }: ImageProps)
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
-        className={`w-full h-auto ${className}`}
+        className={className}
+        style={Object.keys(imgStyle).length > 0 ? imgStyle : undefined}
+        onError={onError}
+        onLoad={onLoad}
       />
     </picture>
   );

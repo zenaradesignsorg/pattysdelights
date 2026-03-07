@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 import { trackPhoneClick } from "@/lib/analytics";
+import { SafeImage } from "@/components/SafeImage";
 // Fruits
 import fruits01 from "@/assets/fruits-01.jpg";
 import fruits02 from "@/assets/fruits-02.jpg";
@@ -344,13 +345,12 @@ const Gallery = () => {
                   onClick={() => openLightbox(actualIndex)}
                   style={{ willChange: 'transform' }}
                 >
-                  <img
+                  <SafeImage
                     src={item.image}
                     alt="Gallery image"
-                    loading={isInitialLoad ? "eager" : "lazy"}
-                    decoding="async"
-                    {...({ fetchpriority: isInitialLoad ? "high" : "auto" } as any)}
+                    priority={isInitialLoad}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                    objectFit="cover"
                     style={{ willChange: 'transform' }}
                     onError={(e) => handleImageError(item.image, e)}
                     onLoad={(e) => {
@@ -463,13 +463,12 @@ const Gallery = () => {
             className="max-w-7xl max-h-full flex flex-col items-center"
             onClick={(e) => e.stopPropagation()}
           >
-            <img
+            <SafeImage
               src={filteredItems[lightboxIndex].image}
               alt="Gallery image"
+              priority={true}
               className="max-w-full max-h-[80vh] object-contain"
-              loading="eager"
-              decoding="async"
-              {...({ fetchpriority: "high" } as any)}
+              objectFit="contain"
               onError={(e) => {
                 handleImageError(filteredItems[lightboxIndex].image, e);
                 closeLightbox();

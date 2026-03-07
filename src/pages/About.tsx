@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ChefHat, Palette, MapPin, Heart, Users, Star, Coffee, ShoppingBag, Sparkles } from "lucide-react";
+import { SafeImage } from "@/components/SafeImage";
 import pattyImage from "@/assets/patty-profile-2.jpg";
 import fruitCarvingImage from "@/assets/fruits-01.jpg";
 import eventImage from "@/assets/events-02.jpg";
@@ -45,12 +46,13 @@ const About = () => {
               
               <div className="lg:col-span-2 relative order-1 lg:order-2">
                 <div className="aspect-[4/5] rounded-lg overflow-hidden shadow-lg">
-                  <img 
+                  <SafeImage 
                     src={pattyImage} 
                     alt="Patty - Owner of Patty's Delights"
-                    loading="lazy"
+                    priority={true}
                     className="w-full h-full object-cover"
-                    style={{ objectPosition: 'center 20%' }}
+                    objectFit="cover"
+                    objectPosition="center 20%"
                   />
                 </div>
               </div>
@@ -216,11 +218,12 @@ const About = () => {
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
               {/* Left Side - Image */}
               <div className="relative lg:h-[700px] h-[300px] md:h-[400px] order-1 lg:order-1">
-                <img 
+                <SafeImage 
                   src={eventImage} 
                   alt="Patty at an event with beautiful displays"
-                  loading="lazy"
+                  priority={false}
                   className="w-full h-full object-cover"
+                  objectFit="cover"
                 />
               </div>
               
