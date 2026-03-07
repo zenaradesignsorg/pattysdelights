@@ -8,6 +8,7 @@ interface ImageProps {
   onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   onLoad?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
   style?: React.CSSProperties;
+  sizes?: string; // Optional custom sizes attribute for responsive images
 }
 
 export const SafeImage = ({ 
@@ -19,11 +20,15 @@ export const SafeImage = ({
   objectPosition,
   onError,
   onLoad,
-  style
+  style,
+  sizes = "(max-width: 1200px) 100vw, 1200px"
 }: ImageProps) => {
-  // These are handled by vite-imagetools at build time
-  const avif = `${src}?format=avif`;
-  const webp = `${src}?format=webp`;
+  // Generate responsive srcsets with multiple widths for optimal mobile performance
+  // vite-imagetools will generate these at build time
+  const avifSet = `${src}?w=400;800;1200&format=avif&as=srcset`;
+  const webpSet = `${src}?w=400;800;1200&format=webp&as=srcset`;
+  const fallbackSrc = `${src}?w=800`; // 800px is a good middle ground for fallback
+  const fallbackSrcSet = `${src}?w=400;800;1200&as=srcset`; // Original format srcset for fallback
 
   const imgStyle: React.CSSProperties = {
     ...style,
@@ -33,10 +38,12 @@ export const SafeImage = ({
 
   return (
     <picture className={className}>
-      <source srcSet={avif} type="image/avif" />
-      <source srcSet={webp} type="image/webp" />
+      <source srcSet={avifSet} type="image/avif" sizes={sizes} />
+      <source srcSet={webpSet} type="image/webp" sizes={sizes} />
       <img
-        src={src}
+        src={fallbackSrc}
+        srcSet={fallbackSrcSet}
+        sizes={sizes}
         alt={alt}
         loading={priority ? 'eager' : 'lazy'}
         fetchPriority={priority ? 'high' : 'auto'}
