@@ -29,6 +29,7 @@ const escapeHtml = (text: string): string => {
 
 const sanitizeText = (text: string, maxLength?: number): string => {
   if (!text) return '';
+  // eslint-disable-next-line no-control-regex -- matching control characters is the point
   let sanitized = text.replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '').trim();
   if (maxLength && sanitized.length > maxLength) {
     sanitized = sanitized.substring(0, maxLength);
@@ -65,10 +66,61 @@ const INPUT_LIMITS = {
 // Initialize Resend with API key from environment
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export default async function handler(req: any, res: any) {
+// Minimal shapes of the Vercel Node request/response used below
+interface ApiRequest {
+  method?: string;
+  headers: Record<string, string | string[] | undefined>;
+  socket?: { remoteAddress?: string };
+  body?: Record<string, unknown> | null;
+}
+
+interface ApiResponse {
+  status: (code: number) => ApiResponse;
+  setHeader: (name: string, value: string) => void;
+  json: (body: unknown) => void;
+}
+
+/**
+ * Best-effort rate limit: 5 submissions per IP per 10 minutes.
+ * State lives in the warm serverless instance, so it resets on cold starts —
+ * enough to stop simple form flooding without adding a datastore.
+ */
+const RATE_LIMIT = 5;
+const RATE_WINDOW_MS = 10 * 60 * 1000;
+const submissions = new Map<string, number[]>();
+
+const isRateLimited = (ip: string): boolean => {
+  const now = Date.now();
+  const recent = (submissions.get(ip) ?? []).filter((t) => now - t < RATE_WINDOW_MS);
+  if (recent.length >= RATE_LIMIT) {
+    submissions.set(ip, recent);
+    return true;
+  }
+  recent.push(now);
+  submissions.set(ip, recent);
+  return false;
+};
+
+const getClientIp = (req: ApiRequest): string => {
+  const forwarded = req.headers["x-forwarded-for"];
+  const first = Array.isArray(forwarded) ? forwarded[0] : forwarded?.split(",")[0];
+  return first?.trim() || req.socket?.remoteAddress || "unknown";
+};
+
+const asString = (value: unknown): string => (typeof value === "string" ? value : "");
+
+export default async function handler(req: ApiRequest, res: ApiResponse) {
   // Only allow POST requests
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
+  }
+
+  if (isRateLimited(getClientIp(req))) {
+    res.setHeader("Retry-After", String(RATE_WINDOW_MS / 1000));
+    return res.status(429).json({
+      success: false,
+      error: "Too many requests. Please try again later or call us directly.",
+    });
   }
 
   try {
@@ -89,18 +141,17 @@ export default async function handler(req: any, res: any) {
       });
     }
 
-    const {
-      name,
-      email,
-      phone,
-      date,
-      guestCount,
-      services,
-      budget,
-      message,
-      _honeypot,
-      _timeSpent,
-    } = req.body;
+    const body = req.body;
+    const name = asString(body.name);
+    const email = asString(body.email);
+    const phone = asString(body.phone);
+    const date = asString(body.date);
+    const guestCount = asString(body.guestCount);
+    const services = asString(body.services);
+    const budget = asString(body.budget);
+    const message = asString(body.message);
+    const _honeypot = asString(body._honeypot);
+    const _timeSpent = typeof body._timeSpent === "number" ? body._timeSpent : undefined;
 
     // Anti-spam: Check honeypot field (should be empty or undefined)
     if (_honeypot && _honeypot.trim() !== '') {
