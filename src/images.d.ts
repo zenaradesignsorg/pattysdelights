@@ -1,24 +1,9 @@
-declare module '*&format=webp' {
-  const src: string;
-  export default src;
+declare module "*?responsive" {
+  const picture: import("./types/picture").Picture;
+  export default picture;
 }
 
-declare module '*&format=avif' {
-  const src: string;
-  export default src;
-}
-
-declare module '*&w=*&format=avif&as=srcset' {
-  const srcSet: string;
-  export default srcSet;
-}
-
-declare module '*&w=*&format=webp&as=srcset' {
-  const srcSet: string;
-  export default srcSet;
-}
-
-declare module '*&w=*' {
+declare module "*format=webp" {
   const src: string;
   export default src;
 }

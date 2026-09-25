@@ -2,35 +2,39 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here.
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
     /* Patty's Delights Brand Colors */
-    --coral: 7 72% 64%;
+    --coral: 7 72% 64%;          /* decorative accent: rules, stars, italic display on dark */
+    --coral-deep: 7 58% 48%;     /* coral that passes contrast as text on cream */
     --green: 152 24% 38%;
     --gold: 7 56% 65%;
     --cream: 36 33% 93%;
-    
-    --background: 0 0% 100%;
-    --foreground: 152 24% 20%;
+    --paper: 38 40% 97%;
+    --ink: 156 32% 15%;          /* deep green for dark bands */
+    --hero-wall: 16 75% 88%;     /* peach backdrop behind the home hero's buffet table */
 
-    --card: 36 33% 93%;
-    --card-foreground: 152 24% 20%;
+    --background: 38 40% 97%;
+    --foreground: 155 26% 17%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 155 26% 17%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 152 24% 20%;
+    --popover-foreground: 155 26% 17%;
 
-    --primary: 7 72% 64%;
+    --primary: 7 58% 50%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 152 24% 38%;
+    --secondary: 152 26% 30%;
     --secondary-foreground: 0 0% 100%;
 
     --muted: 36 33% 93%;
-    --muted-foreground: 152 24% 38%;
+    --muted-foreground: 152 16% 34%;
 
     --accent: 7 56% 65%;
     --accent-foreground: 0 0% 100%;
@@ -38,16 +42,16 @@ All colors MUST be HSL.
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 36 25% 85%;
-    --input: 36 25% 85%;
-    --ring: 7 72% 64%;
+    --border: 36 22% 84%;
+    --input: 36 22% 80%;
+    --ring: 7 58% 50%;
 
-    --radius: 1rem;
-    
+    --radius: 0.5rem;
+
     /* Shadows */
-    --shadow-soft: 0 2px 8px hsl(152 24% 38% / 0.08);
-    --shadow-card: 0 4px 16px hsl(152 24% 38% / 0.12);
-    --shadow-hover: 0 8px 24px hsl(152 24% 38% / 0.16);
+    --shadow-soft: 0 1px 2px hsl(156 32% 15% / 0.06), 0 2px 8px hsl(156 32% 15% / 0.05);
+    --shadow-card: 0 1px 2px hsl(156 32% 15% / 0.06), 0 8px 24px -8px hsl(156 32% 15% / 0.12);
+    --shadow-hover: 0 2px 4px hsl(156 32% 15% / 0.06), 0 16px 40px -12px hsl(156 32% 15% / 0.2);
   }
 }
 
@@ -65,36 +69,83 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground font-sans;
     line-height: 1.7;
-    /* Optimize rendering */
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+    -webkit-tap-highlight-color: transparent;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif text-secondary;
-    line-height: 1.3;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
-  
+
   h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl font-bold;
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold;
   }
-  
+
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold;
+    @apply text-3xl md:text-4xl lg:text-5xl font-semibold;
   }
-  
+
   h3 {
     @apply text-2xl md:text-3xl font-semibold;
   }
 
-  /* Performance optimizations */
-  img {
-    image-rendering: -webkit-optimize-contrast;
+  p {
+    text-wrap: pretty;
   }
 
-  /* Optimize scrolling performance */
-  * {
-    -webkit-tap-highlight-color: transparent;
+  ::selection {
+    background: hsl(var(--coral) / 0.3);
+  }
+
+  :focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 3px;
+  }
+}
+
+@layer components {
+  /* Scroll reveal — only hides content once JS has confirmed motion is OK */
+  .reveal-ready [data-reveal] {
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal-ready [data-reveal].is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Hero arches rise onto the table on load (transform only, so images still paint immediately) */
+@keyframes arch-rise {
+  from {
+    transform: translateY(24px);
+  }
+  to {
+    transform: none;
+  }
+}
+
+.hero-arch {
+  animation: arch-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+  animation-delay: var(--arch-delay, 0ms);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
   }
 }

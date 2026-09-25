@@ -1,48 +1,58 @@
-import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 import { SafeImage } from "@/components/SafeImage";
+import { ArrowLink } from "@/components/ArrowLink";
+import { cn } from "@/lib/utils";
+import type { Picture } from "@/types/picture";
 
 interface ServiceCardProps {
   title: string;
   description: string;
-  image: string;
+  image: Picture;
+  imageAlt: string;
   features: string[];
+  /** Full-width horizontal layout, used for the closing "Custom Requests" card */
+  wide?: boolean;
 }
 
-const ServiceCard = ({ title, description, image, features }: ServiceCardProps) => {
-  return (
-    <div className="flex flex-col h-full bg-white rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 overflow-hidden group border border-border">
-      <div className="aspect-[4/3] overflow-hidden relative">
-        <SafeImage 
-          src={image} 
-          alt={title}
-          priority={false}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-          objectFit="cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
-      <div className="p-6 flex flex-col flex-grow">
-        <h3 className="text-xl font-serif font-bold text-secondary mb-3">
-          {title}
-        </h3>
-        <p className="text-muted-foreground mb-4 text-sm line-clamp-2">
-          {description}
-        </p>
-        <ul className="space-y-2 mb-6 flex-grow">
-          {features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <span className="text-coral mt-1 text-xs">✓</span>
-              <span className="text-sm text-foreground">{feature}</span>
-            </li>
-          ))}
-        </ul>
-        <Button asChild variant="outline" className="w-full border-coral text-coral hover:bg-coral hover:text-white">
-          <Link to="/contact">Request a Quote</Link>
-        </Button>
-      </div>
+const ServiceCard = ({ title, description, image, imageAlt, features, wide = false }: ServiceCardProps) => (
+  <article
+    className={cn(
+      "group flex h-full flex-col",
+      wide && "overflow-hidden rounded-md bg-muted md:grid md:grid-cols-2"
+    )}
+  >
+    <div
+      className={cn(
+        "overflow-hidden rounded-md bg-muted",
+        // Wide: the text column sets the height and the photo fills it
+        wide ? "relative aspect-[4/3] rounded-none md:aspect-auto" : "aspect-[4/3]"
+      )}
+    >
+      <SafeImage
+        image={image}
+        alt={imageAlt}
+        sizes={wide ? "(min-width: 768px) 50vw, 92vw" : "(min-width: 1024px) 30vw, (min-width: 768px) 46vw, 92vw"}
+        className={cn(
+          "h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]",
+          wide && "absolute inset-0"
+        )}
+      />
     </div>
-  );
-};
+    <div className={cn("flex flex-grow flex-col pt-6", wide && "justify-center p-8 md:min-h-[26rem] md:p-12 lg:p-16")}>
+      <h3 className={cn("font-semibold", wide ? "text-3xl md:text-4xl" : "text-2xl")}>{title}</h3>
+      <p className={cn("mt-2 leading-relaxed text-muted-foreground", wide && "mt-4 max-w-lg text-lg")}>{description}</p>
+      <ul className={cn("mb-6 mt-5 flex-grow space-y-2 border-t border-border pt-5", wide && "sm:columns-2 sm:gap-8")}>
+        {features.map((feature) => (
+          <li key={feature} className="flex items-start gap-3 text-[0.95rem] leading-snug text-foreground/85 break-inside-avoid">
+            <span aria-hidden="true" className="mt-[0.6rem] h-px w-3 shrink-0 bg-coral" />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+      <ArrowLink to="/contact" className="self-start">
+        Request a Quote
+      </ArrowLink>
+    </div>
+  </article>
+);
 
 export default ServiceCard;

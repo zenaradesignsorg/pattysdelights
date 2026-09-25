@@ -1,125 +1,99 @@
-import { memo } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { memo, useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Phone, Mail } from "lucide-react";
 import MobileNav from "./MobileNav";
-import { trackPhoneClick, trackEmailClick } from "@/lib/analytics";
-import { SafeImage } from "@/components/SafeImage";
-import logoImage from "@/assets/pattysdelightslogo-removebg.png";
+import { trackPhoneClick } from "@/lib/analytics";
+import { NAV_LINKS, PHONE_DISPLAY, PHONE_HREF } from "@/lib/site";
+import { cn } from "@/lib/utils";
+import logoImage from "@/assets/pattysdelightslogo-removebg.png?w=112&format=webp";
 
-// Static navigation links moved outside component to prevent recreation on every render
-const navLinks = [
-  { name: "Home", path: "/" },
-  { name: "About", path: "/about" },
-  { name: "Services", path: "/services" },
-  { name: "Gallery", path: "/gallery" },
-  { name: "Contact", path: "/contact" },
-];
+const SCROLL_THRESHOLD = 24;
 
-const Header = memo(({ transparent = false }: { transparent?: boolean }) => {
-  const location = useLocation();
-  
-  const isActive = (path: string) => location.pathname === path;
-  
-  const handleLinkClick = () => {
-    // Ensure instant scroll to top on navigation (no animation for instant feel)
-    window.scrollTo(0, 0);
-  };
-  
+const Header = memo(() => {
+  const { pathname } = useLocation();
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    let frame: number | null = null;
+    const update = () => {
+      frame = null;
+      setIsScrolled(window.scrollY > SCROLL_THRESHOLD);
+    };
+    const onScroll = () => {
+      if (frame === null) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frame !== null) cancelAnimationFrame(frame);
+    };
+  }, []);
+
+  // On the home hero the header floats transparent until the visitor scrolls
+  const overHero = pathname === "/" && !isScrolled;
+
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 ${
-      transparent 
-        ? "bg-transparent backdrop-blur-none border-b-0" 
-        : "bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border"
-    }`}>
-      {/* Top bar */}
-      {!transparent && (
-        <div className="bg-muted py-2">
-          <div className="container mx-auto px-4 flex justify-end items-center gap-6 text-sm">
-            <a 
-              href="tel:+16476677559" 
-              onClick={trackPhoneClick}
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Phone className="h-4 w-4" />
-              <span className="hidden sm:inline">(647) 667-7559</span>
-            </a>
-            <a 
-              href="mailto:Pattysdelightsinc@gmail.com" 
-              onClick={trackEmailClick}
-              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
-            >
-              <Mail className="h-4 w-4" />
-              <span className="hidden sm:inline">Pattysdelightsinc@gmail.com</span>
-            </a>
-          </div>
-        </div>
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,box-shadow,border-color] duration-300",
+        overHero
+          ? "border-b border-transparent bg-transparent"
+          : "border-b border-border/70 bg-paper/95 shadow-[0_1px_12px_-6px_hsl(var(--ink)/0.15)] backdrop-blur supports-[backdrop-filter]:bg-paper/85"
       )}
-      
-      {/* Main header */}
-      <div className={`container mx-auto px-4 ${transparent ? 'py-6' : 'py-4'}`}>
-        <div className="flex items-center">
-          {/* Left: Logo + Brand */}
-          <div className="flex-1">
-            <Link 
-              to="/" 
-              onClick={handleLinkClick}
-              className={`flex items-center gap-3 hover:opacity-80 transition-opacity duration-300 ${
-                transparent ? 'text-white' : 'text-secondary'
-              }`}
+    >
+      <div className="container mx-auto flex h-16 items-center gap-6 px-4 md:h-20">
+        <Link
+          to="/"
+          aria-label="Patty's Delights home"
+          className="flex shrink-0 items-center gap-3 text-secondary"
+        >
+          <img
+            src={logoImage}
+            alt=""
+            width={56}
+            height={56}
+            className="h-11 w-11 md:h-12 md:w-12"
+          />
+          <span className="whitespace-nowrap font-serif text-xl font-semibold tracking-tight md:text-2xl">
+            Patty's Delights
+          </span>
+        </Link>
+
+        <nav aria-label="Main" className="hidden flex-1 items-center justify-center gap-8 lg:flex">
+          {NAV_LINKS.map((link) => (
+            <NavLink
+              key={link.path}
+              to={link.path}
+              end
+              className={({ isActive }) =>
+                cn(
+                  "relative py-2 text-[0.95rem] font-medium transition-colors",
+                  "after:absolute after:inset-x-0 after:-bottom-0.5 after:h-px after:origin-left after:bg-coral after:transition-transform after:duration-300",
+                  isActive ? "after:scale-x-100" : "after:scale-x-0 hover:after:scale-x-100",
+                  isActive ? "text-secondary" : "text-foreground/75 hover:text-secondary"
+                )
+              }
             >
-              <div className="relative">
-                <SafeImage 
-                  src={logoImage} 
-                  alt="Patty's Delights Logo" 
-                  className="h-12 md:h-16 w-auto object-contain"
-                  priority={true}
-                  objectFit="contain"
-                  style={{ 
-                    filter: transparent 
-                      ? 'drop-shadow(0 2px 8px rgba(0,0,0,0.6)) brightness(1.15) contrast(1.1)' 
-                      : 'drop-shadow(0 1px 4px rgba(0,0,0,0.3))',
-                    maxWidth: '140px'
-                  }}
-                />
-              </div>
-              <span className="text-2xl md:text-3xl font-serif font-bold">
-                Patty's Delights
-              </span>
-            </Link>
-          </div>
-          
-          {/* Center: Navigation Links */}
-          <nav className="hidden md:flex items-center gap-8 flex-1 justify-center">
-            {navLinks.map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={handleLinkClick}
-                className={`font-medium transition-colors hover:text-primary ${
-                  isActive(link.path) 
-                    ? "text-primary" 
-                    : transparent 
-                      ? "text-white" 
-                      : "text-foreground"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
-          </nav>
-          
-          {/* Right: Button + Mobile Nav */}
-          <div className="flex items-center gap-4 flex-1 justify-end">
-            <Button asChild size={transparent ? "sm" : "lg"} className={`hidden md:inline-flex ${
-              transparent 
-                ? "bg-white text-primary hover:bg-white/90" 
-                : ""
-            }`}>
-              <Link to="/contact" onClick={handleLinkClick}>Buy Now</Link>
-            </Button>
-            <MobileNav isWhite={transparent} />
-          </div>
+              {link.name}
+            </NavLink>
+          ))}
+        </nav>
+
+        <div className="ml-auto flex items-center gap-5 lg:ml-0">
+          <a
+            href={PHONE_HREF}
+            onClick={trackPhoneClick}
+            className="hidden items-center gap-2 text-sm font-medium text-secondary transition-colors hover:text-coral-deep xl:flex"
+          >
+            <Phone aria-hidden="true" className="h-4 w-4" />
+            {PHONE_DISPLAY}
+          </a>
+          <Button asChild size="sm" className="hidden lg:inline-flex">
+            <Link to="/contact">Request a Quote</Link>
+          </Button>
+          <MobileNav />
         </div>
       </div>
     </header>

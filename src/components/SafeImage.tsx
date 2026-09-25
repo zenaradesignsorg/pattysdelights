@@ -1,56 +1,55 @@
-interface ImageProps {
-  src: string; // The base path to your PNG in src/assets
+import type { CSSProperties, SyntheticEvent } from "react";
+import type { Picture } from "@/types/picture";
+
+interface SafeImageProps {
+  /** Build-time Picture from an `@/assets/*?responsive` import */
+  image: Picture;
   alt: string;
   className?: string;
-  priority?: boolean; // If true, it's for Hero images
-  objectFit?: string; // For object-cover, object-contain, etc.
-  objectPosition?: string; // For positioning (e.g., 'center 20%')
-  onError?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
-  onLoad?: (e: React.SyntheticEvent<HTMLImageElement, Event>) => void;
-  style?: React.CSSProperties;
-  sizes?: string; // Optional custom sizes attribute for responsive images
+  /** Above-the-fold images: eager load + high fetch priority */
+  priority?: boolean;
+  /** How wide the image renders, so the browser picks the right file */
+  sizes?: string;
+  style?: CSSProperties;
+  onError?: (e: SyntheticEvent<HTMLImageElement, Event>) => void;
 }
 
-export const SafeImage = ({ 
-  src, 
-  alt, 
-  className, 
-  priority = false,
-  objectFit,
-  objectPosition,
-  onError,
-  onLoad,
-  style,
-  sizes = "(max-width: 1200px) 100vw, 1200px"
-}: ImageProps) => {
-  // Generate responsive srcsets with multiple widths for optimal mobile performance
-  // vite-imagetools will generate these at build time
-  const avifSet = `${src}?w=400;800;1200&format=avif&as=srcset`;
-  const webpSet = `${src}?w=400;800;1200&format=webp&as=srcset`;
-  const fallbackSrc = `${src}?w=800`; // 800px is a good middle ground for fallback
-  const fallbackSrcSet = `${src}?w=400;800;1200&as=srcset`; // Original format srcset for fallback
+const MODERN_FORMATS = ["avif", "webp"] as const;
 
-  const imgStyle: React.CSSProperties = {
-    ...style,
-    ...(objectFit && { objectFit }),
-    ...(objectPosition && { objectPosition }),
-  };
+export const SafeImage = ({
+  image,
+  alt,
+  className,
+  priority = false,
+  sizes = "100vw",
+  style,
+  onError,
+}: SafeImageProps) => {
+  // The fallback (jpeg/png) srcset is whichever source isn't a modern format
+  const fallbackSrcSet = Object.entries(image.sources).find(
+    ([format]) => !MODERN_FORMATS.includes(format as (typeof MODERN_FORMATS)[number])
+  )?.[1];
 
   return (
-    <picture className={className}>
-      <source srcSet={avifSet} type="image/avif" sizes={sizes} />
-      <source srcSet={webpSet} type="image/webp" sizes={sizes} />
+    <picture className="contents">
+      {MODERN_FORMATS.map((format) =>
+        image.sources[format] ? (
+          <source key={format} srcSet={image.sources[format]} type={`image/${format}`} sizes={sizes} />
+        ) : null
+      )}
       <img
-        src={fallbackSrc}
+        src={image.img.src}
         srcSet={fallbackSrcSet}
         sizes={sizes}
+        width={image.img.w}
+        height={image.img.h}
         alt={alt}
-        loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        fetchPriority={priority ? "high" : "auto"}
         className={className}
-        style={Object.keys(imgStyle).length > 0 ? imgStyle : undefined}
+        style={style}
         onError={onError}
-        onLoad={onLoad}
       />
     </picture>
   );

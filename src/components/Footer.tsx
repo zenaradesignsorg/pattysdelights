@@ -1,183 +1,110 @@
 import { memo } from "react";
 import { Link } from "react-router-dom";
-import { Phone, Mail, MapPin, Instagram, Clock, Star } from "lucide-react";
+import { Instagram } from "lucide-react";
 import { trackPhoneClick, trackEmailClick, trackExternalLink } from "@/lib/analytics";
+import { EMAIL, HOURS, INSTAGRAM_URL, NAV_LINKS, PHONE_DISPLAY, PHONE_HREF, SERVICE_AREAS } from "@/lib/site";
 
-// Static service areas moved outside component to prevent recreation on every render
-const serviceAreas = [
-  "Toronto",
-  "Mississauga",
-  "Brampton",
-  "Markham",
-  "Vaughan",
-  "Scarborough",
-  "Oakville",
-];
+const footerHeading = "mb-5 font-sans text-xs font-semibold uppercase tracking-[0.2em] text-coral";
+const footerLink = "text-paper/75 transition-colors hover:text-paper";
 
-const Footer = memo(() => {
-  const handleLinkClick = () => {
-    // Ensure instant scroll to top on navigation (no animation for instant feel)
-    window.scrollTo(0, 0);
-  };
-  
-  return (
-    <footer className="bg-cream border-t border-border">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
-          {/* About */}
-          <div>
-            <h3 className="text-xl font-serif font-bold text-secondary mb-4">
-              Patty's Delights
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Serving the Greater Toronto Area with fresh, homemade food and beautiful setups. Our goal is to bring a mom's care to every celebration.
-            </p>
-            <div className="flex gap-4">
-              <a 
-                href="https://www.instagram.com/pattys.delights/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                onClick={() => trackExternalLink("https://www.instagram.com/pattys.delights/", "Instagram")}
-                className="text-muted-foreground hover:text-primary transition-colors" 
-                aria-label="Follow us on Instagram"
-              >
-                <Instagram className="h-5 w-5" />
-              </a>
-            </div>
-          </div>
-          
-          {/* Navigation */}
-          <div>
-            <h4 className="font-semibold text-secondary mb-4">Navigation</h4>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link to="/about" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  About
-                </Link>
-              </li>
-              <li>
-                <Link to="/services" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Services
-                </Link>
-              </li>
-              <li>
-                <Link to="/gallery" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Gallery
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" onClick={handleLinkClick} className="text-muted-foreground hover:text-primary transition-colors">
-                  Contact
-                </Link>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Contact */}
-          <div>
-            <h4 className="font-semibold text-secondary mb-4">Contact Us</h4>
-            <ul className="space-y-3">
-              <li className="flex items-start gap-2 text-muted-foreground">
-                <Phone className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <a 
-                  href="tel:+16476677559" 
-                  onClick={trackPhoneClick}
-                  className="hover:text-primary transition-colors"
-                >
-                  (647) 667-7559
-                </a>
-              </li>
-              <li className="flex items-start gap-2 text-muted-foreground">
-                <Mail className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <a 
-                  href="mailto:Pattysdelightsinc@gmail.com" 
-                  onClick={trackEmailClick}
-                  className="hover:text-primary transition-colors"
-                >
-                  Pattysdelightsinc@gmail.com
-                </a>
-              </li>
-              <li className="flex items-start gap-2 text-muted-foreground">
-                <MapPin className="h-5 w-5 mt-0.5 flex-shrink-0" />
-                <span>Greater Toronto Area</span>
-              </li>
-            </ul>
-          </div>
-          
-          {/* Business Info */}
-          <div>
-            <h4 className="font-semibold text-secondary mb-4">Business Hours</h4>
-            <ul className="space-y-2 text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
-                <span>Mon-Fri: 9am - 7pm</span>
-              </li>
-              <li className="flex items-center gap-2">
-                <Clock className="h-4 w-4" />
-                <span>Sat-Sun: 10am - 5pm</span>
-              </li>
-            </ul>
-            
-            <div className="mt-6">
-              <h5 className="font-semibold text-secondary mb-3">Why Choose Us?</h5>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-coral" />
-                  <span>10+ years experience</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-coral" />
-                  <span>500+ happy events</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <Star className="h-4 w-4 text-coral" />
-                  <span>Fresh local ingredients</span>
-                </li>
-              </ul>
-            </div>
-          </div>
+const Footer = memo(() => (
+  <footer className="bg-ink text-paper">
+    <div className="container mx-auto px-4 pb-10 pt-16 md:pt-20">
+      <div className="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-8">
+        {/* About */}
+        <div className="lg:col-span-4">
+          <p className="font-serif text-2xl font-semibold text-paper">Patty's Delights</p>
+          <p className="mt-4 max-w-sm leading-relaxed text-paper/70">
+            Serving the Greater Toronto Area with fresh, homemade food and beautiful setups. Our goal is to bring a mom's care to every celebration.
+          </p>
+          <a
+            href={INSTAGRAM_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackExternalLink(INSTAGRAM_URL, "Instagram")}
+            className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-paper/80 transition-colors hover:text-paper"
+          >
+            <Instagram aria-hidden="true" className="h-4 w-4" />
+            @pattys.delights
+          </a>
         </div>
-        
-        {/* Service Areas */}
-        <div className="border-t border-border pt-8">
-          <h4 className="font-semibold text-secondary mb-3 text-center">Service Areas</h4>
-          <div className="flex flex-wrap justify-center gap-3 mb-6">
-            {serviceAreas.map((area) => (
-              <span
-                key={area}
-                className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm"
-              >
-                {area}
-              </span>
+
+        {/* Navigation */}
+        <nav aria-label="Footer" className="lg:col-span-2">
+          <h2 className={footerHeading}>Navigation</h2>
+          <ul className="space-y-2.5">
+            {NAV_LINKS.map((link) => (
+              <li key={link.path}>
+                <Link to={link.path} className={footerLink}>
+                  {link.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
+        </nav>
+
+        {/* Contact */}
+        <div className="lg:col-span-3">
+          <h2 className={footerHeading}>Contact Us</h2>
+          <ul className="space-y-2.5">
+            <li>
+              <a href={PHONE_HREF} onClick={trackPhoneClick} className={footerLink}>
+                {PHONE_DISPLAY}
+              </a>
+            </li>
+            <li>
+              <a href={`mailto:${EMAIL}`} onClick={trackEmailClick} className={`${footerLink} break-all`}>
+                {EMAIL}
+              </a>
+            </li>
+            <li className="text-paper/75">Greater Toronto Area</li>
+          </ul>
         </div>
-        
-        {/* Copyright */}
-        <div className="text-center text-sm text-muted-foreground pt-6 border-t border-border">
-          <p>&copy; {new Date().getFullYear()} Patty's Delights. All rights reserved.</p>
-          <p className="mt-2">
-            Website created by{" "}
-            <a 
-              href="https://zenaradesigns.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              onClick={() => trackExternalLink("https://zenaradesigns.com", "Zenara Designs")}
-              className="text-primary hover:text-coral transition-colors underline"
-            >
-              Zenara Designs
-            </a>
+
+        {/* Hours */}
+        <div className="lg:col-span-3">
+          <h2 className={footerHeading}>Business Hours</h2>
+          <dl className="space-y-2.5">
+            {HOURS.map((row) => (
+              <div key={row.days} className="flex justify-between gap-6 border-b border-paper/10 pb-2.5 text-paper/75 last:border-0">
+                <dt>{row.days}</dt>
+                <dd className="tabular-nums">{row.time}</dd>
+              </div>
+            ))}
+          </dl>
+          <p className="mt-6 text-sm text-paper/60">
+            10+ years experience · 500+ happy events · Fresh local ingredients
           </p>
         </div>
       </div>
-    </footer>
-  );
-});
+
+      {/* Service Areas */}
+      <div className="mt-14 border-t border-paper/10 pt-8">
+        <p className="text-sm text-paper/60">
+          <span className="mr-2 font-semibold uppercase tracking-[0.2em] text-paper/80">Service Areas</span>
+          {SERVICE_AREAS.join(" · ")}
+        </p>
+      </div>
+
+      {/* Copyright */}
+      <div className="mt-8 flex flex-col gap-2 text-xs text-paper/50 sm:flex-row sm:justify-between">
+        <p>&copy; {new Date().getFullYear()} Patty's Delights. All rights reserved.</p>
+        <p>
+          Website created by{" "}
+          <a
+            href="https://zenaradesigns.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => trackExternalLink("https://zenaradesigns.com", "Zenara Designs")}
+            className="underline underline-offset-4 transition-colors hover:text-paper"
+          >
+            Zenara Designs
+          </a>
+        </p>
+      </div>
+    </div>
+  </footer>
+));
 
 Footer.displayName = "Footer";
 

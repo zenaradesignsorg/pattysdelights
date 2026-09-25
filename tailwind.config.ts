@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 export default {
   darkMode: ["class"],
@@ -7,18 +8,24 @@ export default {
   theme: {
     container: {
       center: true,
-      padding: "2rem",
+      padding: "1.25rem",
       screens: {
         "2xl": "1400px",
       },
     },
     extend: {
       fontFamily: {
-        serif: ['Playfair Display', 'serif'],
-        sans: ['DM Sans', 'sans-serif'],
+        serif: ['"Playfair Display"', 'Georgia', 'serif'],
+        sans: ['"DM Sans"', 'system-ui', 'sans-serif'],
       },
       colors: {
-        coral: "hsl(var(--coral))",
+        coral: {
+          DEFAULT: "hsl(var(--coral))",
+          deep: "hsl(var(--coral-deep))",
+        },
+        ink: "hsl(var(--ink))",
+        "hero-wall": "hsl(var(--hero-wall))",
+        paper: "hsl(var(--paper))",
         green: "hsl(var(--green))",
         gold: "hsl(var(--gold))",
         cream: "hsl(var(--cream))",
@@ -121,5 +128,5 @@ export default {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [animate],
 } satisfies Config;
