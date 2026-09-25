@@ -1,4 +1,4 @@
-import { ContactFormData } from "./resend";
+import type { ContactFormData } from "./resend";
 
 /**
  * Client-side function to submit contact form

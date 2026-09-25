@@ -30,6 +30,7 @@ export const sanitizeText = (text: string, maxLength?: number): string => {
   if (!text) return '';
   
   // Remove control characters except newlines and tabs
+  // eslint-disable-next-line no-control-regex -- matching control characters is the point
   let sanitized = text.replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '');
   
   // Trim whitespace
@@ -83,7 +84,7 @@ export const validateAndSanitizePhone = (phone: string): string | null => {
   if (!phone) return null;
   
   // Remove all non-digit characters except + at the start
-  let sanitized = phone.trim();
+  const sanitized = phone.trim();
   
   // Check for header injection attempts
   if (/[\r\n]/.test(sanitized)) {
