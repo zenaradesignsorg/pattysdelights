@@ -30,8 +30,8 @@ const StructuredData = () => {
       "name": "Patty's Delights",
       "description": "Premium event catering specializing in fruit platters, dessert tables, and beverage stations across the Greater Toronto Area.",
       "url": "https://www.pattysdelights.com",
-      "logo": "https://www.pattysdelights.com/favicon-512x512.png",
-      "image": "https://www.pattysdelights.com/hero-fruits.jpg",
+      "logo": "https://www.pattysdelights.com/android-chrome-512x512.png",
+      "image": "https://www.pattysdelights.com/og-image.jpg",
       "telephone": "+16476677559",
       "email": "Pattysdelightsinc@gmail.com",
       "address": {
