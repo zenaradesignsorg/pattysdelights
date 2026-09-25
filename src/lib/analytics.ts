@@ -7,14 +7,12 @@
  * - User interactions
  */
 
+type GtagParams = Record<string, string | number | boolean | undefined>;
+
 declare global {
   interface Window {
-    gtag?: (
-      command: 'config' | 'event' | 'js' | 'set',
-      targetId: string | Date,
-      config?: Record<string, any>
-    ) => void;
-    dataLayer?: any[];
+    gtag?: (command: 'config' | 'event' | 'js' | 'set', targetId: string | Date, config?: GtagParams) => void;
+    dataLayer?: unknown[];
   }
 }
 
@@ -22,48 +20,18 @@ declare global {
 const GA4_MEASUREMENT_ID = import.meta.env.VITE_GA4_MEASUREMENT_ID || 'G-DLRC2DY0R2';
 
 /**
- * Initialize Google Analytics 4
- * This should be called once when the app loads
- * Note: The gtag.js script is loaded in index.html, so we just ensure gtag is available
- */
-export const initGA4 = () => {
-  // Only initialize if we have a valid measurement ID
-  if (!GA4_MEASUREMENT_ID) {
-    if (import.meta.env.DEV) {
-      console.log('GA4: No tracking ID configured. Analytics will not be active.');
-    }
-    return;
-  }
-
-  // Ensure dataLayer and gtag are initialized (script in index.html should handle this)
-  window.dataLayer = window.dataLayer || [];
-  
-  // If gtag is not already defined (should be from index.html), define it
-  if (!window.gtag) {
-    window.gtag = function() {
-      window.dataLayer.push(arguments);
-    };
-  }
-
-  // Track initial page view
-  if (window.gtag) {
-    window.gtag('config', GA4_MEASUREMENT_ID, {
-      page_path: window.location.pathname,
-    });
-  }
-};
-
-/**
- * Track a page view
- * Call this when the route changes
+ * Track a page view.
+ * gtag is configured with send_page_view: false in index.html,
+ * so this is the single source of page_view events (initial load + every route change).
  */
 export const trackPageView = (path: string, title?: string) => {
   if (!window.gtag || !GA4_MEASUREMENT_ID) {
     return;
   }
 
-  window.gtag('config', GA4_MEASUREMENT_ID, {
+  window.gtag('event', 'page_view', {
     page_path: path,
+    page_location: window.location.href,
     page_title: title || document.title,
   });
 };
@@ -75,7 +43,7 @@ export const trackPageView = (path: string, title?: string) => {
  */
 export const trackEvent = (
   eventName: string,
-  eventParams?: Record<string, any>
+  eventParams?: GtagParams
 ) => {
   if (!window.gtag || !GA4_MEASUREMENT_ID) {
     if (import.meta.env.DEV) {
@@ -90,7 +58,7 @@ export const trackEvent = (
 /**
  * Track form submissions
  */
-export const trackFormSubmit = (formName: string, formData?: Record<string, any>) => {
+export const trackFormSubmit = (formName: string, formData?: GtagParams) => {
   trackEvent('form_submit', {
     form_name: formName,
     ...formData,
